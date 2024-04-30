@@ -1,21 +1,15 @@
 package uz.toshmatov.currency.presentation
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 import dagger.hilt.android.AndroidEntryPoint
-import uz.toshmatov.currency.core.theme.CurrencyColors
 import uz.toshmatov.currency.core.theme.CurrencyTheme
-import uz.toshmatov.currency.presentation.home.HomeScreen
+import uz.toshmatov.currency.presentation.main.MainScreen
+import uz.toshmatov.currency.presentation.splash.SplashScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -23,7 +17,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CurrencyTheme {
-                Navigator(HomeScreen()) {
+                Navigator(
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        MainScreen()
+                    } else {
+                        SplashScreen()
+                    }
+                ) {
                     SlideTransition(it)
                 }
             }

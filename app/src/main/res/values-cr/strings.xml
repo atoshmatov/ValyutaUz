@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">currency</string>
+
+  // Main text
+  <string name="tab_home">Асосий</string>
+  <string name="tab_calculet">Калькулятор</string>
+  <string name="tab_favorite">Севимли</string>
+  <string name="tab_setting">Созламалар</string>
 </resources>

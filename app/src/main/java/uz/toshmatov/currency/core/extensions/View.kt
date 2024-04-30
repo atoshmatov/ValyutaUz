@@ -21,8 +21,8 @@ import uz.toshmatov.currency.core.theme.CurrencyColors
 
 @Composable
 fun StatusBarStyle(
-    statusBarColor: Color = CurrencyColors.background,
-    navigationBarColor: Color = CurrencyColors.background
+    statusBarColor: Color = CurrencyColors.bottomBar,
+    navigationBarColor: Color = CurrencyColors.bottomBar
 ) {
     val view = LocalView.current
     if (!view.isInEditMode) {
@@ -41,7 +41,7 @@ fun Modifier.iconIndication(radius: Dp) = composed {
     indication(
         interactionSource = interactionSource,
         indication = rememberRipple(
-            color = CurrencyColors.background,
+            color = CurrencyColors.bottomBar,
             radius = radius
         )
     )

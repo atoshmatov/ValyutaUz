@@ -1,3 +1,9 @@
 <resources>
   <string name="app_name">currency</string>
+
+  // Main text
+  <string name="tab_home">Main</string>
+  <string name="tab_calculet">Calculator</string>
+  <string name="tab_favorite">Favorite</string>
+  <string name="tab_setting">Settings</string>
 </resources>
