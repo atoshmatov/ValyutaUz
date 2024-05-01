@@ -11,6 +11,7 @@
 /.idea/deploymentTargetSelector.xml
 /.idea/vcs.xml
 /.idea/icon.svg
+/.idea/kotlinc.xml
 .DS_Store
 /build
 /captures
