@@ -1,5 +1,6 @@
 package uz.toshmatov.currency.presentation.main.screen.home
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,6 +26,7 @@ import uz.toshmatov.currency.core.utils.drawable
 import uz.toshmatov.currency.core.utils.resource
 import uz.toshmatov.currency.core.utils.string
 import uz.toshmatov.currency.presentation.main.screen.home.component.CurrencyItems
+import uz.toshmatov.currency.presentation.main.screen.home.component.HomeHeader
 import uz.toshmatov.currency.presentation.main.screen.home.component.NBUCurrencyItems
 import uz.toshmatov.currency.presentation.main.screen.home.intents.HomeEvents
 import uz.toshmatov.currency.presentation.main.screen.home.intents.HomeState
@@ -59,6 +61,7 @@ object HomeScreen : Tab {
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreenContent(
     modifier: Modifier = Modifier,
@@ -73,8 +76,11 @@ fun HomeScreenContent(
         horizontalAlignment = Alignment.Start
     ) {
         LazyColumn {
+            stickyHeader {
+                HomeHeader(title = "Markaziy Bank")
+            }
             items(
-                items = state.cbuList.reversed().takeLast(5).reversed(),
+                items = state.cbuList.reversed().takeLast(10).reversed(),
                 key = {
                     it.id
                 }
@@ -82,13 +88,30 @@ fun HomeScreenContent(
                 CurrencyItems(cbuModel = cbuModel)
             }
 
+            stickyHeader {
+                HomeHeader(title = "Milliy Bank")
+            }
+
             items(
-                items = state.nbuList.takeLast(5).reversed(),
+                items = state.nbuList.takeLast(10).reversed(),
                 key = {
                     it.code
                 }
             ) { nbuModel ->
                 NBUCurrencyItems(nbuModel = nbuModel)
+            }
+
+            stickyHeader {
+                HomeHeader(title = "Banklar kesimida")
+            }
+
+            items(
+                items = state.exchangeRateList,
+                key = {
+                    it.bank
+                }
+            ) { nbuModel ->
+                CurrencyItems(nbuModel = nbuModel)
             }
         }
     }

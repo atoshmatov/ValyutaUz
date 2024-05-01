@@ -1,19 +1,22 @@
 package uz.toshmatov.currency.di
 
-import android.content.Context
-import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import org.jsoup.Connection
+import org.jsoup.Jsoup
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import uz.toshmatov.currency.data.Configurations
 import uz.toshmatov.currency.data.Configurations.CBU_BASE_URL
 import uz.toshmatov.currency.data.Configurations.CONNECTION_TIMEOUT_SECONDS
 import uz.toshmatov.currency.data.Configurations.NBU_BASE_URL
 import uz.toshmatov.currency.data.remote.api.CBUApiService
+import uz.toshmatov.currency.data.remote.api.impl.ExchangeRateDataSouImpl
+import uz.toshmatov.currency.data.remote.api.ExchangeRateDataSource
 import uz.toshmatov.currency.data.remote.api.NBUApiService
 import uz.toshmatov.currency.data.remote.retrofit.adapter.CoroutineCallAdapterFactory
 import uz.toshmatov.currency.data.remote.retrofit.adapter.FlowCallAdapterFactory
@@ -52,6 +55,13 @@ object NetworkModule {
     }
 
     @Provides
+    fun provideContext(): Connection {
+        return Jsoup.newSession()
+            .timeout(20 * 1000)
+            .userAgent("FooBar 2000").url(Configurations.DOLLER_UZ)
+    }
+
+    @Provides
     @Named("NBU")
     fun provideRetrofitNbu(okHttpClient: OkHttpClient): Retrofit {
         val gson = GsonBuilder()
@@ -78,5 +88,12 @@ object NetworkModule {
         @Named("NBU") retrofit: Retrofit,
     ): NBUApiService {
         return retrofit.create(NBUApiService::class.java)
+    }
+
+    @Provides
+    fun provideExchangeRateDataSou(
+        connection: Connection
+    ): ExchangeRateDataSource {
+        return ExchangeRateDataSouImpl(connection)
     }
 }

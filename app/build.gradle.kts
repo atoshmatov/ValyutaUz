@@ -119,6 +119,9 @@ dependencies {
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.gson)
 
+    // gson
+    implementation(libs.gson)
+
     // coil
     implementation(libs.coil.kt.compose)
 
@@ -133,5 +136,8 @@ dependencies {
 
     // system ui
     implementation(libs.accompanist.systemui)
+
+    // jsoup
+    implementation(libs.jsoup)
 
 }

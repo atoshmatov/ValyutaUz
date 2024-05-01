@@ -13,6 +13,8 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import uz.toshmatov.currency.core.logger.logError
+import uz.toshmatov.currency.core.logger.logInfo
+import uz.toshmatov.currency.domain.repository.ExchangeRateRepository
 import uz.toshmatov.currency.domain.repository.CBURepository
 import uz.toshmatov.currency.domain.repository.NBURepository
 import uz.toshmatov.currency.presentation.main.screen.home.intents.HomeEvents
@@ -22,7 +24,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val cbuRepository: CBURepository,
-    private val nbuRepository: NBURepository
+    private val nbuRepository: NBURepository,
+    private val exchangeRateRepository: ExchangeRateRepository
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<HomeState> = MutableStateFlow(HomeState())
@@ -31,6 +34,7 @@ class HomeViewModel @Inject constructor(
     init {
         getCBUCurrencyList()
         getNBUCurrencyList()
+        getExchangeRateData()
     }
 
     fun reduce(event: HomeEvents) {}
@@ -83,5 +87,34 @@ class HomeViewModel @Inject constructor(
                 logError { it.localizedMessage ?: "" }
             }
             .launchIn(viewModelScope)
+    }
+
+
+    private fun getExchangeRateData() {
+        exchangeRateRepository.exchangeRateData()
+            .onStart {
+                _state.update {
+                    it.copy(isLoading = true)
+                }
+            }.onEach { exchangeRateModel ->
+
+                logInfo {
+                    "getExchangeRateData --> $exchangeRateModel"
+                }
+                _state.update {
+                    it.copy(
+                        exchangeRateList = exchangeRateModel.toPersistentList(),
+                        isLoading = false
+                    )
+                }
+            }.catch {
+                _state.update {
+                    it.copy(
+                        error = "Error",
+                        isLoading = false
+                    )
+                }
+                logError { it.localizedMessage ?: "" }
+            }.launchIn(viewModelScope)
     }
 }

@@ -50,7 +50,6 @@ fun NBUCurrencyItems(
         AsyncImage(
             modifier = Modifier
                 .size(32.dp),
-            //model = CurrencyCode.valueOf(cbuModel.ccy).flag,
             model = ImageRequest.Builder(LocalContext.current)
                 .data(CurrencyCode.valueOf(nbuModel.code).flag).crossfade(true).build(),
             contentDescription = "This is an example image",
