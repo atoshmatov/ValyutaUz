@@ -3,7 +3,6 @@ package uz.toshmatov.currency.presentation.main.screen.home
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -68,14 +67,13 @@ fun HomeScreenContent(
     state: HomeState,
     reduce: (HomeEvents) -> Unit,
 ) {
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .background(CurrencyColors.background),
         verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.Start
+        horizontalAlignment = Alignment.Start,
     ) {
-        LazyColumn {
             stickyHeader {
                 HomeHeader(title = "Markaziy Bank")
             }
@@ -115,4 +113,4 @@ fun HomeScreenContent(
             }
         }
     }
-}
+

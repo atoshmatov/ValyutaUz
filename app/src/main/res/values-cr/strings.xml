@@ -7,4 +7,22 @@
   <string name="tab_calculet">Калькулятор</string>
   <string name="tab_favorite">Севимли</string>
   <string name="tab_setting">Созламалар</string>
+
+  // settings text
+  <string name="settings_language">Илова Тили</string>
+  <string name="settings_theme">Мавзу</string>
+  <string name="settings_dark">Қоронгъи</string>
+  <string name="settings_light">Ёрқин</string>
+  <string name="settings_system">Тизимлли</string>
+  <string name="settings_info">Илова ҳақида</string>
+  <string name="settings_contact">Биз билан боғланинг</string>
+  <string name="settings_rate">Иловани баҳоланг</string>
+  <string name="settings_share">Иловани улашинг</string>
+
+  // language text
+  <string name="uzbek_language">O‘zbekcha</string>
+  <string name="cyrillic_language">Ўзбекча</string>
+  <string name="english_language">English</string>
+  <string name="russian_language">Русский</string>
+
 </resources>

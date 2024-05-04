@@ -1,5 +1,7 @@
 package uz.toshmatov.currency.di
 
+import android.app.Application
+import android.content.Context
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -22,6 +24,7 @@ import uz.toshmatov.currency.data.remote.retrofit.adapter.CoroutineCallAdapterFa
 import uz.toshmatov.currency.data.remote.retrofit.adapter.FlowCallAdapterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -90,10 +93,9 @@ object NetworkModule {
         return retrofit.create(NBUApiService::class.java)
     }
 
+    @Singleton
     @Provides
-    fun provideExchangeRateDataSou(
-        connection: Connection
-    ): ExchangeRateDataSource {
-        return ExchangeRateDataSouImpl(connection)
+    fun providesContext(application: Application): Context {
+        return application.applicationContext
     }
 }

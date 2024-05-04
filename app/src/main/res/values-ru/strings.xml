@@ -5,6 +5,24 @@
   // Main text
   <string name="tab_home">Основной</string>
   <string name="tab_calculet">Калькулятор</string>
-  <string name="tab_favorite">Возлюбленный</string>
+  <string name="tab_favorite">Сохраненное</string>
   <string name="tab_setting">Настройки</string>
+
+  // settings text
+  <string name="settings_language">Язык</string>
+  <string name="settings_theme">Тема</string>
+  <string name="settings_dark">Темный</string>
+  <string name="settings_light">Свет</string>
+  <string name="settings_system">Система</string>
+  <string name="settings_info">Информационное приложение</string>
+  <string name="settings_contact">Свяжитесь с нами</string>
+  <string name="settings_rate">Оценить приложение</string>
+  <string name="settings_share">Поделиться приложением</string>
+
+  // language text
+  <string name="uzbek_language">O‘zbekcha</string>
+  <string name="cyrillic_language">Ўзбекча</string>
+  <string name="english_language">English</string>
+  <string name="russian_language">Русский</string>
+
 </resources>

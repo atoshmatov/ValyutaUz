@@ -122,6 +122,13 @@ dependencies {
     // gson
     implementation(libs.gson)
 
+    // room_database
+    annotationProcessor(libs.room.compiler)
+    implementation(libs.room.paging)
+    implementation(libs.room.ktx)
+    implementation(libs.room)
+    ksp(libs.room.ksp.compiler)
+
     // coil
     implementation(libs.coil.kt.compose)
 
@@ -140,4 +147,10 @@ dependencies {
     // jsoup
     implementation(libs.jsoup)
 
+    // lingver
+    implementation(libs.lingver)
+
+    // datastore
+    implementation(libs.androidx.dataStore.core)
+    implementation(libs.androidx.dataStore.preferences)
 }

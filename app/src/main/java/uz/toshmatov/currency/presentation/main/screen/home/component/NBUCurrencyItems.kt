@@ -42,7 +42,7 @@ fun NBUCurrencyItems(
                 vertical = CurrencyDimensions.extraSmall
             )
             .clip(RoundedCornerShape(CurrencyDimensions.small))
-            .background(CurrencyColors.itemBackground)
+            .background(CurrencyColors.bottomBar)
             .clickable { }
             .padding(CurrencyDimensions.itemSpace),
         verticalAlignment = Alignment.CenterVertically

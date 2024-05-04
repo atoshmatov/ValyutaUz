@@ -42,16 +42,16 @@ fun CurrencyItems(
                 vertical = CurrencyDimensions.extraSmall
             )
             .clip(RoundedCornerShape(CurrencyDimensions.small))
-            .background(CurrencyColors.itemBackground)
+            .background(CurrencyColors.bottomBar)
             .clickable { }
             .padding(CurrencyDimensions.itemSpace),
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
             modifier = Modifier
-                .size(32.dp),
+                .size(64.dp),
             model = ImageRequest.Builder(LocalContext.current)
-                .data(CurrencyCode.valueOf("USD").flag).crossfade(true).build(),
+                .data(drawable.asakabank).crossfade(true).build(),
             contentDescription = "This is an example image",
             placeholder = painterResource(id = drawable.ic_empty_flag)
         )

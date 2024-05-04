@@ -4,6 +4,24 @@
   // Main text
   <string name="tab_home">Main</string>
   <string name="tab_calculet">Calculator</string>
-  <string name="tab_favorite">Favorite</string>
+  <string name="tab_favorite">Saved</string>
   <string name="tab_setting">Settings</string>
+
+  // settings text
+  <string name="settings_language">Language</string>
+  <string name="settings_theme">Theme</string>
+  <string name="settings_dark">Dark</string>
+  <string name="settings_light">Light</string>
+  <string name="settings_system">System</string>
+  <string name="settings_info">Info App</string>
+  <string name="settings_contact">Contact Us</string>
+  <string name="settings_rate">App Rate</string>
+  <string name="settings_share">Share App</string>
+
+  // language text
+  <string name="uzbek_language">O‘zbekcha</string>
+  <string name="cyrillic_language">Ўзбекча</string>
+  <string name="english_language">English</string>
+  <string name="russian_language">Русский</string>
+
 </resources>

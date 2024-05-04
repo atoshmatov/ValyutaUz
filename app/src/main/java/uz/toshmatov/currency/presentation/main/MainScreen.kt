@@ -1,5 +1,6 @@
 package uz.toshmatov.currency.presentation.main
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
@@ -9,6 +10,7 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.androidx.AndroidScreen
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
@@ -17,6 +19,9 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabDisposable
 import cafe.adriel.voyager.navigator.tab.TabNavigator
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toPersistentList
+import kotlinx.coroutines.launch
 import uz.toshmatov.currency.core.theme.CurrencyColors
 import uz.toshmatov.currency.presentation.main.screen.calculet.CalculetScreen
 import uz.toshmatov.currency.presentation.main.screen.favorite.FavoriteScreen
@@ -52,14 +57,14 @@ private fun MainScreenContent(
                 Column(modifier = Modifier.padding(padding)) { CurrentTab() }
             },
             bottomBar = {
-                BottomNavigatorBar(tabs = tabs)
+                BottomNavigatorBar(tabs = tabs.toPersistentList())
             },
         )
     }
 }
 
 @Composable
-private fun BottomNavigatorBar(tabs: List<Tab>) {
+private fun BottomNavigatorBar(tabs: ImmutableList<Tab>) {
     val tabNavigator = LocalTabNavigator.current
 
     NavigationBar(

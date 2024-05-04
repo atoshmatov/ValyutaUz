@@ -5,6 +5,7 @@ internal fun lightColors(): CurrencyColors = CurrencyColors(
     text = BLACK,
     textSecondary = GRAY50,
     icon = BLUE60,
+    iconGray = GRAY40,
     error = RED60,
     success = GREEN,
     button = BLUE60,

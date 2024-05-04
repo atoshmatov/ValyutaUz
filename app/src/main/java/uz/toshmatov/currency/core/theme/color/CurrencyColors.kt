@@ -10,6 +10,7 @@ class CurrencyColors(
     text: Color,
     textSecondary: Color,
     icon: Color,
+    iconGray: Color,
     error: Color,
     success:Color,
     button: Color,
@@ -32,6 +33,9 @@ class CurrencyColors(
         private set
 
     var icon by mutableStateOf(icon)
+        private set
+
+    var iconGray by mutableStateOf(iconGray)
         private set
 
     var error by mutableStateOf(error)
@@ -69,6 +73,7 @@ class CurrencyColors(
         text: Color = this.text,
         textSecondary: Color = this.textSecondary,
         icon: Color = this.icon,
+        iconGray: Color = this.iconGray,
         error: Color = this.error,
         success: Color = this.success,
         button: Color = this.button,
@@ -84,6 +89,7 @@ class CurrencyColors(
         text = text,
         textSecondary = textSecondary,
         icon = icon,
+        iconGray = iconGray,
         error = error,
         success = success,
         button = button,
@@ -101,6 +107,7 @@ class CurrencyColors(
         text = other.text
         textSecondary = other.textSecondary
         icon = other.icon
+        iconGray = other.iconGray
         error = other.error
         success = other.success
         button = other.button
