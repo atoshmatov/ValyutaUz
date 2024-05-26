@@ -3,7 +3,7 @@ package uz.toshmatov.currency.presentation.main.screen.setting.feature.language.
 import android.content.Context
 import com.yariksoffice.lingver.Lingver
 
-class LingverLocalization() {
+class LingverLocalization {
     fun setLocale(
         context: Context,
         languageCode: String,

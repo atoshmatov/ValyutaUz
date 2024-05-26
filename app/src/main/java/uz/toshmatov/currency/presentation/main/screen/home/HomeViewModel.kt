@@ -56,7 +56,10 @@ class HomeViewModel @Inject constructor(
                         isLoading = false
                     )
                 }
-                setCbuData(cbuModel[0].rate)
+                cbuModel.forEach {
+                    if (it.ccy == "USD")
+                        setCbuData(it.rate)
+                }
             }.catch {
                 _state.update {
                     it.copy(
