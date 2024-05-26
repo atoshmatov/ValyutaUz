@@ -1,6 +1,7 @@
 package uz.toshmatov.currency.data.mapper
 
 import com.google.gson.JsonObject
+import uz.toshmatov.currency.core.extensions.toSom
 import uz.toshmatov.currency.core.mapper.Mapper
 import uz.toshmatov.currency.domain.model.ExchangeModel
 import javax.inject.Inject
@@ -13,8 +14,8 @@ class ExchangeMapper @Inject constructor() : Mapper<ExchangeModel, JsonObject> {
     override fun mapFromEntity(entity: JsonObject): ExchangeModel {
         return ExchangeModel(
             bank = entity.asJsonObject.get("bank").asString,
-            buy = entity.asJsonObject.get("buy").asString,
-            sell = entity.asJsonObject.get("sell").asString,
+            buy = entity.asJsonObject.get("buy").asString.toSom(),
+            sell = entity.asJsonObject.get("sell").asString.toSom(),
             date = entity.asJsonObject.get("date").asString
         )
     }

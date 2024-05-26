@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import uz.toshmatov.currency.core.extensions.CurrencyCode
+import uz.toshmatov.currency.core.extensions.addPlus
 import uz.toshmatov.currency.core.theme.CurrencyColors
 import uz.toshmatov.currency.core.theme.CurrencyDimensions
 import uz.toshmatov.currency.core.theme.CurrencyTypography
@@ -35,17 +36,16 @@ import uz.toshmatov.currency.core.utils.drawable
 import uz.toshmatov.currency.domain.model.CBUModel
 
 @Composable
-fun CurrencyItems(
+fun CBUCurrencyItems(
     modifier: Modifier = Modifier,
     cbuModel: CBUModel,
 ) {
-
     val priceIcon by remember {
         derivedStateOf {
             if (cbuModel.diff.contains("-")) {
-                mutableIntStateOf(drawable.ic_money_recive)
+                mutableIntStateOf(drawable.ic_chart_down)
             } else {
-                mutableIntStateOf(drawable.ic_money_send)
+                mutableIntStateOf(drawable.ic_chart_up)
             }
         }
     }
@@ -73,7 +73,7 @@ fun CurrencyItems(
                 .size(32.dp),
             model = ImageRequest.Builder(LocalContext.current)
                 .data(CurrencyCode.valueOf(cbuModel.ccy).flag).crossfade(true).build(),
-            contentDescription = "This is an example image",
+            contentDescription = cbuModel.ccy,
             placeholder = painterResource(id = drawable.ic_empty_flag)
         )
         Spacer(modifier = Modifier.width(12.dp))
@@ -87,9 +87,9 @@ fun CurrencyItems(
                 color = CurrencyColors.text,
                 style = CurrencyTypography.textSemiBold
             )
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(6.dp))
             Text(
-                text = cbuModel.ccyNmUZ,
+                text = cbuModel.ccyName,
                 color = CurrencyColors.textSecondary,
                 style = CurrencyTypography.captionUppercase
             )
@@ -101,23 +101,23 @@ fun CurrencyItems(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = cbuModel.rate + " so'm",
+                text = cbuModel.rate,
                 color = CurrencyColors.text,
                 style = CurrencyTypography.buttonRegular
             )
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(6.dp))
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = if (priceColor) cbuModel.diff else "+" + cbuModel.diff,
+                    text = if (priceColor) cbuModel.diff else cbuModel.diff.addPlus(),
                     color = if (priceColor) CurrencyColors.error else CurrencyColors.success,
                     style = CurrencyTypography.captionUppercase
                 )
-                Spacer(modifier = Modifier.width(4.dp))
+                Spacer(modifier = Modifier.width(6.dp))
                 Icon(
                     painter = painterResource(id = priceIcon.intValue),
-                    contentDescription = "Price Icon",
+                    contentDescription = cbuModel.ccy,
                     tint = if (priceColor) CurrencyColors.error else CurrencyColors.success,
                     modifier = Modifier.size(16.dp)
                 )

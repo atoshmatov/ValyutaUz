@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class CBURepositoryImpl @Inject constructor(
     private val cbuApiService: CBUApiService,
-    private val cbuMapper: CBUMapper
+    private val cbuMapper: CBUMapper,
 ) : CBURepository {
     override fun getCBUCurrencyList(): Flow<List<CBUModel>> {
         return cbuApiService.getCBUCurrencyList().map {

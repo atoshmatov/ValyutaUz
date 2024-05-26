@@ -17,8 +17,6 @@ import uz.toshmatov.currency.data.Configurations.CBU_BASE_URL
 import uz.toshmatov.currency.data.Configurations.CONNECTION_TIMEOUT_SECONDS
 import uz.toshmatov.currency.data.Configurations.NBU_BASE_URL
 import uz.toshmatov.currency.data.remote.api.CBUApiService
-import uz.toshmatov.currency.data.remote.api.impl.ExchangeRateDataSouImpl
-import uz.toshmatov.currency.data.remote.api.ExchangeRateDataSource
 import uz.toshmatov.currency.data.remote.api.NBUApiService
 import uz.toshmatov.currency.data.remote.retrofit.adapter.CoroutineCallAdapterFactory
 import uz.toshmatov.currency.data.remote.retrofit.adapter.FlowCallAdapterFactory
@@ -42,8 +40,7 @@ object NetworkModule {
             .build()
     }
 
-    @Provides
-    @Named("CBU")
+    @[Provides Named("CBU")]
     fun provideRetrofitCbu(okHttpClient: OkHttpClient): Retrofit {
         val gson = GsonBuilder()
             .setLenient()
@@ -64,8 +61,7 @@ object NetworkModule {
             .userAgent("FooBar 2000").url(Configurations.DOLLER_UZ)
     }
 
-    @Provides
-    @Named("NBU")
+    @[Provides Named("NBU")]
     fun provideRetrofitNbu(okHttpClient: OkHttpClient): Retrofit {
         val gson = GsonBuilder()
             .setLenient()
@@ -93,8 +89,7 @@ object NetworkModule {
         return retrofit.create(NBUApiService::class.java)
     }
 
-    @Singleton
-    @Provides
+    @[Singleton Provides]
     fun providesContext(application: Application): Context {
         return application.applicationContext
     }

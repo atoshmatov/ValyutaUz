@@ -25,4 +25,13 @@
   <string name="english_language">English</string>
   <string name="russian_language">Русский</string>
 
+  // home text
+  <string name="home_buy_price">Sotib olish</string>
+  <string name="home_sell_price">Sotish</string>
+  <string name="home_cbu">Markaziy bank</string>
+  <string name="home_nbu">Milliy bank</string>
+  <string name="home_section_banks">Banklar kesimida</string>
+  <string name="home_update_date">Yangilangan sana</string>
+  <string name="home_all_item">Ko‘proq</string>
+
 </resources>

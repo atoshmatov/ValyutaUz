@@ -4,6 +4,10 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import uz.toshmatov.currency.core.connect.ConnectivityObserver
+import uz.toshmatov.currency.core.connect.NetworkConnectivityObserver
+import uz.toshmatov.currency.data.local.repository.DataStoreRepository
+import uz.toshmatov.currency.data.local.repository.DataStoreRepositoryImpl
 import uz.toshmatov.currency.data.remote.api.ExchangeRateDataSource
 import uz.toshmatov.currency.data.remote.api.impl.ExchangeRateDataSouImpl
 import uz.toshmatov.currency.data.remote.repository.CBURepositoryImpl
@@ -27,4 +31,10 @@ interface RepositoryModule {
 
     @Binds
     fun bindExchangeRateDataSource(repositoryImpl: ExchangeRateDataSouImpl): ExchangeRateDataSource
+
+    @Binds
+    fun bindConnectivityObserver(connectivityObserver: NetworkConnectivityObserver): ConnectivityObserver
+
+    @Binds
+    fun bindAppDataStoreRepository(appDataStore: DataStoreRepositoryImpl): DataStoreRepository
 }

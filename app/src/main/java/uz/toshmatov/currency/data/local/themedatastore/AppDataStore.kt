@@ -1,4 +1,4 @@
-package uz.toshmatov.currency.data.local.datastore
+package uz.toshmatov.currency.data.local.themedatastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -15,8 +15,8 @@ import javax.inject.Inject
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "current_theme")
 private val THEME_MODE_KEY = stringPreferencesKey("theme")
-
-class ThemeDataStore @Inject constructor(context: Context) {
+private val CBU_DATA_KEY = stringPreferencesKey("cbu_data")
+class AppDataStore @Inject constructor(context: Context) {
     private val store = context.dataStore
 
     fun getThemeMode(): Flow<ThemeMode> {
@@ -39,6 +39,18 @@ class ThemeDataStore @Inject constructor(context: Context) {
 
         store.edit { preferences ->
             preferences[THEME_MODE_KEY] = themeName
+        }
+    }
+
+    fun getCBUData(): Flow<String> {
+        return store.data.map { preferences ->
+            preferences[CBU_DATA_KEY] ?: ""
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun setCBUData(data: String) {
+        store.edit { preferences ->
+            preferences[CBU_DATA_KEY] = data
         }
     }
 

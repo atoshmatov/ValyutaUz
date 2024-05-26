@@ -12,10 +12,12 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import uz.toshmatov.currency.core.logger.logError
 import uz.toshmatov.currency.core.logger.logInfo
-import uz.toshmatov.currency.domain.repository.ExchangeRateRepository
+import uz.toshmatov.currency.data.local.repository.DataStoreRepository
 import uz.toshmatov.currency.domain.repository.CBURepository
+import uz.toshmatov.currency.domain.repository.ExchangeRateRepository
 import uz.toshmatov.currency.domain.repository.NBURepository
 import uz.toshmatov.currency.presentation.main.screen.home.intents.HomeEvents
 import uz.toshmatov.currency.presentation.main.screen.home.intents.HomeState
@@ -25,6 +27,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val cbuRepository: CBURepository,
     private val nbuRepository: NBURepository,
+    private val storeRepository: DataStoreRepository,
     private val exchangeRateRepository: ExchangeRateRepository
 ) : ViewModel() {
 
@@ -35,6 +38,7 @@ class HomeViewModel @Inject constructor(
         getCBUCurrencyList()
         getNBUCurrencyList()
         getExchangeRateData()
+        getCBUData()
     }
 
     fun reduce(event: HomeEvents) {}
@@ -52,6 +56,7 @@ class HomeViewModel @Inject constructor(
                         isLoading = false
                     )
                 }
+                setCbuData(cbuModel[0].rate)
             }.catch {
                 _state.update {
                     it.copy(
@@ -62,6 +67,23 @@ class HomeViewModel @Inject constructor(
                 logError { it.localizedMessage ?: "" }
             }
             .launchIn(viewModelScope)
+    }
+
+    private fun setCbuData(cbuData: String) {
+        viewModelScope.launch {
+            storeRepository.setCBUData(cbuData)
+        }
+    }
+
+    private fun getCBUData() {
+        viewModelScope.launch {
+            storeRepository.getCBUData()
+                .onEach { cbu ->
+                    _state.update {
+                        it.copy(cbuData = cbu)
+                    }
+                }.launchIn(viewModelScope)
+        }
     }
 
     private fun getNBUCurrencyList() {

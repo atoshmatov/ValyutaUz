@@ -25,4 +25,13 @@
   <string name="english_language">English</string>
   <string name="russian_language">Русский</string>
 
+  // home text
+  <string name="home_buy_price">Сотиб Олиш</string>
+  <string name="home_sell_price">Сотиш</string>
+  <string name="home_cbu">Марказий банк</string>
+  <string name="home_nbu">Миллий банк</string>
+  <string name="home_section_banks">Банк Кесимида</string>
+  <string name="home_update_date">Янгиланган сана</string>
+  <string name="home_all_item">Хаммаси</string>
+
 </resources>
