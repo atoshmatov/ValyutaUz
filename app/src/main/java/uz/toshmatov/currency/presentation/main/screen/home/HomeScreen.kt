@@ -21,9 +21,11 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import uz.toshmatov.currency.core.theme.CurrencyColors
+import uz.toshmatov.currency.core.uicompoenent.CcyLoading
 import uz.toshmatov.currency.core.utils.drawable
 import uz.toshmatov.currency.core.utils.resource
 import uz.toshmatov.currency.core.utils.string
+import uz.toshmatov.currency.presentation.main.screen.home.component.CBUCurrencyItems
 import uz.toshmatov.currency.presentation.main.screen.home.component.CurrencyItems
 import uz.toshmatov.currency.presentation.main.screen.home.component.HomeHeader
 import uz.toshmatov.currency.presentation.main.screen.home.component.NBUCurrencyItems
@@ -50,13 +52,15 @@ object HomeScreen : Tab {
     override fun Content() {
         val viewModel = getViewModel<HomeViewModel>()
         val state by viewModel.state.collectAsState()
-
         val currentNavigator = LocalNavigator.currentOrThrow.parent!!
 
-        HomeScreenContent(
-            state = state,
-            reduce = viewModel::reduce,
-        )
+        if (state.isLoading)
+            CcyLoading()
+        else
+            HomeScreenContent(
+                state = state,
+                reduce = viewModel::reduce,
+            )
     }
 }
 
@@ -68,49 +72,50 @@ fun HomeScreenContent(
     reduce: (HomeEvents) -> Unit,
 ) {
     LazyColumn(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(CurrencyColors.background),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start,
     ) {
-            stickyHeader {
-                HomeHeader(title = "Markaziy Bank")
+        stickyHeader { HomeHeader(title = string.home_cbu.resource) }
+        items(
+            items = state.cbuList
+                .reversed()
+                .takeLast(10)
+                .reversed(),
+            key = {
+                it.id
             }
-            items(
-                items = state.cbuList.reversed().takeLast(10).reversed(),
-                key = {
-                    it.id
-                }
-            ) { cbuModel ->
-                CurrencyItems(cbuModel = cbuModel)
+        ) { cbuModel ->
+            CBUCurrencyItems(cbuModel = cbuModel)
+        }
+        stickyHeader {
+            HomeHeader(title = string.home_nbu.resource)
+        }
+        items(
+            items = state.nbuList.reversed(),
+            key = {
+                it.code
             }
-
-            stickyHeader {
-                HomeHeader(title = "Milliy Bank")
+        ) { nbuModel ->
+            NBUCurrencyItems(nbuModel = nbuModel)
+        }
+        stickyHeader {
+            HomeHeader(title = string.home_section_banks.resource)
+        }
+        items(items = state.exchangeRateList,
+            key = {
+                it.bank
             }
-
-            items(
-                items = state.nbuList.takeLast(10).reversed(),
-                key = {
-                    it.code
-                }
-            ) { nbuModel ->
-                NBUCurrencyItems(nbuModel = nbuModel)
-            }
-
-            stickyHeader {
-                HomeHeader(title = "Banklar kesimida")
-            }
-
-            items(
-                items = state.exchangeRateList,
-                key = {
-                    it.bank
-                }
-            ) { nbuModel ->
-                CurrencyItems(nbuModel = nbuModel)
-            }
+        ) { nbuModel ->
+            CurrencyItems(
+                exchangeModel = nbuModel,
+                cbu = state.cbuData
+            )
         }
     }
+}
+
+
 

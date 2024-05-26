@@ -63,6 +63,7 @@ kotlinxSerializationJson = "1.6.3"
 
 # accompanist
 accompanist = "0.34.0"
+swiperefresh = "0.31.5-beta"
 
 # paging
 androidxPagerCompose = "3.3.0-alpha04"
@@ -161,6 +162,7 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 
 # accompanist
 accompanist_systemui = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
+accompanist_swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "swiperefresh" }
 
 # paging
 androidx-pager-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "androidxPagerCompose" }

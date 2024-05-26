@@ -59,7 +59,7 @@ fun ThemeItem(
         if (isCheck)
             Icon(
                 modifier = Modifier.align(Alignment.CenterEnd),
-                painter = painterResource(id = drawable.ic_check),
+                painter = painterResource(id = drawable.ic_active),
                 contentDescription = themeModel.title.resource,
                 tint = CurrencyColors.icon
             )

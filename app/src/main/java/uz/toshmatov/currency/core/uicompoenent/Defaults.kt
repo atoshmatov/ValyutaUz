@@ -70,7 +70,7 @@ fun TopBar(
             )
         },
         navigationIcon = {
-            CommetaIcon(
+            CurrencyIcon(
                 image = drawable.ic_tab_setting,
                 tint = CurrencyColors.text,
                 onClick = onBackClick,

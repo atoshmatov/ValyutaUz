@@ -25,4 +25,13 @@
   <string name="english_language">English</string>
   <string name="russian_language">Русский</string>
 
+  // home text
+  <string name="home_buy_price">Покупка</string>
+  <string name="home_sell_price">Продажа</string>
+  <string name="home_cbu">Центральный банк</string>
+  <string name="home_nbu">Национальный банк</string>
+  <string name="home_section_banks">В банковском разделе</string>
+  <string name="home_update_date">Дата обновления</string>
+  <string name="home_all_item">Все</string>
+
 </resources>

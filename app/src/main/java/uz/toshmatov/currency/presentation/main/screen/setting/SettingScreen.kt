@@ -1,5 +1,6 @@
 package uz.toshmatov.currency.presentation.main.screen.setting
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -29,6 +31,7 @@ import uz.toshmatov.currency.presentation.main.screen.setting.feature.language.L
 import uz.toshmatov.currency.presentation.main.screen.setting.feature.theme.ThemeScreen
 import uz.toshmatov.currency.presentation.main.screen.setting.intents.SettingsState
 import uz.toshmatov.currency.presentation.main.screen.setting.model.ActionType
+
 
 object SettingScreen : Tab {
     override val options: TabOptions
@@ -51,6 +54,7 @@ object SettingScreen : Tab {
         val viewModel = getViewModel<SettingsViewModel>()
         val state by viewModel.state.collectAsState()
         val currentNavigator = LocalNavigator.currentOrThrow.parent!!
+        val context = LocalContext.current
 
         SettingScreenContent(
             state = state,
@@ -60,7 +64,13 @@ object SettingScreen : Tab {
                     ActionType.THEME -> currentNavigator.push(ThemeScreen())
                     ActionType.CONTACT_US -> {}
                     ActionType.RATE_APP -> {}
-                    ActionType.SHARE_APP -> {}
+                    ActionType.SHARE_APP -> {
+                        val emailIntent = Intent(Intent.ACTION_SEND)
+                        emailIntent.setType("text/plain")
+                        val recipients = arrayOf("mobdevali1220@gmail.com")
+                        emailIntent.putExtra(Intent.EXTRA_EMAIL, recipients)
+                        context.startActivity(emailIntent)
+                    }
                     ActionType.ABOUT_APP -> {}
                 }
 

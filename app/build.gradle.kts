@@ -143,6 +143,7 @@ dependencies {
 
     // system ui
     implementation(libs.accompanist.systemui)
+    implementation(libs.accompanist.swiperefresh)
 
     // jsoup
     implementation(libs.jsoup)

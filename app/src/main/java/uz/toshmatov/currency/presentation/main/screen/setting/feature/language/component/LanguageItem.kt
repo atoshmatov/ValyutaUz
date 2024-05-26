@@ -66,7 +66,7 @@ fun LanguageItem(
         if (isSelected) {
             Icon(
                 modifier = Modifier.align(Alignment.CenterEnd),
-                painter = painterResource(id = drawable.ic_check),
+                painter = painterResource(id = drawable.ic_active),
                 contentDescription = languageModel.title.resource,
                 tint = CurrencyColors.icon
             )

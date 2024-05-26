@@ -17,9 +17,7 @@ class ExchangeRateDataSouImpl @Inject constructor(
         return flow {
             try {
                 val doc = session.newRequest().get()
-
                 val table = doc.select(".banks table")
-
                 val jsonArray = JsonArray()
 
                 table.select("tbody tr").forEach { row ->
@@ -28,12 +26,12 @@ class ExchangeRateDataSouImpl @Inject constructor(
                     val sell = row.select("td.sell").text()
                     val date = row.select("td.datetime").text()
 
-                    val jsonObj = JsonObject()
-                    jsonObj.addProperty("bank", bank)
-                    jsonObj.addProperty("buy", buy)
-                    jsonObj.addProperty("sell", sell)
-                    jsonObj.addProperty("date", date)
-
+                    val jsonObj = JsonObject().apply {
+                        addProperty("bank", bank)
+                        addProperty("buy", buy)
+                        addProperty("sell", sell)
+                        addProperty("date", date)
+                    }
                     jsonArray.add(jsonObj)
                 }
 

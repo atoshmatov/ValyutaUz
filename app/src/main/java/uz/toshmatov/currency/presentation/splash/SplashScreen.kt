@@ -1,6 +1,6 @@
 package uz.toshmatov.currency.presentation.splash
 
-import android.os.Build
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +14,8 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.androidx.AndroidScreen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import kotlinx.coroutines.delay
+import uz.toshmatov.currency.core.theme.CurrencyColors
+import uz.toshmatov.currency.core.utils.raw
 import uz.toshmatov.currency.presentation.main.MainScreen
 import uz.toshmatov.currency.presentation.splash.component.AnimatedPreloader
 
@@ -21,7 +23,9 @@ class SplashScreen : AndroidScreen() {
     @Composable
     override fun Content() {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .background(CurrencyColors.background),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -29,7 +33,9 @@ class SplashScreen : AndroidScreen() {
             Box {
                 AnimatedPreloader(modifier = Modifier
                     .size(200.dp)
-                    .align(Alignment.Center))
+                    .align(Alignment.Center),
+                    raw.currency_app_animation
+                )
             }
 
             LaunchedEffect(Unit) {

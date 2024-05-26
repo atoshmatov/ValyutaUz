@@ -13,8 +13,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import uz.toshmatov.currency.core.utils.drawable
 import uz.toshmatov.currency.core.utils.string
-import uz.toshmatov.currency.data.local.datastore.ThemeDataStore
 import uz.toshmatov.currency.data.local.model.ThemeMode
+import uz.toshmatov.currency.data.local.repository.DataStoreRepository
 import uz.toshmatov.currency.presentation.main.screen.setting.feature.theme.component.ThemeModel
 import uz.toshmatov.currency.presentation.main.screen.setting.feature.theme.intents.ThemeEvents
 import uz.toshmatov.currency.presentation.main.screen.setting.feature.theme.intents.ThemeState
@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ThemeViewModel @Inject constructor(
-    private val themeDataStore: ThemeDataStore
+    private val storeRepository: DataStoreRepository
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<ThemeState> = MutableStateFlow(ThemeState())
@@ -64,12 +64,12 @@ class ThemeViewModel @Inject constructor(
 
     private fun updateTheme(themeMode: ThemeMode) {
         viewModelScope.launch {
-            themeDataStore.setThemeMode(themeMode)
+            storeRepository.setThemeMode(themeMode)
         }
     }
 
     private fun getThemeMode() {
-        themeDataStore.getThemeMode().onEach { themeMode ->
+        storeRepository.getThemeMode().onEach { themeMode ->
             _state.update { state ->
                 state.copy(currentThemeMode = themeMode)
             }

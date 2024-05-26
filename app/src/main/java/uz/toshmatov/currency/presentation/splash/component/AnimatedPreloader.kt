@@ -8,13 +8,12 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
-import uz.toshmatov.currency.R
 
 @Composable
-fun AnimatedPreloader(modifier: Modifier = Modifier) {
+fun AnimatedPreloader(modifier: Modifier = Modifier, lottie: Int) {
     val preloaderLottieComposition by rememberLottieComposition(
         LottieCompositionSpec.RawRes(
-            R.raw.currency_app_animation
+            lottie
         )
     )
 

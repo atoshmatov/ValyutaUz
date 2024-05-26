@@ -22,12 +22,12 @@ import androidx.compose.ui.unit.dp
 import uz.toshmatov.currency.core.theme.CurrencyDimensions
 
 @Composable
-fun CommetaIcon(
+fun CurrencyIcon(
     @DrawableRes image: Int,
     modifier: Modifier = Modifier,
     tint: Color = Color.Unspecified,
     size: Dp = 24.dp,
-    padding: Dp = 5.dp,
+    padding: Dp = 4.dp,
     color: Color = Color.Unspecified,
     onClick: (() -> Unit)? = null,
 ) {
@@ -54,12 +54,12 @@ fun CommetaIcon(
 }
 
 @Composable
-fun CommetaIcon(
+fun CurrencyIcon(
     @DrawableRes image: Int,
     modifier: Modifier = Modifier,
     tint: Color = Color.Unspecified,
     size: Dp = 24.dp,
-    padding: Dp = 5.dp,
+    padding: Dp = 4.dp,
     shape: Shape = RoundedCornerShape(CurrencyDimensions.medium),
     color: Color = Color.Unspecified,
     onClick: (() -> Unit)? = null,

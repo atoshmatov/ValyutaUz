@@ -17,7 +17,9 @@ class NBURepositoryImpl @Inject constructor(
 ) : NBURepository {
     override fun getNBUCurrencyList(): Flow<List<NBUModel>> {
         return nbuApiService.getNBUCurrencyList().map {
-            it.map(nbuMapper::mapFromEntity)
+            it.filter { nbuModel ->
+                nbuModel.nbuBuyPrice.isNotEmpty() && nbuModel.nbuCellPrice.isNotEmpty()
+            }.map(nbuMapper::mapFromEntity)
         }.flowOn(Dispatchers.IO)
     }
 }

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "cbu")
 data class CBUEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Long = 0,
     val code: String,
     @ColumnInfo("Ccy")
     val currencyCode: String,

@@ -9,6 +9,7 @@ import uz.toshmatov.currency.R
 typealias string = R.string
 typealias drawable = R.drawable
 typealias font = R.font
+typealias raw = R.raw
 
 @get:SuppressLint("SupportAnnotationUsage")
 @get:StringRes

@@ -8,6 +8,6 @@ data class NBUModel(
     val code: String,
     val cbPrice: String,
     val nbuBuyPrice: String,
-    val nbCellPrice: String,
+    val nbuCellPrice: String,
     val date: String
 )
