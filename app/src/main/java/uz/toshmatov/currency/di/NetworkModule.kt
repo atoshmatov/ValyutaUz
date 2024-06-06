@@ -16,6 +16,7 @@ import uz.toshmatov.currency.data.Configurations
 import uz.toshmatov.currency.data.Configurations.CBU_BASE_URL
 import uz.toshmatov.currency.data.Configurations.CONNECTION_TIMEOUT_SECONDS
 import uz.toshmatov.currency.data.Configurations.NBU_BASE_URL
+import uz.toshmatov.currency.data.local.prefs.Prefs
 import uz.toshmatov.currency.data.remote.api.CBUApiService
 import uz.toshmatov.currency.data.remote.api.NBUApiService
 import uz.toshmatov.currency.data.remote.retrofit.adapter.CoroutineCallAdapterFactory
@@ -92,5 +93,10 @@ object NetworkModule {
     @[Singleton Provides]
     fun providesContext(application: Application): Context {
         return application.applicationContext
+    }
+
+    @[Singleton Provides]
+    fun providePrefs(context: Context): Prefs {
+        return Prefs(context)
     }
 }

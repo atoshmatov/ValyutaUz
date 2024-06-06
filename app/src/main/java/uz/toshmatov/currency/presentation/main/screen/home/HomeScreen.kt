@@ -25,8 +25,8 @@ import uz.toshmatov.currency.core.uicompoenent.CcyLoading
 import uz.toshmatov.currency.core.utils.drawable
 import uz.toshmatov.currency.core.utils.resource
 import uz.toshmatov.currency.core.utils.string
+import uz.toshmatov.currency.presentation.main.screen.home.component.BankCurrencyItems
 import uz.toshmatov.currency.presentation.main.screen.home.component.CBUCurrencyItems
-import uz.toshmatov.currency.presentation.main.screen.home.component.CurrencyItems
 import uz.toshmatov.currency.presentation.main.screen.home.component.HomeHeader
 import uz.toshmatov.currency.presentation.main.screen.home.component.NBUCurrencyItems
 import uz.toshmatov.currency.presentation.main.screen.home.intents.HomeEvents
@@ -82,8 +82,7 @@ fun HomeScreenContent(
         items(
             items = state.cbuList
                 .reversed()
-                .takeLast(10)
-                .reversed(),
+                .takeLast(10),
             key = {
                 it.id
             }
@@ -94,7 +93,7 @@ fun HomeScreenContent(
             HomeHeader(title = string.home_nbu.resource)
         }
         items(
-            items = state.nbuList.reversed(),
+            items = state.nbuList,
             key = {
                 it.code
             }
@@ -109,8 +108,8 @@ fun HomeScreenContent(
                 it.bank
             }
         ) { nbuModel ->
-            CurrencyItems(
-                exchangeModel = nbuModel,
+            BankCurrencyItems(
+                exchangeBankModel = nbuModel,
                 cbu = state.cbuData
             )
         }

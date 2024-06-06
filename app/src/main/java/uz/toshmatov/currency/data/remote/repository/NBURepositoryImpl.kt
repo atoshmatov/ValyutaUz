@@ -4,7 +4,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import uz.toshmatov.currency.data.mapper.NBUMapper
+import uz.toshmatov.currency.data.mapper.nbu.NBUMapper
 import uz.toshmatov.currency.data.remote.api.NBUApiService
 import uz.toshmatov.currency.domain.model.NBUModel
 import uz.toshmatov.currency.domain.repository.NBURepository
@@ -14,12 +14,12 @@ class NBURepositoryImpl @Inject constructor(
     private val nbuApiService: NBUApiService,
     private val nbuMapper: NBUMapper,
 
-) : NBURepository {
+    ) : NBURepository {
     override fun getNBUCurrencyList(): Flow<List<NBUModel>> {
         return nbuApiService.getNBUCurrencyList().map {
-            it.filter { nbuModel ->
-                nbuModel.nbuBuyPrice.isNotEmpty() && nbuModel.nbuCellPrice.isNotEmpty()
-            }.map(nbuMapper::mapFromEntity)
+            it.map(nbuMapper::mapFromEntity).filter { nbu ->
+                nbu.nbuCellPrice.isNotEmpty() && nbu.nbuBuyPrice.isNotEmpty()
+            }
         }.flowOn(Dispatchers.IO)
     }
 }

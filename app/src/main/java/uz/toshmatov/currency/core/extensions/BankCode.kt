@@ -73,36 +73,3 @@ fun getBankLogo(bank: String): Int {
         }
     }
 }
-
-fun main() {
-    println(getBankLogo("Universal Bank"))
-    println(getBankLogo("Aloqa Bank"))
-    println(getBankLogo("Hamkor Bank"))
-    println(getBankLogo("Xalq Banki"))
-    println(getBankLogo("MK Bank"))
-    println(getBankLogo("Asia Alliance"))
-    println(getBankLogo("BRB"))
-    println(getBankLogo("MadadInvest"))
-    println(getBankLogo("Ipoteka Bank"))
-    println(getBankLogo("InfinBank"))
-    println(getBankLogo("Davrbank"))
-    println(getBankLogo("NBU"))
-    println(getBankLogo("Agrobank"))
-    println(getBankLogo("Turonbank"))
-    println(getBankLogo("Trastbank"))
-    println(getBankLogo("Kapitalbank"))
-    println(getBankLogo("Anorbank"))
-    println(getBankLogo("Asakabank"))
-    println(getBankLogo("Tengebank"))
-    println(getBankLogo("Ziraat Bank"))
-    println(getBankLogo("KDB Bank"))
-    println(getBankLogo("Octobank"))
-    println(getBankLogo("OFB"))
-    println(getBankLogo("Saderatbank"))
-    println(getBankLogo("Garantbank"))
-    println(getBankLogo("Hayot Bank"))
-    println(getBankLogo("SQB"))
-    println(getBankLogo("Ipak Yuli Bank"))
-    println(getBankLogo("Poytaxt Bank"))
-    println(getBankLogo("Unknown Bank"))
-}
