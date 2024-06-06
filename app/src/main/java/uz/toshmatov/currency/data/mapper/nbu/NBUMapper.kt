@@ -1,4 +1,4 @@
-package uz.toshmatov.currency.data.mapper
+package uz.toshmatov.currency.data.mapper.nbu
 
 import uz.toshmatov.currency.core.extensions.toNumber
 import uz.toshmatov.currency.core.extensions.toSom
@@ -17,8 +17,8 @@ class NBUMapper @Inject constructor() : Mapper<NBUModel, NBUDto> {
             title = entity.title,
             code = entity.code,
             cbPrice = entity.cbPrice.toNumber().toSom(),
-            nbuBuyPrice = entity.nbuBuyPrice.toNumber().toSom(),
-            nbuCellPrice = entity.nbuCellPrice.toNumber().toSom(),
+            nbuBuyPrice = entity.nbuBuyPrice?.toNumber()?.toSom()?:"",
+            nbuCellPrice = entity.nbuCellPrice?.toNumber()?.toSom()?:"",
             date = entity.date
         )
     }

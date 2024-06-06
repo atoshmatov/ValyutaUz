@@ -8,10 +8,11 @@ import kotlinx.coroutines.flow.onEach
 import uz.toshmatov.currency.data.local.prefs.PrefKeys
 import uz.toshmatov.currency.data.local.prefs.Prefs
 import uz.toshmatov.currency.data.local.room.dao.CBUDao
-import uz.toshmatov.currency.data.mapper.CBUMapper
-import uz.toshmatov.currency.data.mapper.localmapper.CBUDaoMapper
-import uz.toshmatov.currency.data.mapper.localmapper.CBUNetMapper
+import uz.toshmatov.currency.data.mapper.cbu.CBUDaoMapper
+import uz.toshmatov.currency.data.mapper.cbu.CBUMapper
+import uz.toshmatov.currency.data.mapper.cbu.CBUNetMapper
 import uz.toshmatov.currency.data.remote.api.CBUApiService
+import uz.toshmatov.currency.data.remote.model.CBUDto
 import uz.toshmatov.currency.domain.model.CBUModel
 import uz.toshmatov.currency.domain.repository.CBURepository
 import javax.inject.Inject
@@ -28,24 +29,58 @@ class CBURepositoryImpl @Inject constructor(
         val lastUpdate = prefs.get(PrefKeys.cbuDateKey, 0L)
 
         // 6 hour
+        val isLocalDataActual = isLocalDataUpToDate(lastUpdate)
+        return if (isLocalDataActual) {
+            getLocalCBUCurrencyList()
+        } else {
+            getRemoteCBUCurrencyList()
+        }
+        /*val lastUpdate = prefs.get(PrefKeys.cbuDateKey, 0L)
         val isLocalDataActual = System.currentTimeMillis() - lastUpdate < 6 * 60 * 60 * 1000
         return if (isLocalDataActual) {
-            cbuDao.getCBUDataList().map {
-                it.map(cbuDaoMapper::mapFromEntity)
+            cbuDao.getCBUDataList().map { cbuEntity ->
+                cbuEntity.map(cbuDaoMapper::mapFromEntity)
             }.flowOn(Dispatchers.IO)
         } else {
             cbuApiService.getCBUCurrencyList()
-                .onEach {
+                .onEach { cbuDto ->
                     cbuDao.deleteAll()
                     cbuDao.upsert(
-                        it.map { model ->
-                            cbuNetMapper.mapToEntity(model)
-                        }
+                        cbuDto.map(cbuNetMapper::mapToEntity)
                     )
                     prefs.save(PrefKeys.cbuDateKey, System.currentTimeMillis())
                 }.map {
                     it.map(cbuMapper::mapFromEntity)
                 }.flowOn(Dispatchers.IO)
-        }
+        }*/
+    }
+
+    private fun isLocalDataUpToDate(lastUpdate: Long): Boolean {
+        return System.currentTimeMillis() - lastUpdate < 6 * 60 * 60 * 1000
+    }
+
+    private fun getLocalCBUCurrencyList(): Flow<List<CBUModel>> {
+        return cbuDao.getCBUDataList()
+            .map { cbuEntityList ->
+                cbuEntityList.map(cbuDaoMapper::mapFromEntity)
+            }
+            .flowOn(Dispatchers.IO)
+    }
+
+    private fun getRemoteCBUCurrencyList(): Flow<List<CBUModel>> {
+        return cbuApiService.getCBUCurrencyList()
+            .onEach { cbuDtoList ->
+                updateLocalData(cbuDtoList)
+                prefs.save(PrefKeys.cbuDateKey, System.currentTimeMillis())
+            }
+            .map { cbuDtoList ->
+                cbuDtoList.map(cbuMapper::mapFromEntity)
+            }
+            .flowOn(Dispatchers.IO)
+    }
+
+    private suspend fun updateLocalData(cbuDtoList: List<CBUDto>) {
+        cbuDao.deleteAll()
+        cbuDao.upsert(cbuDtoList.map(cbuNetMapper::mapToEntity))
     }
 }

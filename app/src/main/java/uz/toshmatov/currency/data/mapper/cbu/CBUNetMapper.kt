@@ -1,4 +1,4 @@
-package uz.toshmatov.currency.data.mapper.localmapper
+package uz.toshmatov.currency.data.mapper.cbu
 
 import uz.toshmatov.currency.core.extensions.toNumber
 import uz.toshmatov.currency.core.extensions.toSom

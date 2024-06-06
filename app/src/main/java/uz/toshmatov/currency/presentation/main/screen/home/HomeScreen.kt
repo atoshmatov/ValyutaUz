@@ -93,7 +93,7 @@ fun HomeScreenContent(
             HomeHeader(title = string.home_nbu.resource)
         }
         items(
-            items = state.nbuList.reversed(),
+            items = state.nbuList,
             key = {
                 it.code
             }

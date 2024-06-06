@@ -116,7 +116,9 @@ fun BankCurrencyItems(
                 Text(
                     text = cbu,
                     color = CurrencyColors.icon,
-                    style = CurrencyTypography.buttonRegular
+                    style = CurrencyTypography.buttonRegular,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
             Spacer(modifier = Modifier.height(6.dp))

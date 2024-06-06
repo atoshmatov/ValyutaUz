@@ -10,9 +10,9 @@ data class NBUDto(
     @SerializedName("cb_price")
     val cbPrice: String,
     @SerializedName("nbu_buy_price")
-    val nbuBuyPrice: String,
+    val nbuBuyPrice: String? = null,
     @SerializedName("nbu_cell_price")
-    val nbuCellPrice: String,
+    val nbuCellPrice: String? = null,
     @SerializedName("date")
     val date: String
 )

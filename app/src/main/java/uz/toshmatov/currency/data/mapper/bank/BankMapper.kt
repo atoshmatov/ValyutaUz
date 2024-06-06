@@ -1,4 +1,4 @@
-package uz.toshmatov.currency.data.mapper
+package uz.toshmatov.currency.data.mapper.bank
 
 import com.google.gson.JsonObject
 import uz.toshmatov.currency.core.extensions.toSom
@@ -6,7 +6,7 @@ import uz.toshmatov.currency.core.mapper.Mapper
 import uz.toshmatov.currency.domain.model.ExchangeBankModel
 import javax.inject.Inject
 
-class ExchangeMapper @Inject constructor() : Mapper<ExchangeBankModel, JsonObject> {
+class BankMapper @Inject constructor() : Mapper<ExchangeBankModel, JsonObject> {
     override fun mapToEntity(model: ExchangeBankModel): JsonObject {
         TODO("Not yet implemented")
     }
