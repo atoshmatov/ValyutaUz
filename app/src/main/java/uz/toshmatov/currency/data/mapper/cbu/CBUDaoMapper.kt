@@ -10,19 +10,7 @@ import javax.inject.Inject
 
 class CBUDaoMapper @Inject constructor() : Mapper<CBUModel, CBUEntity> {
     override fun mapToEntity(model: CBUModel): CBUEntity {
-        return CBUEntity(
-            id = model.id,
-            code = model.code,
-            currencyCode = model.ccy,
-            nominal = model.nominal,
-            rate = model.rate.toNumber(),
-            difference = model.diff,
-            date = model.date,
-            currencyNameUZ = model.ccyName,
-            currencyNameUZC = model.ccyName,
-            currencyNameEN = model.ccyName,
-            currencyNameRU = model.ccyName
-        )
+        TODO("Not yet implemented")
     }
 
     override fun mapFromEntity(entity: CBUEntity): CBUModel {

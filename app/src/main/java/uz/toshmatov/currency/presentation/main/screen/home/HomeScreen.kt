@@ -16,8 +16,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.vectorResource
 import cafe.adriel.voyager.hilt.getViewModel
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import uz.toshmatov.currency.core.theme.CurrencyColors
@@ -29,7 +27,6 @@ import uz.toshmatov.currency.presentation.main.screen.home.component.BankCurrenc
 import uz.toshmatov.currency.presentation.main.screen.home.component.CBUCurrencyItems
 import uz.toshmatov.currency.presentation.main.screen.home.component.HomeHeader
 import uz.toshmatov.currency.presentation.main.screen.home.component.NBUCurrencyItems
-import uz.toshmatov.currency.presentation.main.screen.home.intents.HomeEvents
 import uz.toshmatov.currency.presentation.main.screen.home.intents.HomeState
 
 object HomeScreen : Tab {
@@ -52,14 +49,12 @@ object HomeScreen : Tab {
     override fun Content() {
         val viewModel = getViewModel<HomeViewModel>()
         val state by viewModel.state.collectAsState()
-        val currentNavigator = LocalNavigator.currentOrThrow.parent!!
 
         if (state.isLoading)
             CcyLoading()
         else
             HomeScreenContent(
                 state = state,
-                reduce = viewModel::reduce,
             )
     }
 }
@@ -69,7 +64,6 @@ object HomeScreen : Tab {
 fun HomeScreenContent(
     modifier: Modifier = Modifier,
     state: HomeState,
-    reduce: (HomeEvents) -> Unit,
 ) {
     LazyColumn(
         modifier = modifier
@@ -78,13 +72,13 @@ fun HomeScreenContent(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start,
     ) {
-        stickyHeader { HomeHeader(title = string.home_cbu.resource) }
+        stickyHeader {
+            HomeHeader(title = string.home_cbu.resource)
+        }
         items(
-            items = state.cbuList
-                .reversed()
-                .takeLast(10),
+            items = state.cbuList.reversed().takeLast(10).reversed(),
             key = {
-                it.id
+                it.code
             }
         ) { cbuModel ->
             CBUCurrencyItems(cbuModel = cbuModel)
@@ -93,7 +87,7 @@ fun HomeScreenContent(
             HomeHeader(title = string.home_nbu.resource)
         }
         items(
-            items = state.nbuList,
+            items = state.nbuList.reversed(),
             key = {
                 it.code
             }
@@ -103,7 +97,8 @@ fun HomeScreenContent(
         stickyHeader {
             HomeHeader(title = string.home_section_banks.resource)
         }
-        items(items = state.exchangeRateList,
+        items(
+            items = state.exchangeRateList.takeLast(10),
             key = {
                 it.bank
             }

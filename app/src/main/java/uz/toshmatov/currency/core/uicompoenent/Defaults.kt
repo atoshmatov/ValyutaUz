@@ -10,8 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -58,7 +58,6 @@ fun TopBar(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
     color: Color = CurrencyColors.background,
-    isWithShadow: Boolean = true,
 ) {
     TopAppBar(
         title = {
@@ -71,13 +70,13 @@ fun TopBar(
         },
         navigationIcon = {
             CurrencyIcon(
-                image = drawable.ic_tab_setting,
+                image = drawable.ic_arrow_left,
                 tint = CurrencyColors.text,
                 onClick = onBackClick,
             )
         },
         colors = TopAppBarDefaults.topAppBarColors(color),
-        modifier = if (isWithShadow) modifier.shadow(16.dp) else modifier,
+        modifier = modifier
     )
 }
 
@@ -125,9 +124,9 @@ fun AvatarLoader(
 
 @Composable
 fun CommetaDivider(modifier: Modifier = Modifier) {
-    Divider(
-        thickness = 1.dp,
-        color = CurrencyColors.button,
+    HorizontalDivider(
         modifier = modifier.fillMaxWidth(),
+        thickness = 1.dp,
+        color = CurrencyColors.button
     )
 }

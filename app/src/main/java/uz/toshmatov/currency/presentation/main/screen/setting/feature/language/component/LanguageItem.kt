@@ -44,7 +44,7 @@ fun LanguageItem(
                 selected = isSelected,
                 onClick = { onLanguageSelected(languageModel.code) },
             )
-            .padding(horizontal = 16.dp, vertical = 20.dp),
+            .padding(horizontal = 16.dp, vertical = 12.dp),
     ) {
         AsyncImage(
             modifier = Modifier

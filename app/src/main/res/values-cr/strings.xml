@@ -5,7 +5,7 @@
   // Main text
   <string name="tab_home">Асосий</string>
   <string name="tab_calculet">Калькулятор</string>
-  <string name="tab_favorite">Севимли</string>
+  <string name="tab_crypto">Крипто</string>
   <string name="tab_setting">Созламалар</string>
 
   // settings text

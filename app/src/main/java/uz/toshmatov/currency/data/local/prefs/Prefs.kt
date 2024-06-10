@@ -45,5 +45,4 @@ class Prefs constructor(context: Context) {
     fun clear() {
         prefs.edit().clear().apply()
     }
-
 }

@@ -3,7 +3,7 @@ package uz.toshmatov.currency.data.remote.api
 import com.google.gson.JsonObject
 import kotlinx.coroutines.flow.Flow
 
-interface ExchangeRateDataSource {
+interface ExchangeBankDataSource {
 
-    fun exchangeRateData(): Flow<JsonObject>
+    fun exchangeBankData(): Flow<JsonObject>
 }

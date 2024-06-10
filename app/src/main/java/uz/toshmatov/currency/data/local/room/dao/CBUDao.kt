@@ -2,16 +2,11 @@ package uz.toshmatov.currency.data.local.room.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
 import uz.toshmatov.currency.data.local.room.entity.CBUEntity
 
 @Dao
 interface CBUDao : BaseDao<CBUEntity> {
-
-    @Upsert
-    fun upsert(cbu: List<CBUEntity>)
-
     @Query("SELECT * FROM cbu")
     fun getCBUDataList(): Flow<List<CBUEntity>>
 

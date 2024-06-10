@@ -1,4 +1,4 @@
-package uz.toshmatov.currency.presentation.main.screen.favorite
+package uz.toshmatov.currency.presentation.main.screen.crypto
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -24,7 +24,7 @@ object FavoriteScreen : Tab {
         @Composable get() {
             val icon =
                 rememberVectorPainter(ImageVector.vectorResource(id = drawable.ic_tab_favorite))
-            val title = string.tab_favorite.resource
+            val title = string.tab_crypto.resource
 
             return remember {
                 TabOptions(

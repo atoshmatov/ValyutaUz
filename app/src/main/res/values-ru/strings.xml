@@ -4,8 +4,8 @@
 
   // Main text
   <string name="tab_home">Основной</string>
-  <string name="tab_calculet">Калькулятор</string>
-  <string name="tab_favorite">Сохраненное</string>
+  <string name="tab_calculet">Крипто</string>
+  <string name="tab_crypto">Сохраненное</string>
   <string name="tab_setting">Настройки</string>
 
   // settings text

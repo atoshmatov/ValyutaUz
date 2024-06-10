@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "nbu")
 data class NBUEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
+    val id: Int = 0,
     @ColumnInfo("title")
     val title: String,
     @ColumnInfo("code")

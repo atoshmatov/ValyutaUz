@@ -8,13 +8,13 @@ import uz.toshmatov.currency.core.connect.ConnectivityObserver
 import uz.toshmatov.currency.core.connect.NetworkConnectivityObserver
 import uz.toshmatov.currency.data.local.repository.DataStoreRepository
 import uz.toshmatov.currency.data.local.repository.DataStoreRepositoryImpl
-import uz.toshmatov.currency.data.remote.api.ExchangeRateDataSource
-import uz.toshmatov.currency.data.remote.api.impl.ExchangeRateDataSouImpl
+import uz.toshmatov.currency.data.remote.api.ExchangeBankDataSource
+import uz.toshmatov.currency.data.remote.api.impl.ExchangeBankDataSouImpl
 import uz.toshmatov.currency.data.remote.repository.CBURepositoryImpl
-import uz.toshmatov.currency.data.remote.repository.ExchangeRateRepositoryImpl
+import uz.toshmatov.currency.data.remote.repository.ExchangeBankRepositoryImpl
 import uz.toshmatov.currency.data.remote.repository.NBURepositoryImpl
 import uz.toshmatov.currency.domain.repository.CBURepository
-import uz.toshmatov.currency.domain.repository.ExchangeRateRepository
+import uz.toshmatov.currency.domain.repository.ExchangeBankRepository
 import uz.toshmatov.currency.domain.repository.NBURepository
 
 @Module
@@ -27,10 +27,10 @@ interface RepositoryModule {
     fun bindNBURepository(repositoryImpl: NBURepositoryImpl): NBURepository
 
     @Binds
-    fun bindExchangeRateRepository(repositoryImpl: ExchangeRateRepositoryImpl): ExchangeRateRepository
+    fun bindExchangeRateRepository(repositoryImpl: ExchangeBankRepositoryImpl): ExchangeBankRepository
 
     @Binds
-    fun bindExchangeRateDataSource(repositoryImpl: ExchangeRateDataSouImpl): ExchangeRateDataSource
+    fun bindExchangeBankDataSource(repositoryImpl: ExchangeBankDataSouImpl): ExchangeBankDataSource
 
     @Binds
     fun bindConnectivityObserver(connectivityObserver: NetworkConnectivityObserver): ConnectivityObserver

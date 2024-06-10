@@ -4,6 +4,7 @@ import androidx.compose.runtime.Stable
 
 @Stable
 data class NBUModel(
+    val id: Int = 0,
     val title: String,
     val code: String,
     val cbPrice: String,
