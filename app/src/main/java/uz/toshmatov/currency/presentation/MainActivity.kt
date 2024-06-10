@@ -22,6 +22,12 @@ class MainActivity : ComponentActivity() {
     //private lateinit var connectivityObserver: ConnectivityObserver
 
     override fun onCreate(savedInstanceState: Bundle?) {
+//        enableEdgeToEdge(
+//            statusBarStyle = SystemBarStyle.light(
+//                Color.Transparent.toArgb(),
+//                Color.Transparent.toArgb()
+//            ),
+//        )
         super.onCreate(savedInstanceState)
         //connectivityObserver = NetworkConnectivityObserver(applicationContext)
 

@@ -26,6 +26,8 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import uz.toshmatov.currency.core.extensions.CurrencyCode
+import uz.toshmatov.currency.core.extensions.toNumber
+import uz.toshmatov.currency.core.extensions.toSom
 import uz.toshmatov.currency.core.theme.CurrencyColors
 import uz.toshmatov.currency.core.theme.CurrencyDimensions
 import uz.toshmatov.currency.core.theme.CurrencyTypography
@@ -92,7 +94,7 @@ fun NBUCurrencyItems(
             }
             Spacer(modifier = Modifier.height(6.dp))
             Text(
-                text = nbuModel.nbuBuyPrice,
+                text = nbuModel.nbuBuyPrice.toNumber().toSom(),
                 color = CurrencyColors.textSecondary,
                 style = CurrencyTypography.captionUppercase
             )
@@ -118,7 +120,7 @@ fun NBUCurrencyItems(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = nbuModel.cbPrice,
+                    text = nbuModel.cbPrice.toNumber().toSom(),
                     color = CurrencyColors.icon,
                     style = CurrencyTypography.buttonRegular
                 )
@@ -142,7 +144,7 @@ fun NBUCurrencyItems(
             }
             Spacer(modifier = Modifier.height(6.dp))
             Text(
-                text = nbuModel.nbuCellPrice,
+                text = nbuModel.nbuCellPrice.toNumber().toSom(),
                 color = CurrencyColors.textSecondary,
                 style = CurrencyTypography.captionUppercase
             )

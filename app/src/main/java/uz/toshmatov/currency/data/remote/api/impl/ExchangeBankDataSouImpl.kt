@@ -5,15 +5,15 @@ import com.google.gson.JsonObject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.jsoup.Connection
-import uz.toshmatov.currency.data.remote.api.ExchangeRateDataSource
+import uz.toshmatov.currency.data.remote.api.ExchangeBankDataSource
 import java.io.IOException
 import javax.inject.Inject
 
-class ExchangeRateDataSouImpl @Inject constructor(
+class ExchangeBankDataSouImpl @Inject constructor(
     private val session: Connection
-) : ExchangeRateDataSource {
+) : ExchangeBankDataSource {
 
-    override fun exchangeRateData(): Flow<JsonObject> {
+    override fun exchangeBankData(): Flow<JsonObject> {
         return flow {
             try {
                 val doc = session.newRequest().get()

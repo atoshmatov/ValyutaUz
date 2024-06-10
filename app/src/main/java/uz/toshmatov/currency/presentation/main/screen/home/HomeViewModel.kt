@@ -14,10 +14,9 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import uz.toshmatov.currency.core.logger.logError
-import uz.toshmatov.currency.core.logger.logInfo
 import uz.toshmatov.currency.data.local.repository.DataStoreRepository
 import uz.toshmatov.currency.domain.repository.CBURepository
-import uz.toshmatov.currency.domain.repository.ExchangeRateRepository
+import uz.toshmatov.currency.domain.repository.ExchangeBankRepository
 import uz.toshmatov.currency.domain.repository.NBURepository
 import uz.toshmatov.currency.presentation.main.screen.home.intents.HomeEvents
 import uz.toshmatov.currency.presentation.main.screen.home.intents.HomeState
@@ -28,7 +27,7 @@ class HomeViewModel @Inject constructor(
     private val cbuRepository: CBURepository,
     private val nbuRepository: NBURepository,
     private val storeRepository: DataStoreRepository,
-    private val exchangeRateRepository: ExchangeRateRepository
+    private val exchangeBankRepository: ExchangeBankRepository
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<HomeState> = MutableStateFlow(HomeState())
@@ -37,7 +36,7 @@ class HomeViewModel @Inject constructor(
     init {
         getCBUCurrencyList()
         getNBUCurrencyList()
-        getExchangeRateData()
+        getExchangeBankData()
         getCBUData()
     }
 
@@ -46,12 +45,12 @@ class HomeViewModel @Inject constructor(
     private fun getCBUCurrencyList() {
         cbuRepository.getCBUCurrencyList()
             .onStart {
-                _state.update {
-                    it.copy(isLoading = true)
+                _state.update { homeState ->
+                    homeState.copy(isLoading = true)
                 }
             }.onEach { cbuModel ->
-                _state.update {
-                    it.copy(
+                _state.update { homeState ->
+                    homeState.copy(
                         cbuList = cbuModel.toPersistentList(),
                         isLoading = false
                     )
@@ -61,8 +60,8 @@ class HomeViewModel @Inject constructor(
                         setCbuData(it.rate)
                 }
             }.catch {
-                _state.update {
-                    it.copy(
+                _state.update { homeState ->
+                    homeState.copy(
                         error = "Error",
                         isLoading = false
                     )
@@ -82,8 +81,8 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             storeRepository.getCBUData()
                 .onEach { cbu ->
-                    _state.update {
-                        it.copy(cbuData = cbu)
+                    _state.update { homeState ->
+                        homeState.copy(cbuData = cbu)
                     }
                 }.launchIn(viewModelScope)
         }
@@ -92,19 +91,19 @@ class HomeViewModel @Inject constructor(
     private fun getNBUCurrencyList() {
         nbuRepository.getNBUCurrencyList()
             .onStart {
-                _state.update {
-                    it.copy(isLoading = true)
+                _state.update { homeState ->
+                    homeState.copy(isLoading = true)
                 }
             }.onEach { nbuModel ->
-                _state.update {
-                    it.copy(
+                _state.update { homeState ->
+                    homeState.copy(
                         nbuList = nbuModel.toPersistentList(),
                         isLoading = false
                     )
                 }
             }.catch {
-                _state.update {
-                    it.copy(
+                _state.update { homeState ->
+                    homeState.copy(
                         error = "Error",
                         isLoading = false
                     )
@@ -115,26 +114,22 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    private fun getExchangeRateData() {
-        exchangeRateRepository.exchangeRateData()
+    private fun getExchangeBankData() {
+        exchangeBankRepository.exchangeBankData()
             .onStart {
-                _state.update {
-                    it.copy(isLoading = true)
+                _state.update { homeState ->
+                    homeState.copy(isLoading = true)
                 }
             }.onEach { exchangeRateModel ->
-
-                logInfo {
-                    "getExchangeRateData --> $exchangeRateModel"
-                }
-                _state.update {
-                    it.copy(
+                _state.update { homeState ->
+                    homeState.copy(
                         exchangeRateList = exchangeRateModel.toPersistentList(),
                         isLoading = false
                     )
                 }
             }.catch {
-                _state.update {
-                    it.copy(
+                _state.update { homeState ->
+                    homeState.copy(
                         error = "Error",
                         isLoading = false
                     )

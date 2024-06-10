@@ -154,4 +154,8 @@ dependencies {
     // datastore
     implementation(libs.androidx.dataStore.core)
     implementation(libs.androidx.dataStore.preferences)
+
+    // appwidget glance
+    implementation(libs.androidx.appwidget.glance)
+    implementation(libs.androidx.appwidget.glance.material)
 }

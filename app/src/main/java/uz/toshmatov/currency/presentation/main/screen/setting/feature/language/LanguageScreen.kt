@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -15,6 +16,9 @@ import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import uz.toshmatov.currency.core.theme.CurrencyColors
+import uz.toshmatov.currency.core.theme.CurrencyDimensions
+import uz.toshmatov.currency.core.uicompoenent.TopBar
+import uz.toshmatov.currency.core.utils.string
 import uz.toshmatov.currency.presentation.main.screen.setting.feature.language.component.LanguageItem
 import uz.toshmatov.currency.presentation.main.screen.setting.feature.language.intents.LanguageState
 import uz.toshmatov.currency.presentation.main.screen.setting.feature.language.lingver.LingverLocalization
@@ -28,7 +32,8 @@ class LanguageScreen : AndroidScreen() {
 
         LanguageContent(
             state = state,
-            onClose = { navigation.pop() }
+            onClose = navigation::pop,
+            backClick = navigation::pop
         )
     }
 }
@@ -38,8 +43,8 @@ fun LanguageContent(
     modifier: Modifier = Modifier,
     state: LanguageState,
     onClose: () -> Unit,
-
-    ) {
+    backClick: () -> Unit
+) {
     val context = LocalContext.current
 
     val onLanguageSelected: (String) -> Unit = {
@@ -54,6 +59,11 @@ fun LanguageContent(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        TopBar(
+            modifier = Modifier.padding(start = CurrencyDimensions.small),
+            titleId = string.settings_language,
+            onBackClick = backClick
+        )
         state.languageList.forEach { languageModel ->
             LanguageItem(
                 languageModel = languageModel,

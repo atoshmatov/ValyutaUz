@@ -35,24 +35,6 @@ class CBURepositoryImpl @Inject constructor(
         } else {
             getRemoteCBUCurrencyList()
         }
-        /*val lastUpdate = prefs.get(PrefKeys.cbuDateKey, 0L)
-        val isLocalDataActual = System.currentTimeMillis() - lastUpdate < 6 * 60 * 60 * 1000
-        return if (isLocalDataActual) {
-            cbuDao.getCBUDataList().map { cbuEntity ->
-                cbuEntity.map(cbuDaoMapper::mapFromEntity)
-            }.flowOn(Dispatchers.IO)
-        } else {
-            cbuApiService.getCBUCurrencyList()
-                .onEach { cbuDto ->
-                    cbuDao.deleteAll()
-                    cbuDao.upsert(
-                        cbuDto.map(cbuNetMapper::mapToEntity)
-                    )
-                    prefs.save(PrefKeys.cbuDateKey, System.currentTimeMillis())
-                }.map {
-                    it.map(cbuMapper::mapFromEntity)
-                }.flowOn(Dispatchers.IO)
-        }*/
     }
 
     private fun isLocalDataUpToDate(lastUpdate: Long): Boolean {
@@ -63,8 +45,7 @@ class CBURepositoryImpl @Inject constructor(
         return cbuDao.getCBUDataList()
             .map { cbuEntityList ->
                 cbuEntityList.map(cbuDaoMapper::mapFromEntity)
-            }
-            .flowOn(Dispatchers.IO)
+            }.flowOn(Dispatchers.IO)
     }
 
     private fun getRemoteCBUCurrencyList(): Flow<List<CBUModel>> {
@@ -72,11 +53,9 @@ class CBURepositoryImpl @Inject constructor(
             .onEach { cbuDtoList ->
                 updateLocalData(cbuDtoList)
                 prefs.save(PrefKeys.cbuDateKey, System.currentTimeMillis())
-            }
-            .map { cbuDtoList ->
+            }.map { cbuDtoList ->
                 cbuDtoList.map(cbuMapper::mapFromEntity)
-            }
-            .flowOn(Dispatchers.IO)
+            }.flowOn(Dispatchers.IO)
     }
 
     private suspend fun updateLocalData(cbuDtoList: List<CBUDto>) {

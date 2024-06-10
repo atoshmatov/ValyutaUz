@@ -10,4 +10,7 @@ interface NBUDao : BaseDao<NBUEntity> {
 
     @Query("SELECT * FROM nbu")
     fun getCBUData(): Flow<List<NBUEntity>>
+
+    @Query("DELETE FROM nbu")
+    suspend fun deleteAll()
 }

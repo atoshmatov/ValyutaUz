@@ -4,7 +4,7 @@ import androidx.compose.runtime.Stable
 
 @Stable
 data class CBUModel(
-    val id: Long,
+    val id: Int,
     val code: String,
     val ccy: String,
     val ccyName:String,

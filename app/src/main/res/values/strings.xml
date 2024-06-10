@@ -4,7 +4,7 @@
   // Main text
   <string name="tab_home">Main</string>
   <string name="tab_calculet">Calculator</string>
-  <string name="tab_favorite">Saved</string>
+  <string name="tab_crypto">Crypto</string>
   <string name="tab_setting">Settings</string>
 
   // settings text

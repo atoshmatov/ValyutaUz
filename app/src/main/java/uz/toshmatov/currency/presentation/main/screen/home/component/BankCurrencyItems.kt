@@ -23,6 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import uz.toshmatov.currency.core.extensions.getBankLogo
+import uz.toshmatov.currency.core.extensions.toSom
 import uz.toshmatov.currency.core.theme.CurrencyColors
 import uz.toshmatov.currency.core.theme.CurrencyDimensions
 import uz.toshmatov.currency.core.theme.CurrencyTypography
@@ -88,7 +89,7 @@ fun BankCurrencyItems(
             }
             Spacer(modifier = Modifier.height(6.dp))
             Text(
-                text = exchangeBankModel.buy,
+                text = exchangeBankModel.buy.toSom(),
                 color = CurrencyColors.textSecondary,
                 style = CurrencyTypography.captionUppercase
             )
@@ -140,7 +141,7 @@ fun BankCurrencyItems(
             }
             Spacer(modifier = Modifier.height(6.dp))
             Text(
-                text = exchangeBankModel.sell,
+                text = exchangeBankModel.sell.toSom(),
                 color = CurrencyColors.textSecondary,
                 style = CurrencyTypography.captionUppercase
             )
