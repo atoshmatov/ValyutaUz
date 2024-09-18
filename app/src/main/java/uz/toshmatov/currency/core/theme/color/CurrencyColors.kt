@@ -21,6 +21,8 @@ class CurrencyColors(
     bottomBarTextSelected: Color,
     bottomBarIndicator: Color,
     itemBackground: Color,
+    shimmer: Color,
+    shimmerLight: Color
 ) {
 
     var background by mutableStateOf(background)
@@ -68,6 +70,12 @@ class CurrencyColors(
     var itemBackground by mutableStateOf(itemBackground)
         private set
 
+    var shimmer by mutableStateOf(shimmer)
+        private set
+
+    var shimmerLight by mutableStateOf(shimmerLight)
+        private set
+
     fun copy(
         background: Color = this.background,
         text: Color = this.text,
@@ -83,7 +91,9 @@ class CurrencyColors(
         bottomBarText: Color = this.bottomBarText,
         bottomBarTextSelected: Color = this.bottomBarTextSelected,
         bottomBarIndicator: Color = this.bottomBarIndicator,
-        itemBackground: Color = this.itemBackground
+        itemBackground: Color = this.itemBackground,
+        shimmer: Color = this.shimmer,
+        shimmerLight: Color = this.shimmerLight
     ) = CurrencyColors(
         background = background,
         text = text,
@@ -99,7 +109,9 @@ class CurrencyColors(
         bottomBarText = bottomBarText,
         bottomBarTextSelected = bottomBarTextSelected,
         bottomBarIndicator = bottomBarIndicator,
-        itemBackground = itemBackground
+        itemBackground = itemBackground,
+        shimmer = shimmer,
+        shimmerLight = shimmerLight
     )
 
     fun updateColorsFrom(other: CurrencyColors) {
@@ -118,5 +130,7 @@ class CurrencyColors(
         bottomBarTextSelected = other.bottomBarTextSelected
         bottomBarIndicator = other.bottomBarIndicator
         itemBackground = other.itemBackground
+        shimmer = other.shimmer
+        shimmerLight = other.shimmerLight
     }
 }

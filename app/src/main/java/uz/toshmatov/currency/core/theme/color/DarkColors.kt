@@ -16,4 +16,6 @@ internal fun darkColors(): CurrencyColors = CurrencyColors(
     bottomBarTextSelected = BLUE,
     bottomBarIndicator = BLUE200,
     itemBackground = GRAY1,
+    shimmer = ShimmerDark,
+    shimmerLight = MidnightMauve,
 )

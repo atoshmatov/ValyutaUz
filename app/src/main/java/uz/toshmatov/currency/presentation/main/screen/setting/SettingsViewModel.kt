@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import uz.toshmatov.currency.core.utils.drawable
 import uz.toshmatov.currency.core.utils.string
-import uz.toshmatov.currency.presentation.main.screen.setting.intents.SettingsEvents
 import uz.toshmatov.currency.presentation.main.screen.setting.intents.SettingsState
 import uz.toshmatov.currency.presentation.main.screen.setting.model.ActionType
 import uz.toshmatov.currency.presentation.main.screen.setting.model.SettingModel
@@ -26,7 +25,7 @@ class SettingsViewModel @Inject constructor() : ViewModel() {
         SettingModel(string.settings_theme, drawable.ic_style, ActionType.THEME),
         SettingModel(string.settings_info, drawable.ic_info_app, ActionType.ABOUT_APP),
         SettingModel(string.settings_contact, drawable.ic_contact, ActionType.CONTACT_US, true),
-        SettingModel(string.settings_rate, drawable.ic_star, ActionType.RATE_APP, true),
+        //SettingModel(string.settings_rate, drawable.ic_star, ActionType.RATE_APP, true),
         SettingModel(string.settings_share, drawable.ic_share, ActionType.SHARE_APP, true),
     )
 
@@ -35,6 +34,4 @@ class SettingsViewModel @Inject constructor() : ViewModel() {
             it.copy(settings = settings.toPersistentList())
         }
     }
-
-    fun reduce(event: SettingsEvents) {}
 }

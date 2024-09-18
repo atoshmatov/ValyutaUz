@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -15,7 +14,6 @@ import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import uz.toshmatov.currency.core.theme.CurrencyColors
-import uz.toshmatov.currency.core.theme.CurrencyDimensions
 import uz.toshmatov.currency.core.uicompoenent.TopBar
 import uz.toshmatov.currency.core.utils.string
 import uz.toshmatov.currency.presentation.main.screen.setting.feature.theme.component.ThemeItem
@@ -52,7 +50,6 @@ fun ThemeContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         TopBar(
-            modifier = Modifier.padding(start = CurrencyDimensions.small),
             titleId = string.settings_theme,
             onBackClick = backClick
         )

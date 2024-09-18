@@ -7,10 +7,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.compositionLocalOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import uz.toshmatov.currency.core.extensions.StatusBarStyle
+import uz.toshmatov.currency.core.extensions.applyTheme
 import uz.toshmatov.currency.core.theme.color.CurrencyColors
 import uz.toshmatov.currency.core.theme.color.LocalColors
 import uz.toshmatov.currency.core.theme.color.darkColors
@@ -19,10 +19,6 @@ import uz.toshmatov.currency.core.theme.deminsion.CurrencyDimensions
 import uz.toshmatov.currency.core.theme.deminsion.LocalDimensions
 import uz.toshmatov.currency.core.theme.typography.CurrencyTypography
 import uz.toshmatov.currency.core.theme.typography.LocalTypography
-import uz.toshmatov.currency.core.extensions.StatusBarStyle
-import uz.toshmatov.currency.core.extensions.applyTheme
-
-internal val LocalThemeIsDark = compositionLocalOf { mutableStateOf(true) }
 
 @Composable
 fun CurrencyTheme(

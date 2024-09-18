@@ -1,6 +1,5 @@
 package uz.toshmatov.currency.presentation.main.screen.setting
 
-import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,10 +21,13 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import uz.toshmatov.currency.core.extensions.openEmail
+import uz.toshmatov.currency.core.extensions.openShareAppLink
 import uz.toshmatov.currency.core.theme.CurrencyColors
 import uz.toshmatov.currency.core.utils.drawable
 import uz.toshmatov.currency.core.utils.resource
 import uz.toshmatov.currency.core.utils.string
+import uz.toshmatov.currency.presentation.MainActivity
 import uz.toshmatov.currency.presentation.main.screen.setting.component.SettingItem
 import uz.toshmatov.currency.presentation.main.screen.setting.feature.language.LanguageScreen
 import uz.toshmatov.currency.presentation.main.screen.setting.feature.theme.ThemeScreen
@@ -55,6 +57,7 @@ object SettingScreen : Tab {
         val state by viewModel.state.collectAsState()
         val currentNavigator = LocalNavigator.currentOrThrow.parent!!
         val context = LocalContext.current
+        val activity = LocalContext.current as MainActivity
 
         SettingScreenContent(
             state = state,
@@ -62,14 +65,14 @@ object SettingScreen : Tab {
                 when (it) {
                     ActionType.LANGUAGE -> currentNavigator.push(LanguageScreen())
                     ActionType.THEME -> currentNavigator.push(ThemeScreen())
-                    ActionType.CONTACT_US -> {}
+                    ActionType.CONTACT_US -> {
+                        context.openEmail()
+                    }
+
                     ActionType.RATE_APP -> {}
+
                     ActionType.SHARE_APP -> {
-                        val emailIntent = Intent(Intent.ACTION_SEND)
-                        emailIntent.setType("text/plain")
-                        val recipients = arrayOf("mobdevali1220@gmail.com")
-                        emailIntent.putExtra(Intent.EXTRA_EMAIL, recipients)
-                        context.startActivity(emailIntent)
+                        context.openShareAppLink()
                     }
                     ActionType.ABOUT_APP -> {}
                 }

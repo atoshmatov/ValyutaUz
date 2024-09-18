@@ -1,7 +1,10 @@
+@file:OptIn(ExperimentalVoyagerApi::class)
+
 package uz.toshmatov.currency.presentation.main
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -10,6 +13,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.androidx.AndroidScreen
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.navigator.tab.CurrentTab
@@ -20,7 +24,6 @@ import cafe.adriel.voyager.navigator.tab.TabNavigator
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toPersistentList
 import uz.toshmatov.currency.core.theme.CurrencyColors
-import uz.toshmatov.currency.presentation.main.screen.calculet.CalculetScreen
 import uz.toshmatov.currency.presentation.main.screen.home.HomeScreen
 import uz.toshmatov.currency.presentation.main.screen.setting.SettingScreen
 
@@ -31,12 +34,11 @@ class MainScreen : AndroidScreen() {
     }
 }
 
-@OptIn(ExperimentalVoyagerApi::class)
 @Composable
 private fun MainScreenContent(
     modifier: Modifier = Modifier
 ) {
-    val tabs = listOf(HomeScreen, CalculetScreen, SettingScreen)
+    val tabs = listOf(HomeScreen, SettingScreen)
 
     TabNavigator(
         HomeScreen,
@@ -47,13 +49,17 @@ private fun MainScreenContent(
             )
         },
     ) {
+
         Scaffold(
             modifier = modifier,
             content = { padding ->
                 Column(modifier = Modifier.padding(padding)) { CurrentTab() }
             },
             bottomBar = {
-                BottomNavigatorBar(tabs = tabs.toPersistentList())
+                Column {
+                    HorizontalDivider(color = CurrencyColors.shimmer, thickness = 1.dp)
+                    BottomNavigatorBar(tabs = tabs.toPersistentList())
+                }
             },
         )
     }
@@ -76,7 +82,7 @@ private fun BottomNavigatorBar(tabs: ImmutableList<Tab>) {
                 icon = { Icon(painter = icon, contentDescription = null) },
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = CurrencyColors.bottomBarIconSelected,
-                    unselectedIconColor = CurrencyColors.bottomBarIcon,
+                    unselectedIconColor = CurrencyColors.textSecondary,
                     selectedTextColor = CurrencyColors.bottomBarTextSelected,
                     unselectedTextColor = CurrencyColors.bottomBarText,
                     indicatorColor = CurrencyColors.bottomBarIndicator,

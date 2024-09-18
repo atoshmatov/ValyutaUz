@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">currency</string>
+  <string name="app_name">Valyuta Uz</string>
+  <string name="app_name_dev">ValyutaUz-debug</string>
+  <string name="app_name_prod">ValyutaUz-prod</string>
 
   // Main text
   <string name="tab_home">Асосий</string>
-  <string name="tab_calculet">Калькулятор</string>
+  <string name="tab_converter">Конвертер</string>
   <string name="tab_crypto">Крипто</string>
   <string name="tab_setting">Созламалар</string>
 
@@ -26,12 +28,11 @@
   <string name="russian_language">Русский</string>
 
   // home text
-  <string name="home_buy_price">Сотиб Олиш</string>
+  <string name="home_buy_price">Сотиб oлиш</string>
   <string name="home_sell_price">Сотиш</string>
   <string name="home_cbu">Марказий банк</string>
   <string name="home_nbu">Миллий банк</string>
   <string name="home_section_banks">Банк Кесимида</string>
   <string name="home_update_date">Янгиланган сана</string>
   <string name="home_all_item">Хаммаси</string>
-
 </resources>

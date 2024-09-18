@@ -9,6 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
+import com.google.android.play.core.review.ReviewManagerFactory
 import dagger.hilt.android.AndroidEntryPoint
 import uz.toshmatov.currency.core.extensions.getCurrentThemeMode
 import uz.toshmatov.currency.core.theme.CurrencyTheme
@@ -19,38 +20,33 @@ import uz.toshmatov.currency.presentation.splash.SplashScreen
 class MainActivity : ComponentActivity() {
     private val viewModel: MainViewModel by viewModels()
 
-    //private lateinit var connectivityObserver: ConnectivityObserver
-
     override fun onCreate(savedInstanceState: Bundle?) {
-//        enableEdgeToEdge(
-//            statusBarStyle = SystemBarStyle.light(
-//                Color.Transparent.toArgb(),
-//                Color.Transparent.toArgb()
-//            ),
-//        )
         super.onCreate(savedInstanceState)
-        //connectivityObserver = NetworkConnectivityObserver(applicationContext)
-
+        showFeedback()
         setContent {
             val themeMode by viewModel.isDarkMode.collectAsStateWithLifecycle()
             CurrencyTheme(
                 darkTheme = getCurrentThemeMode(themeMode),
             ) {
-                /*val status by connectivityObserver.observe().collectAsState(
-                    initial = ConnectivityObserver.Status.UNAVAILABLE
-                )
-                if (status == ConnectivityObserver.Status.UNAVAILABLE || status == ConnectivityObserver.Status.LOST || status == ConnectivityObserver.Status.LOSING) {
-                    NetworkError()
-                }*/
                 Navigator(
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                         MainScreen()
                     } else {
                         SplashScreen()
-                    }
+                    },
                 ) {
                     SlideTransition(it)
                 }
+            }
+        }
+    }
+
+    private fun showFeedback() {
+        val reviewManager = ReviewManagerFactory.create(this)
+
+        reviewManager.requestReviewFlow().addOnCompleteListener {
+            if (it.isSuccessful) {
+                reviewManager.launchReviewFlow(this, it.result)
             }
         }
     }

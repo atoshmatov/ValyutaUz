@@ -19,16 +19,16 @@ import uz.toshmatov.currency.core.utils.drawable
 import uz.toshmatov.currency.core.utils.resource
 import uz.toshmatov.currency.core.utils.string
 
-object FavoriteScreen : Tab {
+object CryptoScreen : Tab {
     override val options: TabOptions
         @Composable get() {
             val icon =
-                rememberVectorPainter(ImageVector.vectorResource(id = drawable.ic_tab_favorite))
+                rememberVectorPainter(ImageVector.vectorResource(id = drawable.ic_tab_crypto))
             val title = string.tab_crypto.resource
 
             return remember {
                 TabOptions(
-                    index = 2u,
+                    index = 1u,
                     title = title,
                     icon = icon,
                 )
@@ -37,12 +37,12 @@ object FavoriteScreen : Tab {
 
     @Composable
     override fun Content() {
-        FavoriteScreenContent()
+        CryptoScreenContent()
     }
 }
 
 @Composable
-fun FavoriteScreenContent() {
+fun CryptoScreenContent() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -50,6 +50,6 @@ fun FavoriteScreenContent() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "FavoriteScreen")
+        Text(text = "CryptoScreenContent")
     }
 }

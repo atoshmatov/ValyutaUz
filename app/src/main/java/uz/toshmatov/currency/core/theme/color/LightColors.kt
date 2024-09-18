@@ -16,4 +16,6 @@ internal fun lightColors(): CurrencyColors = CurrencyColors(
     bottomBarTextSelected = BLUE,
     bottomBarIndicator = WHITE,
     itemBackground = WHITE,
+    shimmer = ShimmerLight,
+    shimmerLight = ShimmerLineLight,
 )

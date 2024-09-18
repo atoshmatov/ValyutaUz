@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">currency</string>
+  <string name="app_name">Valyuta Uz</string>
+  <string name="app_name_dev">ValyutaUz-debug</string>
+  <string name="app_name_prod">ValyutaUz-prod</string>
 
   // Main text
   <string name="tab_home">Основной</string>
-  <string name="tab_calculet">Крипто</string>
-  <string name="tab_crypto">Сохраненное</string>
+  <string name="tab_converter">Конвертер</string>
+  <string name="tab_crypto">Крипто</string>
   <string name="tab_setting">Настройки</string>
 
   // settings text
@@ -33,5 +35,4 @@
   <string name="home_section_banks">В банковском разделе</string>
   <string name="home_update_date">Дата обновления</string>
   <string name="home_all_item">Все</string>
-
 </resources>

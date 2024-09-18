@@ -45,6 +45,18 @@ data class CurrencyTypography(
         fontSize = 18.sp,
         lineHeight = 24.sp
     ),
+    val labelSemiBold: TextStyle = TextStyle(
+        fontWeight = FontWeight.SemiBold,
+        fontFamily = font_montserrat,
+        fontSize = 16.sp,
+        lineHeight = 24.sp
+    ),
+    val labelSemiMedium: TextStyle = TextStyle(
+        fontWeight = FontWeight.Medium,
+        fontFamily = font_montserrat,
+        fontSize = 16.sp,
+        lineHeight = 24.sp
+    ),
     val textSemiBold: TextStyle = TextStyle(
         fontWeight = FontWeight.SemiBold,
         fontFamily = font_montserrat,

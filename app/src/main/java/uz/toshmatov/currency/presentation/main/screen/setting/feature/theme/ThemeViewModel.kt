@@ -69,10 +69,11 @@ class ThemeViewModel @Inject constructor(
     }
 
     private fun getThemeMode() {
-        storeRepository.getThemeMode().onEach { themeMode ->
-            _state.update { state ->
-                state.copy(currentThemeMode = themeMode)
-            }
-        }.launchIn(viewModelScope)
+        storeRepository.getThemeMode()
+            .onEach { themeMode ->
+                _state.update { state ->
+                    state.copy(currentThemeMode = themeMode)
+                }
+            }.launchIn(viewModelScope)
     }
 }

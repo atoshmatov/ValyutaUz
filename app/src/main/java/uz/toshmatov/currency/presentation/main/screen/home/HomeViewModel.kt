@@ -18,7 +18,6 @@ import uz.toshmatov.currency.data.local.repository.DataStoreRepository
 import uz.toshmatov.currency.domain.repository.CBURepository
 import uz.toshmatov.currency.domain.repository.ExchangeBankRepository
 import uz.toshmatov.currency.domain.repository.NBURepository
-import uz.toshmatov.currency.presentation.main.screen.home.intents.HomeEvents
 import uz.toshmatov.currency.presentation.main.screen.home.intents.HomeState
 import javax.inject.Inject
 
@@ -39,8 +38,6 @@ class HomeViewModel @Inject constructor(
         getExchangeBankData()
         getCBUData()
     }
-
-    fun reduce(event: HomeEvents) {}
 
     private fun getCBUCurrencyList() {
         cbuRepository.getCBUCurrencyList()
@@ -71,23 +68,6 @@ class HomeViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    private fun setCbuData(cbuData: String) {
-        viewModelScope.launch {
-            storeRepository.setCBUData(cbuData)
-        }
-    }
-
-    private fun getCBUData() {
-        viewModelScope.launch {
-            storeRepository.getCBUData()
-                .onEach { cbu ->
-                    _state.update { homeState ->
-                        homeState.copy(cbuData = cbu)
-                    }
-                }.launchIn(viewModelScope)
-        }
-    }
-
     private fun getNBUCurrencyList() {
         nbuRepository.getNBUCurrencyList()
             .onStart {
@@ -113,7 +93,6 @@ class HomeViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-
     private fun getExchangeBankData() {
         exchangeBankRepository.exchangeBankData()
             .onStart {
@@ -136,5 +115,22 @@ class HomeViewModel @Inject constructor(
                 }
                 logError { it.localizedMessage ?: "" }
             }.launchIn(viewModelScope)
+    }
+
+    private fun setCbuData(cbuData: String) {
+        viewModelScope.launch {
+            storeRepository.setCBUData(cbuData)
+        }
+    }
+
+    private fun getCBUData() {
+        viewModelScope.launch {
+            storeRepository.getCBUData()
+                .onEach { cbu ->
+                    _state.update { homeState ->
+                        homeState.copy(cbuData = cbu)
+                    }
+                }.launchIn(viewModelScope)
+        }
     }
 }

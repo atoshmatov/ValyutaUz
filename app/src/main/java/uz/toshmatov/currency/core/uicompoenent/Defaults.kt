@@ -57,15 +57,17 @@ fun TopBar(
     @StringRes titleId: Int,
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
-    color: Color = CurrencyColors.background,
+    color: Color = Color.Transparent,
 ) {
     TopAppBar(
+        modifier = modifier
+            .padding(start = CurrencyDimensions.medium),
         title = {
             Text(
                 text = titleId.resource,
                 style = CurrencyTypography.textSemiBold,
                 color = CurrencyColors.text,
-                modifier = Modifier.padding(start = CurrencyDimensions.medium),
+                modifier = Modifier.padding(start = CurrencyDimensions.small),
             )
         },
         navigationIcon = {
@@ -76,7 +78,6 @@ fun TopBar(
             )
         },
         colors = TopAppBarDefaults.topAppBarColors(color),
-        modifier = modifier
     )
 }
 

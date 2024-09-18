@@ -39,6 +39,7 @@ import uz.toshmatov.currency.domain.model.CBUModel
 fun CBUCurrencyItems(
     modifier: Modifier = Modifier,
     cbuModel: CBUModel,
+    cbuItemClick: () -> Unit
 ) {
     val priceIcon by remember {
         derivedStateOf {
@@ -64,7 +65,7 @@ fun CBUCurrencyItems(
             )
             .clip(RoundedCornerShape(CurrencyDimensions.small))
             .background(CurrencyColors.bottomBar)
-            .clickable { }
+            .clickable { cbuItemClick() }
             .padding(CurrencyDimensions.itemSpace),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -103,7 +104,7 @@ fun CBUCurrencyItems(
             Text(
                 text = cbuModel.rate,
                 color = CurrencyColors.text,
-                style = CurrencyTypography.buttonRegular
+                style = CurrencyTypography.labelSemiBold
             )
             Spacer(modifier = Modifier.height(6.dp))
             Row(

@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.ktlint)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -15,7 +17,7 @@ android {
         minSdk = 21
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -31,9 +33,26 @@ android {
                 "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("debug")
+            versionNameSuffix = "-prod-release"
         }
 
-        debug {}
+        debug {
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-dev-debug"
+            isDebuggable = true
+        }
+
+        flavorDimensions += "mobile_uz"
+        productFlavors {
+            create("dev") {
+                applicationId = "uz.toshmatov.currency"
+                dimension = "mobile_uz"
+            }
+            create("prod") {
+                applicationId = "uz.toshmatov.currency"
+                dimension = "mobile_uz"
+            }
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -53,6 +72,11 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+    ktlint {
+        version = "12.1.0"
+        android = true
+        ignoreFailures = false
     }
 }
 
@@ -158,4 +182,9 @@ dependencies {
     // appwidget glance
     implementation(libs.androidx.appwidget.glance)
     implementation(libs.androidx.appwidget.glance.material)
+    implementation(libs.androidx.appwidget.glance.material3)
+
+    // play review
+    implementation(libs.play.review.ktx)
+    implementation(libs.play.review)
 }

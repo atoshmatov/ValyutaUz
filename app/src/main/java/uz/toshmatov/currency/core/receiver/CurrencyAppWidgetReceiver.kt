@@ -6,5 +6,5 @@ import uz.toshmatov.currency.presentation.appwidget.CurrencyAppWidget
 
 class CurrencyAppWidgetReceiver : GlanceAppWidgetReceiver() {
     override val glanceAppWidget: GlanceAppWidget
-        get() = CurrencyAppWidget
+        get() = CurrencyAppWidget()
 }

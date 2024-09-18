@@ -1,6 +1,7 @@
 package uz.toshmatov.currency.presentation.main.screen.home.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,6 +24,7 @@ import uz.toshmatov.currency.core.utils.string
 fun HomeHeader(
     modifier: Modifier = Modifier,
     title: String = "",
+    onClick: () -> Unit = {}
 ) {
     Row(
         modifier = modifier
@@ -42,6 +44,7 @@ fun HomeHeader(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
+                modifier = Modifier.clickable { onClick() },
                 text = string.home_all_item.resource,
                 color = CurrencyColors.iconGray,
                 style = CurrencyTypography.textSemiBold
@@ -51,7 +54,7 @@ fun HomeHeader(
                 image = drawable.ic_arrow_right,
                 size = 20.dp,
                 tint = CurrencyColors.iconGray,
-                onClick = {},
+                onClick = onClick,
             )
         }
     }

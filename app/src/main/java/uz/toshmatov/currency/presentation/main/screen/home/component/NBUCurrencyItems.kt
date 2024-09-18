@@ -40,6 +40,7 @@ import uz.toshmatov.currency.domain.model.NBUModel
 fun NBUCurrencyItems(
     modifier: Modifier = Modifier,
     nbuModel: NBUModel,
+    nbuItemClick: () -> Unit
 ) {
     Row(
         modifier = modifier
@@ -50,13 +51,13 @@ fun NBUCurrencyItems(
             )
             .clip(RoundedCornerShape(CurrencyDimensions.small))
             .background(CurrencyColors.bottomBar)
-            .clickable { }
+            .clickable { nbuItemClick() }
             .padding(CurrencyDimensions.itemSpace),
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
             modifier = Modifier
-                .size(36.dp),
+                .size(32.dp),
             model = ImageRequest.Builder(LocalContext.current)
                 .data(CurrencyCode.valueOf(nbuModel.code).flag).crossfade(true).build(),
             contentDescription = nbuModel.code,
@@ -86,10 +87,10 @@ fun NBUCurrencyItems(
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Icon(
-                    painter = painterResource(id = drawable.ic_money_recive),
+                    painter = painterResource(id = drawable.ic_buy),
                     contentDescription = nbuModel.code,
-                    tint = CurrencyColors.icon,
-                    modifier = Modifier.size(20.dp)
+                    tint = CurrencyColors.success,
+                    modifier = Modifier.size(14.dp)
                 )
             }
             Spacer(modifier = Modifier.height(6.dp))
@@ -98,12 +99,12 @@ fun NBUCurrencyItems(
                 color = CurrencyColors.textSecondary,
                 style = CurrencyTypography.captionUppercase
             )
-            Spacer(modifier = Modifier.height(6.dp))
+            /*Spacer(modifier = Modifier.height(6.dp))
             Text(
                 text = string.home_update_date.resource,
                 color = CurrencyColors.textSecondary,
                 style = CurrencyTypography.captionUppercase
-            )
+            )*/
         }
         Column(
             modifier = Modifier.weight(1f),
@@ -116,13 +117,15 @@ fun NBUCurrencyItems(
                 Image(
                     painter = painterResource(id = drawable.ic_cbu_logo),
                     contentDescription = nbuModel.code,
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier.size(16.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = nbuModel.cbPrice.toNumber().toSom(),
-                    color = CurrencyColors.icon,
-                    style = CurrencyTypography.buttonRegular
+                    color = CurrencyColors.text,
+                    style = CurrencyTypography.labelSemiBold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
             Spacer(modifier = Modifier.height(6.dp))
@@ -136,10 +139,10 @@ fun NBUCurrencyItems(
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Icon(
-                    painter = painterResource(id = drawable.ic_money_send),
+                    painter = painterResource(id = drawable.ic_sell),
                     contentDescription = nbuModel.code,
-                    tint = CurrencyColors.icon,
-                    modifier = Modifier.size(20.dp)
+                    tint = CurrencyColors.error,
+                    modifier = Modifier.size(14.dp)
                 )
             }
             Spacer(modifier = Modifier.height(6.dp))
@@ -148,7 +151,7 @@ fun NBUCurrencyItems(
                 color = CurrencyColors.textSecondary,
                 style = CurrencyTypography.captionUppercase
             )
-            Spacer(modifier = Modifier.height(6.dp))
+            /*Spacer(modifier = Modifier.height(6.dp))
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
@@ -162,9 +165,11 @@ fun NBUCurrencyItems(
                 Text(
                     text = nbuModel.date,
                     color = CurrencyColors.textSecondary,
-                    style = CurrencyTypography.captionUppercase
+                    style = CurrencyTypography.captionUppercase,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
-            }
+            }*/
         }
     }
 }

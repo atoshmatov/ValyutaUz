@@ -14,6 +14,14 @@ internal val BLACK = Color(0xFF000000)
 internal val DARK = Color(0xFF1A1A1A)
 internal val GREEN = Color(0xFF00C853)
 
+
+internal val ShimmerDark = Color(0xFF151617)
+internal val ShimmerLight = Color(0xFFf0f3f7)
+internal val ShimmerLineLight = Color(0xFFD7E2EC)
+
+internal val MidnightMauve = Color(0xFF49454F)
+internal val MidnightBlack = Color(0xFF070e19)
+
 //RED color
 internal val RED10 = Color(0xFFFFEDED)
 internal val RED60 = Color(0xFFCE2D2D)

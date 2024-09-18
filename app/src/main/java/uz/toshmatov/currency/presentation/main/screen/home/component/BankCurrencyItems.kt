@@ -36,7 +36,8 @@ import uz.toshmatov.currency.domain.model.ExchangeBankModel
 fun BankCurrencyItems(
     modifier: Modifier = Modifier,
     exchangeBankModel: ExchangeBankModel,
-    cbu: String
+    cbu: String,
+    bankItemClick: () -> Unit
 ) {
     Row(
         modifier = modifier
@@ -47,7 +48,7 @@ fun BankCurrencyItems(
             )
             .clip(RoundedCornerShape(CurrencyDimensions.small))
             .background(CurrencyColors.bottomBar)
-            .clickable { }
+            .clickable { bankItemClick() }
             .padding(CurrencyDimensions.itemSpace),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -81,10 +82,10 @@ fun BankCurrencyItems(
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Icon(
-                    painter = painterResource(id = drawable.ic_money_recive),
+                    painter = painterResource(id = drawable.ic_buy),
                     contentDescription = exchangeBankModel.bank,
-                    tint = CurrencyColors.icon,
-                    modifier = Modifier.size(20.dp)
+                    tint = CurrencyColors.success,
+                    modifier = Modifier.size(14.dp)
                 )
             }
             Spacer(modifier = Modifier.height(6.dp))
@@ -93,12 +94,12 @@ fun BankCurrencyItems(
                 color = CurrencyColors.textSecondary,
                 style = CurrencyTypography.captionUppercase
             )
-            Spacer(modifier = Modifier.height(6.dp))
+            /*Spacer(modifier = Modifier.height(6.dp))
             Text(
                 text = string.home_update_date.resource,
                 color = CurrencyColors.textSecondary,
                 style = CurrencyTypography.captionUppercase
-            )
+            )*/
         }
         Column(
             modifier = Modifier.weight(1f),
@@ -111,13 +112,13 @@ fun BankCurrencyItems(
                 Image(
                     painter = painterResource(id = drawable.ic_cbu_logo),
                     contentDescription = exchangeBankModel.bank,
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier.size(16.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = cbu,
-                    color = CurrencyColors.icon,
-                    style = CurrencyTypography.buttonRegular,
+                    color = CurrencyColors.text,
+                    style = CurrencyTypography.labelSemiBold,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -133,10 +134,10 @@ fun BankCurrencyItems(
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Icon(
-                    painter = painterResource(id = drawable.ic_money_send),
+                    painter = painterResource(id = drawable.ic_sell),
                     contentDescription = exchangeBankModel.bank,
-                    tint = CurrencyColors.icon,
-                    modifier = Modifier.size(20.dp)
+                    tint = CurrencyColors.error,
+                    modifier = Modifier.size(14.dp)
                 )
             }
             Spacer(modifier = Modifier.height(6.dp))
@@ -145,23 +146,25 @@ fun BankCurrencyItems(
                 color = CurrencyColors.textSecondary,
                 style = CurrencyTypography.captionUppercase
             )
-            Spacer(modifier = Modifier.height(6.dp))
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
-                Icon(
-                    painter = painterResource(id = drawable.ic_update),
-                    contentDescription = exchangeBankModel.bank,
-                    tint = CurrencyColors.icon,
-                    modifier = Modifier.size(16.dp)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = exchangeBankModel.date,
-                    color = CurrencyColors.textSecondary,
-                    style = CurrencyTypography.captionUppercase
-                )
-            }
+            /* Spacer(modifier = Modifier.height(6.dp))
+             Row(
+                 horizontalArrangement = Arrangement.SpaceBetween,
+             ) {
+                 Icon(
+                     painter = painterResource(id = drawable.ic_update),
+                     contentDescription = exchangeBankModel.bank,
+                     tint = CurrencyColors.icon,
+                     modifier = Modifier.size(16.dp)
+                 )
+                 Spacer(modifier = Modifier.width(8.dp))
+                 Text(
+                     text = exchangeBankModel.date,
+                     color = CurrencyColors.textSecondary,
+                     style = CurrencyTypography.captionUppercase,
+                     maxLines = 1,
+                     overflow = TextOverflow.Ellipsis
+                 )
+             }*/
         }
     }
 }
