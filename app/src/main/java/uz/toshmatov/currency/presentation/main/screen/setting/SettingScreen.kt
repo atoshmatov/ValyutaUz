@@ -29,6 +29,7 @@ import uz.toshmatov.currency.core.utils.resource
 import uz.toshmatov.currency.core.utils.string
 import uz.toshmatov.currency.presentation.MainActivity
 import uz.toshmatov.currency.presentation.main.screen.setting.component.SettingItem
+import uz.toshmatov.currency.presentation.main.screen.setting.feature.appinfo.InfoScreen
 import uz.toshmatov.currency.presentation.main.screen.setting.feature.language.LanguageScreen
 import uz.toshmatov.currency.presentation.main.screen.setting.feature.theme.ThemeScreen
 import uz.toshmatov.currency.presentation.main.screen.setting.intents.SettingsState
@@ -74,7 +75,7 @@ object SettingScreen : Tab {
                     ActionType.SHARE_APP -> {
                         context.openShareAppLink()
                     }
-                    ActionType.ABOUT_APP -> {}
+                    ActionType.ABOUT_APP -> currentNavigator.push(InfoScreen())
                 }
 
             }

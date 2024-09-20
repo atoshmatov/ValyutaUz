@@ -33,12 +33,10 @@ android {
                 "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("debug")
-            versionNameSuffix = "-prod-release"
         }
 
         debug {
             applicationIdSuffix = ".debug"
-            versionNameSuffix = "-dev-debug"
             isDebuggable = true
         }
 

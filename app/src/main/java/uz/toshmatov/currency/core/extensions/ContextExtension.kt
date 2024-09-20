@@ -27,5 +27,14 @@ fun Context.openShareAppLink() {
 
     val shareIntent = Intent.createChooser(sendIntent, null)
     this.startActivity(shareIntent)
+}
 
+fun Context.telegramIntent() {
+    val telegram = Intent(
+        Intent.ACTION_VIEW,
+        Uri.parse("https://t.me/a_toshmatov")
+    )
+    telegram.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    telegram.setPackage("org.telegram.messenger")
+    this.startActivity(telegram)
 }

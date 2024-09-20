@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">Valyuta Uz</string>
+  <string name="app_name">Valyuta UZ</string>
   <string name="app_name_dev">ValyutaUz-debug</string>
   <string name="app_name_prod">ValyutaUz-prod</string>
 
@@ -19,6 +19,8 @@
   <string name="settings_contact">Contact Us</string>
   <string name="settings_rate">App Rate</string>
   <string name="settings_share">Share App</string>
+  <string name="version">version</string>
+  <string name="settings_info_title">\"Valyuta UZ\" is an application that allows you to see real-time exchange rates of the national currency of Uzbekistan, the soum, against international currencies.</string>
 
   // language text
   <string name="uzbek_language">O‘zbekcha</string>

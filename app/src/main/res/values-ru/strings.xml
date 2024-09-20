@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Valyuta Uz</string>
+  <string name="app_name">Valyuta UZ</string>
   <string name="app_name_dev">ValyutaUz-debug</string>
   <string name="app_name_prod">ValyutaUz-prod</string>
 
@@ -22,6 +22,7 @@
   <string name="settings_share">Поделиться приложением</string>
 
   // language text
+  <string name="settings_info_title">\"Валюта УЗ\" — приложение, которое позволяет в режиме реального времени видеть курсы национальной валюты Узбекистана, сума, по отношению к международным валютам.</string>
   <string name="uzbek_language">O‘zbekcha</string>
   <string name="cyrillic_language">Ўзбекча</string>
   <string name="english_language">English</string>
@@ -35,4 +36,5 @@
   <string name="home_section_banks">В банковском разделе</string>
   <string name="home_update_date">Дата обновления</string>
   <string name="home_all_item">Все</string>
+  <string name="version">версия</string>
 </resources>

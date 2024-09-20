@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Valyuta Uz</string>
+  <string name="app_name">Valyuta UZ</string>
   <string name="app_name_dev">ValyutaUz-debug</string>
   <string name="app_name_prod">ValyutaUz-prod</string>
 
@@ -22,6 +22,7 @@
   <string name="settings_share">Иловани улашинг</string>
 
   // language text
+  <string name="settings_info_title">\"Валюта УЗ\" — бу Узбекистон миллий валютаси со’мнинг халькаро валюталарга нисбатан курсларини реал вакт режимида кориш имкониятини берувчи илова.</string>
   <string name="uzbek_language">O‘zbekcha</string>
   <string name="cyrillic_language">Ўзбекча</string>
   <string name="english_language">English</string>
@@ -35,4 +36,5 @@
   <string name="home_section_banks">Банк Кесимида</string>
   <string name="home_update_date">Янгиланган сана</string>
   <string name="home_all_item">Хаммаси</string>
+  <string name="version">версия</string>
 </resources>
