@@ -36,4 +36,5 @@
   <string name="home_section_banks">Bank section</string>
   <string name="home_update_date">Update date</string>
   <string name="home_all_item">See all</string>
+  <string name="home_search">search</string>
 </resources>

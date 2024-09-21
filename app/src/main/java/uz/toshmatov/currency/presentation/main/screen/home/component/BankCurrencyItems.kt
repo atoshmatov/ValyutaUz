@@ -94,12 +94,6 @@ fun BankCurrencyItems(
                 color = CurrencyColors.textSecondary,
                 style = CurrencyTypography.captionUppercase
             )
-            /*Spacer(modifier = Modifier.height(6.dp))
-            Text(
-                text = string.home_update_date.resource,
-                color = CurrencyColors.textSecondary,
-                style = CurrencyTypography.captionUppercase
-            )*/
         }
         Column(
             modifier = Modifier.weight(1f),
@@ -146,25 +140,6 @@ fun BankCurrencyItems(
                 color = CurrencyColors.textSecondary,
                 style = CurrencyTypography.captionUppercase
             )
-            /* Spacer(modifier = Modifier.height(6.dp))
-             Row(
-                 horizontalArrangement = Arrangement.SpaceBetween,
-             ) {
-                 Icon(
-                     painter = painterResource(id = drawable.ic_update),
-                     contentDescription = exchangeBankModel.bank,
-                     tint = CurrencyColors.icon,
-                     modifier = Modifier.size(16.dp)
-                 )
-                 Spacer(modifier = Modifier.width(8.dp))
-                 Text(
-                     text = exchangeBankModel.date,
-                     color = CurrencyColors.textSecondary,
-                     style = CurrencyTypography.captionUppercase,
-                     maxLines = 1,
-                     overflow = TextOverflow.Ellipsis
-                 )
-             }*/
         }
     }
 }

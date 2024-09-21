@@ -58,6 +58,7 @@ fun TopBar(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
     color: Color = Color.Transparent,
+    contentDescription: String,
 ) {
     TopAppBar(
         modifier = modifier
@@ -75,6 +76,7 @@ fun TopBar(
                 image = drawable.ic_arrow_left,
                 tint = CurrencyColors.text,
                 onClick = onBackClick,
+                contentDescription = contentDescription,
             )
         },
         colors = TopAppBarDefaults.topAppBarColors(color),

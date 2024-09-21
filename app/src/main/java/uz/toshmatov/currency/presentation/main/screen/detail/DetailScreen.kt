@@ -130,7 +130,8 @@ fun CBUScreen(
         item(key = "top_bar") {
             TopBar(
                 titleId = title,
-                onBackClick = backClick
+                onBackClick = backClick,
+                contentDescription = "back"
             )
         }
         stickyHeader {
@@ -144,7 +145,6 @@ fun CBUScreen(
                             vertical = CurrencyDimensions.small
                         ),
                     onValueChange = searchQuery,
-                    placeHolderResId = title
                 )
         }
         items(
@@ -181,7 +181,8 @@ fun NBUScreen(
         item {
             TopBar(
                 titleId = title,
-                onBackClick = backClick
+                onBackClick = backClick,
+                contentDescription = "back"
             )
         }
         stickyHeader {
@@ -195,7 +196,6 @@ fun NBUScreen(
                             vertical = CurrencyDimensions.small
                         ),
                     onValueChange = searchQuery,
-                    placeHolderResId = title
                 )
         }
         items(
@@ -233,7 +233,8 @@ fun BankScreen(
         item {
             TopBar(
                 titleId = title,
-                onBackClick = backClick
+                onBackClick = backClick,
+                contentDescription = "back"
             )
         }
         stickyHeader {
@@ -247,7 +248,6 @@ fun BankScreen(
                             vertical = CurrencyDimensions.small
                         ),
                     onValueChange = searchQuery,
-                    placeHolderResId = title
                 )
         }
         items(

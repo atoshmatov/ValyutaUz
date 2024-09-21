@@ -59,7 +59,8 @@ fun LanguageContent(
     ) {
         TopBar(
             titleId = string.settings_language,
-            onBackClick = backClick
+            onBackClick = backClick,
+            contentDescription = "Back"
         )
         state.languageList.forEach { languageModel ->
             LanguageItem(

@@ -30,6 +30,7 @@ fun CurrencyIcon(
     padding: Dp = 4.dp,
     color: Color = Color.Unspecified,
     onClick: (() -> Unit)? = null,
+    contentDescription: String = "default",
 ) {
     Box(
         modifier = modifier
@@ -46,7 +47,7 @@ fun CurrencyIcon(
     ) {
         Icon(
             painter = painterResource(id = image),
-            contentDescription = null,
+            contentDescription = contentDescription,
             tint = tint,
             modifier = Modifier.size(size),
         )

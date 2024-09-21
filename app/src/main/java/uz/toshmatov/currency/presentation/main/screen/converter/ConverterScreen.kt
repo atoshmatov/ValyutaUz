@@ -68,7 +68,8 @@ fun ConverterScreenContent(
     ) {
         TopBar(
             titleId = string.tab_converter,
-            onBackClick = backClick
+            onBackClick = backClick,
+            contentDescription = "back"
         )
         ConverterItem(
             modifier = Modifier

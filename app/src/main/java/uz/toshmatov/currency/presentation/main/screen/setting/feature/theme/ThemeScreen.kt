@@ -51,7 +51,8 @@ fun ThemeContent(
     ) {
         TopBar(
             titleId = string.settings_theme,
-            onBackClick = backClick
+            onBackClick = backClick,
+            contentDescription = "Back"
         )
         state.themeList.forEach {
             ThemeItem(

@@ -55,6 +55,7 @@ fun HomeHeader(
                 size = 20.dp,
                 tint = CurrencyColors.iconGray,
                 onClick = onClick,
+                contentDescription = "sea all items"
             )
         }
     }

@@ -59,12 +59,14 @@ fun InfoScreenContent(
     ) {
         TopBar(
             titleId = string.settings_info,
-            onBackClick = backClick
+            onBackClick = backClick,
+            contentDescription = "Back"
         )
         CurrencyIcon(
             image = drawable.ic_launcher_foreground,
             size = 120.dp,
-            padding = 0.dp
+            padding = 0.dp,
+            contentDescription = "App Icon"
         )
         Text(
             text = string.app_name.resource,

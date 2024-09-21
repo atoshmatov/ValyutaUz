@@ -37,4 +37,5 @@
   <string name="home_update_date">Дата обновления</string>
   <string name="home_all_item">Все</string>
   <string name="version">версия</string>
+  <string name="home_search">поиск</string>
 </resources>

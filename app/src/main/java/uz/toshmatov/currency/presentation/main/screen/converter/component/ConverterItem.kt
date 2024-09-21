@@ -53,7 +53,8 @@ fun ConverterItem(
             CurrencyIcon(
                 image = drawable.ic_arrow_down,
                 tint = CurrencyColors.success,
-                onClick = {}
+                onClick = {},
+                contentDescription = "arrow down"
             )
         }
     }

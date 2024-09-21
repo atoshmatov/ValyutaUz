@@ -35,7 +35,7 @@ import uz.toshmatov.currency.core.utils.string
 @Composable
 fun CurrencyTextField(
     modifier: Modifier = Modifier,
-    @StringRes placeHolderResId: Int = string.home_cbu,
+    @StringRes placeHolderResId: Int = string.home_search,
     onValueChange: (String) -> Unit,
     onFocus: () -> Unit = {},
 ) {
@@ -92,7 +92,7 @@ fun CurrencyTextField(
             visualTransformation = VisualTransformation.None,
             interactionSource = interactionSource,
             leadingIcon = {
-                CurrencyIcon(image = drawable.ic_search, size = 16.dp)
+                CurrencyIcon(image = drawable.ic_search, size = 16.dp, contentDescription = "search")
             },
             contentPadding = TextFieldDefaults.contentPaddingWithoutLabel(
                 top = CurrencyDimensions.empty,
