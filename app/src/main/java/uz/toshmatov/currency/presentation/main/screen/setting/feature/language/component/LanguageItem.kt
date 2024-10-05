@@ -19,11 +19,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.yariksoffice.lingver.Lingver
 import uz.toshmatov.currency.core.theme.CurrencyColors
 import uz.toshmatov.currency.core.theme.CurrencyTypography
 import uz.toshmatov.currency.core.utils.drawable
 import uz.toshmatov.currency.core.utils.resource
-import java.util.Locale
 
 @Composable
 fun LanguageItem(
@@ -31,9 +31,8 @@ fun LanguageItem(
     languageModel: LanguageModel,
     onLanguageSelected: (String) -> Unit,
 ) {
-
-    val currentLanguage = remember { Locale.getDefault().language }
-    val isSelected = remember { languageModel.code == currentLanguage }
+    val currentLanguage = remember { Lingver.getInstance().getLocale() }
+    val isSelected = remember { languageModel.code == currentLanguage.language }
     Box(
         modifier = modifier
             .fillMaxWidth()

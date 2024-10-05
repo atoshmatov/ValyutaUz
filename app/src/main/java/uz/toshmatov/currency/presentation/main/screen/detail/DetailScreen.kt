@@ -30,10 +30,10 @@ import uz.toshmatov.currency.core.uicompoenent.CcyLoading
 import uz.toshmatov.currency.core.uicompoenent.CurrencyTextField
 import uz.toshmatov.currency.core.uicompoenent.TopBar
 import uz.toshmatov.currency.core.utils.string
-import uz.toshmatov.currency.data.enum.CurrencyType
-import uz.toshmatov.currency.data.enum.CurrencyType.BANK
-import uz.toshmatov.currency.data.enum.CurrencyType.CBU
-import uz.toshmatov.currency.data.enum.CurrencyType.NBU
+import uz.toshmatov.currency.data.enumclass.CurrencyType
+import uz.toshmatov.currency.data.enumclass.CurrencyType.BANK
+import uz.toshmatov.currency.data.enumclass.CurrencyType.CBU
+import uz.toshmatov.currency.data.enumclass.CurrencyType.NBU
 import uz.toshmatov.currency.presentation.main.screen.converter.ConverterScreen
 import uz.toshmatov.currency.presentation.main.screen.detail.intents.DetailEvents
 import uz.toshmatov.currency.presentation.main.screen.detail.intents.DetailState

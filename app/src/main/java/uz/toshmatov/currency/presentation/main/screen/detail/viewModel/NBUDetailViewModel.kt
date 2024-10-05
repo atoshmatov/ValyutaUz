@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import uz.toshmatov.currency.core.logger.logError
 import uz.toshmatov.currency.domain.model.NBUModel
 import uz.toshmatov.currency.domain.repository.NBURepository
@@ -41,34 +42,36 @@ class NBUDetailViewModel @Inject constructor(
     }
 
     fun getNBUCurrencyList() {
-        nbuRepository.getNBUCurrencyList()
-            .onStart {
-                _state.update { detailState ->
-                    detailState.copy(loading = true)
-                }
-            }.onEach { cbuModel ->
-                cbuModel.apply {
-                    nbuList.clear()
-                    nbuList.addAll(this)
-                    filter()
-                }
+        viewModelScope.launch {
+            nbuRepository.getNBUCurrencyList()
+                .onStart {
+                    _state.update { detailState ->
+                        detailState.copy(loading = true)
+                    }
+                }.onEach { cbuModel ->
+                    cbuModel.apply {
+                        nbuList.clear()
+                        nbuList.addAll(this)
+                        filter()
+                    }
 
-                _state.update { homeState ->
-                    homeState.copy(
-                        loading = false,
-                        listSize = cbuModel.size
-                    )
+                    _state.update { homeState ->
+                        homeState.copy(
+                            loading = false,
+                            listSize = cbuModel.size
+                        )
+                    }
+                }.catch {
+                    _state.update { detailState ->
+                        detailState.copy(
+                            error = "Error",
+                            loading = false
+                        )
+                    }
+                    logError { it.localizedMessage ?: "" }
                 }
-            }.catch {
-                _state.update { detailState ->
-                    detailState.copy(
-                        error = "Error",
-                        loading = false
-                    )
-                }
-                logError { it.localizedMessage ?: "" }
-            }
-            .launchIn(viewModelScope)
+                .launchIn(viewModelScope)
+        }
     }
 
     private fun filter() {

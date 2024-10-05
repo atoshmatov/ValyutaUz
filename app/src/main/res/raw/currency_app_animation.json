@@ -1,48 +1,25 @@
 {
-  "v": "4.8.0",
-  "meta": {
-    "g": "LottieFiles AE 3.0.2",
-    "a": "",
-    "k": "",
-    "d": "",
-    "tc": ""
-  },
-  "fr": 24,
-  "ip": 0,
-  "op": 86,
-  "w": 1520,
-  "h": 1212,
   "nm": "Virtual account - Payment",
   "ddd": 0,
-  "assets": [],
+  "h": 1212,
+  "w": 1520,
+  "meta": {
+    "g": "LottieFiles AE 3.0.2"
+  },
   "layers": [
     {
-      "ddd": 0,
-      "ind": 1,
       "ty": 4,
       "nm": "Layer 3/Virtual account - Payment Outlines 3",
-      "parent": 7,
       "sr": 1,
+      "st": -18,
+      "op": 114,
+      "ip": 72,
+      "hd": false,
+      "ddd": 0,
+      "bm": 0,
+      "hasMask": false,
+      "ao": 0,
       "ks": {
-        "o": {
-          "a": 0,
-          "k": 100,
-          "ix": 11
-        },
-        "r": {
-          "a": 0,
-          "k": 0,
-          "ix": 10
-        },
-        "p": {
-          "a": 0,
-          "k": [
-            719.091,
-            539.031,
-            0
-          ],
-          "ix": 2
-        },
         "a": {
           "a": 0,
           "k": [
@@ -60,20 +37,59 @@
             100
           ],
           "ix": 6
+        },
+        "sk": {
+          "a": 0,
+          "k": 0
+        },
+        "p": {
+          "a": 0,
+          "k": [
+            719.091,
+            539.031,
+            0
+          ],
+          "ix": 2
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "sa": {
+          "a": 0,
+          "k": 0
+        },
+        "o": {
+          "a": 0,
+          "k": 100,
+          "ix": 11
         }
       },
-      "ao": 0,
+      "ef": [],
       "shapes": [
         {
           "ty": "gr",
+          "bm": 0,
+          "hd": false,
+          "mn": "ADBE Vector Group",
+          "nm": "Group 1",
+          "ix": 1,
+          "cix": 2,
+          "np": 2,
           "it": [
             {
-              "ind": 0,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 1",
               "ix": 1,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       0,
@@ -799,48 +815,35 @@
                       193.731,
                       164.55
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 1",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
               "ty": "fl",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Graphic - Fill",
+              "nm": "Fill 1",
               "c": {
                 "a": 0,
                 "k": [
-                  1,
                   1,
                   1,
                   1
                 ],
                 "ix": 4
               },
+              "r": 1,
               "o": {
                 "a": 0,
                 "k": 100,
                 "ix": 5
-              },
-              "r": 1,
-              "bm": 0,
-              "nm": "Fill 1",
-              "mn": "ADBE Vector Graphic - Fill",
-              "hd": false
+              }
             },
             {
               "ty": "tr",
-              "p": {
-                "a": 0,
-                "k": [
-                  756.773,
-                  540.739
-                ],
-                "ix": 2
-              },
               "a": {
                 "a": 0,
                 "k": [
@@ -857,70 +860,54 @@
                 ],
                 "ix": 3
               },
-              "r": {
-                "a": 0,
-                "k": 0,
-                "ix": 6
-              },
-              "o": {
-                "a": 0,
-                "k": 100,
-                "ix": 7
-              },
               "sk": {
                 "a": 0,
                 "k": 0,
                 "ix": 4
+              },
+              "p": {
+                "a": 0,
+                "k": [
+                  756.773,
+                  540.739
+                ],
+                "ix": 2
+              },
+              "r": {
+                "a": 0,
+                "k": 0,
+                "ix": 6
               },
               "sa": {
                 "a": 0,
                 "k": 0,
                 "ix": 5
               },
-              "nm": "Transform"
+              "o": {
+                "a": 0,
+                "k": 100,
+                "ix": 7
+              }
             }
-          ],
-          "nm": "Group 1",
-          "np": 2,
-          "cix": 2,
-          "bm": 0,
-          "ix": 1,
-          "mn": "ADBE Vector Group",
-          "hd": false
+          ]
         }
       ],
-      "ip": 72,
-      "op": 114,
-      "st": -18,
-      "bm": 0
+      "ind": 1,
+      "parent": 7
     },
     {
-      "ddd": 0,
-      "ind": 2,
       "ty": 4,
       "nm": "Layer 2/Virtual account - Payment Outlines",
-      "parent": 7,
       "sr": 1,
+      "st": 0,
+      "op": 72,
+      "ip": 43,
+      "hd": false,
+      "ddd": 0,
+      "bm": 0,
+      "hasMask": false,
+      "ao": 0,
       "ks": {
-        "o": {
-          "a": 0,
-          "k": 100,
-          "ix": 11
-        },
-        "r": {
-          "a": 0,
-          "k": 0,
-          "ix": 10
-        },
-        "p": {
-          "a": 0,
-          "k": [
-            755.092,
-            543.031,
-            0
-          ],
-          "ix": 2
-        },
         "a": {
           "a": 0,
           "k": [
@@ -938,20 +925,59 @@
             100
           ],
           "ix": 6
+        },
+        "sk": {
+          "a": 0,
+          "k": 0
+        },
+        "p": {
+          "a": 0,
+          "k": [
+            755.092,
+            543.031,
+            0
+          ],
+          "ix": 2
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "sa": {
+          "a": 0,
+          "k": 0
+        },
+        "o": {
+          "a": 0,
+          "k": 100,
+          "ix": 11
         }
       },
-      "ao": 0,
+      "ef": [],
       "shapes": [
         {
           "ty": "gr",
+          "bm": 0,
+          "hd": false,
+          "mn": "ADBE Vector Group",
+          "nm": "Group 1",
+          "ix": 1,
+          "cix": 2,
+          "np": 2,
           "it": [
             {
-              "ind": 0,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 1",
               "ix": 1,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       0,
@@ -1797,48 +1823,35 @@
                       181.428,
                       182.153
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 1",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
               "ty": "fl",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Graphic - Fill",
+              "nm": "Fill 1",
               "c": {
                 "a": 0,
                 "k": [
-                  1,
                   1,
                   1,
                   1
                 ],
                 "ix": 4
               },
+              "r": 1,
               "o": {
                 "a": 0,
                 "k": 100,
                 "ix": 5
-              },
-              "r": 1,
-              "bm": 0,
-              "nm": "Fill 1",
-              "mn": "ADBE Vector Graphic - Fill",
-              "hd": false
+              }
             },
             {
               "ty": "tr",
-              "p": {
-                "a": 0,
-                "k": [
-                  756.211,
-                  540.739
-                ],
-                "ix": 2
-              },
               "a": {
                 "a": 0,
                 "k": [
@@ -1855,70 +1868,54 @@
                 ],
                 "ix": 3
               },
-              "r": {
-                "a": 0,
-                "k": 0,
-                "ix": 6
-              },
-              "o": {
-                "a": 0,
-                "k": 100,
-                "ix": 7
-              },
               "sk": {
                 "a": 0,
                 "k": 0,
                 "ix": 4
+              },
+              "p": {
+                "a": 0,
+                "k": [
+                  756.211,
+                  540.739
+                ],
+                "ix": 2
+              },
+              "r": {
+                "a": 0,
+                "k": 0,
+                "ix": 6
               },
               "sa": {
                 "a": 0,
                 "k": 0,
                 "ix": 5
               },
-              "nm": "Transform"
+              "o": {
+                "a": 0,
+                "k": 100,
+                "ix": 7
+              }
             }
-          ],
-          "nm": "Group 1",
-          "np": 2,
-          "cix": 2,
-          "bm": 0,
-          "ix": 1,
-          "mn": "ADBE Vector Group",
-          "hd": false
+          ]
         }
       ],
-      "ip": 43,
-      "op": 72,
-      "st": 0,
-      "bm": 0
+      "ind": 2,
+      "parent": 7
     },
     {
-      "ddd": 0,
-      "ind": 3,
       "ty": 4,
       "nm": "Naira",
-      "parent": 7,
       "sr": 1,
+      "st": 18,
+      "op": 43,
+      "ip": 18,
+      "hd": false,
+      "ddd": 0,
+      "bm": 0,
+      "hasMask": false,
+      "ao": 0,
       "ks": {
-        "o": {
-          "a": 0,
-          "k": 100,
-          "ix": 11
-        },
-        "r": {
-          "a": 0,
-          "k": 0,
-          "ix": 10
-        },
-        "p": {
-          "a": 0,
-          "k": [
-            746.944,
-            533.668,
-            0
-          ],
-          "ix": 2
-        },
         "a": {
           "a": 0,
           "k": [
@@ -1936,20 +1933,59 @@
             100
           ],
           "ix": 6
+        },
+        "sk": {
+          "a": 0,
+          "k": 0
+        },
+        "p": {
+          "a": 0,
+          "k": [
+            746.944,
+            533.668,
+            0
+          ],
+          "ix": 2
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "sa": {
+          "a": 0,
+          "k": 0
+        },
+        "o": {
+          "a": 0,
+          "k": 100,
+          "ix": 11
         }
       },
-      "ao": 0,
+      "ef": [],
       "shapes": [
         {
           "ty": "gr",
+          "bm": 0,
+          "hd": false,
+          "mn": "ADBE Vector Group",
+          "nm": "Group 1",
+          "ix": 1,
+          "cix": 2,
+          "np": 7,
           "it": [
             {
-              "ind": 0,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 1",
               "ix": 1,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       0,
@@ -2003,22 +2039,23 @@
                       139.628,
                       -34.906
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 1",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
-              "ind": 1,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 2",
               "ix": 2,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       0,
@@ -2060,22 +2097,23 @@
                       139.624,
                       69.812
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 2",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
-              "ind": 2,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 3",
               "ix": 3,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       0,
@@ -2129,22 +2167,23 @@
                       4.364,
                       34.906
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 3",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
-              "ind": 3,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 4",
               "ix": 4,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       0,
@@ -2186,22 +2225,23 @@
                       -139.622,
                       -69.811
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 4",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
-              "ind": 4,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 5",
               "ix": 5,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       0,
@@ -2759,55 +2799,43 @@
                       209.435,
                       34.906
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 5",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
               "ty": "mm",
-              "mm": 1,
-              "nm": "Merge Paths 1",
+              "bm": 0,
+              "hd": false,
               "mn": "ADBE Vector Filter - Merge",
-              "hd": false
+              "nm": "Merge Paths 1",
+              "mm": 1
             },
             {
               "ty": "fl",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Graphic - Fill",
+              "nm": "Fill 1",
               "c": {
                 "a": 0,
                 "k": [
-                  1,
                   1,
                   1,
                   1
                 ],
                 "ix": 4
               },
+              "r": 1,
               "o": {
                 "a": 0,
                 "k": 100,
                 "ix": 5
-              },
-              "r": 1,
-              "bm": 0,
-              "nm": "Fill 1",
-              "mn": "ADBE Vector Graphic - Fill",
-              "hd": false
+              }
             },
             {
               "ty": "tr",
-              "p": {
-                "a": 0,
-                "k": [
-                  756.21,
-                  540.739
-                ],
-                "ix": 2
-              },
               "a": {
                 "a": 0,
                 "k": [
@@ -2824,70 +2852,54 @@
                 ],
                 "ix": 3
               },
-              "r": {
-                "a": 0,
-                "k": 0,
-                "ix": 6
-              },
-              "o": {
-                "a": 0,
-                "k": 100,
-                "ix": 7
-              },
               "sk": {
                 "a": 0,
                 "k": 0,
                 "ix": 4
+              },
+              "p": {
+                "a": 0,
+                "k": [
+                  756.21,
+                  540.739
+                ],
+                "ix": 2
+              },
+              "r": {
+                "a": 0,
+                "k": 0,
+                "ix": 6
               },
               "sa": {
                 "a": 0,
                 "k": 0,
                 "ix": 5
               },
-              "nm": "Transform"
+              "o": {
+                "a": 0,
+                "k": 100,
+                "ix": 7
+              }
             }
-          ],
-          "nm": "Group 1",
-          "np": 7,
-          "cix": 2,
-          "bm": 0,
-          "ix": 1,
-          "mn": "ADBE Vector Group",
-          "hd": false
+          ]
         }
       ],
-      "ip": 18,
-      "op": 43,
-      "st": 18,
-      "bm": 0
+      "ind": 3,
+      "parent": 7
     },
     {
-      "ddd": 0,
-      "ind": 4,
       "ty": 4,
       "nm": "Layer 3/Virtual account - Payment Outlines 2",
-      "parent": 7,
       "sr": 1,
+      "st": -18,
+      "op": 18,
+      "ip": 0,
+      "hd": false,
+      "ddd": 0,
+      "bm": 0,
+      "hasMask": false,
+      "ao": 0,
       "ks": {
-        "o": {
-          "a": 0,
-          "k": 100,
-          "ix": 11
-        },
-        "r": {
-          "a": 0,
-          "k": 0,
-          "ix": 10
-        },
-        "p": {
-          "a": 0,
-          "k": [
-            719.091,
-            539.031,
-            0
-          ],
-          "ix": 2
-        },
         "a": {
           "a": 0,
           "k": [
@@ -2905,20 +2917,59 @@
             100
           ],
           "ix": 6
+        },
+        "sk": {
+          "a": 0,
+          "k": 0
+        },
+        "p": {
+          "a": 0,
+          "k": [
+            719.091,
+            539.031,
+            0
+          ],
+          "ix": 2
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "sa": {
+          "a": 0,
+          "k": 0
+        },
+        "o": {
+          "a": 0,
+          "k": 100,
+          "ix": 11
         }
       },
-      "ao": 0,
+      "ef": [],
       "shapes": [
         {
           "ty": "gr",
+          "bm": 0,
+          "hd": false,
+          "mn": "ADBE Vector Group",
+          "nm": "Group 1",
+          "ix": 1,
+          "cix": 2,
+          "np": 2,
           "it": [
             {
-              "ind": 0,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 1",
               "ix": 1,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       0,
@@ -3644,48 +3695,35 @@
                       193.731,
                       164.55
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 1",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
               "ty": "fl",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Graphic - Fill",
+              "nm": "Fill 1",
               "c": {
                 "a": 0,
                 "k": [
-                  1,
                   1,
                   1,
                   1
                 ],
                 "ix": 4
               },
+              "r": 1,
               "o": {
                 "a": 0,
                 "k": 100,
                 "ix": 5
-              },
-              "r": 1,
-              "bm": 0,
-              "nm": "Fill 1",
-              "mn": "ADBE Vector Graphic - Fill",
-              "hd": false
+              }
             },
             {
               "ty": "tr",
-              "p": {
-                "a": 0,
-                "k": [
-                  756.773,
-                  540.739
-                ],
-                "ix": 2
-              },
               "a": {
                 "a": 0,
                 "k": [
@@ -3702,71 +3740,55 @@
                 ],
                 "ix": 3
               },
-              "r": {
-                "a": 0,
-                "k": 0,
-                "ix": 6
-              },
-              "o": {
-                "a": 0,
-                "k": 100,
-                "ix": 7
-              },
               "sk": {
                 "a": 0,
                 "k": 0,
                 "ix": 4
+              },
+              "p": {
+                "a": 0,
+                "k": [
+                  756.773,
+                  540.739
+                ],
+                "ix": 2
+              },
+              "r": {
+                "a": 0,
+                "k": 0,
+                "ix": 6
               },
               "sa": {
                 "a": 0,
                 "k": 0,
                 "ix": 5
               },
-              "nm": "Transform"
+              "o": {
+                "a": 0,
+                "k": 100,
+                "ix": 7
+              }
             }
-          ],
-          "nm": "Group 1",
-          "np": 2,
-          "cix": 2,
-          "bm": 0,
-          "ix": 1,
-          "mn": "ADBE Vector Group",
-          "hd": false
+          ]
         }
       ],
-      "ip": 0,
-      "op": 18,
-      "st": -18,
-      "bm": 0
+      "ind": 4,
+      "parent": 7
     },
     {
-      "ddd": 0,
-      "ind": 5,
       "ty": 4,
       "nm": "Mask",
-      "parent": 7,
-      "td": 1,
       "sr": 1,
+      "st": 0,
+      "op": 718,
+      "ip": 0,
+      "hd": false,
+      "ddd": 0,
+      "bm": 0,
+      "hasMask": false,
+      "td": 1,
+      "ao": 0,
       "ks": {
-        "o": {
-          "a": 0,
-          "k": 100,
-          "ix": 11
-        },
-        "r": {
-          "a": 0,
-          "k": 0,
-          "ix": 10
-        },
-        "p": {
-          "a": 0,
-          "k": [
-            741.94,
-            540.739,
-            0
-          ],
-          "ix": 2
-        },
         "a": {
           "a": 0,
           "k": [
@@ -3784,20 +3806,59 @@
             100
           ],
           "ix": 6
+        },
+        "sk": {
+          "a": 0,
+          "k": 0
+        },
+        "p": {
+          "a": 0,
+          "k": [
+            741.94,
+            540.739,
+            0
+          ],
+          "ix": 2
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "sa": {
+          "a": 0,
+          "k": 0
+        },
+        "o": {
+          "a": 0,
+          "k": 100,
+          "ix": 11
         }
       },
-      "ao": 0,
+      "ef": [],
       "shapes": [
         {
           "ty": "gr",
+          "bm": 0,
+          "hd": false,
+          "mn": "ADBE Vector Group",
+          "nm": "Group 3",
+          "ix": 1,
+          "cix": 2,
+          "np": 4,
           "it": [
             {
-              "ind": 0,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 1",
               "ix": 1,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       5.961,
@@ -3899,22 +3960,23 @@
                       172.125,
                       -377.412
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 1",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
-              "ind": 1,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 2",
               "ix": 2,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       200.229,
@@ -3992,55 +4054,43 @@
                       370.013,
                       158.39
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 2",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
               "ty": "mm",
-              "mm": 1,
-              "nm": "Merge Paths 1",
+              "bm": 0,
+              "hd": false,
               "mn": "ADBE Vector Filter - Merge",
-              "hd": false
+              "nm": "Merge Paths 1",
+              "mm": 1
             },
             {
               "ty": "fl",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Graphic - Fill",
+              "nm": "Fill 1",
               "c": {
                 "a": 0,
                 "k": [
-                  0.458823559331,
-                  0.207843152214,
-                  0.992156922583,
-                  1
+                  0.4588,
+                  0.2078,
+                  0.9922
                 ],
                 "ix": 4
               },
+              "r": 1,
               "o": {
                 "a": 0,
                 "k": 100,
                 "ix": 5
-              },
-              "r": 1,
-              "bm": 0,
-              "nm": "Fill 1",
-              "mn": "ADBE Vector Graphic - Fill",
-              "hd": false
+              }
             },
             {
               "ty": "tr",
-              "p": {
-                "a": 0,
-                "k": [
-                  741.94,
-                  560.341
-                ],
-                "ix": 2
-              },
               "a": {
                 "a": 0,
                 "k": [
@@ -4057,47 +4107,59 @@
                 ],
                 "ix": 3
               },
-              "r": {
-                "a": 0,
-                "k": 0,
-                "ix": 6
-              },
-              "o": {
-                "a": 0,
-                "k": 100,
-                "ix": 7
-              },
               "sk": {
                 "a": 0,
                 "k": 0,
                 "ix": 4
+              },
+              "p": {
+                "a": 0,
+                "k": [
+                  741.94,
+                  560.341
+                ],
+                "ix": 2
+              },
+              "r": {
+                "a": 0,
+                "k": 0,
+                "ix": 6
               },
               "sa": {
                 "a": 0,
                 "k": 0,
                 "ix": 5
               },
-              "nm": "Transform"
+              "o": {
+                "a": 0,
+                "k": 100,
+                "ix": 7
+              }
             }
-          ],
-          "nm": "Group 3",
-          "np": 4,
-          "cix": 2,
-          "bm": 0,
-          "ix": 1,
-          "mn": "ADBE Vector Group",
-          "hd": false
+          ]
         },
         {
           "ty": "gr",
+          "bm": 0,
+          "hd": false,
+          "mn": "ADBE Vector Group",
+          "nm": "Group 2",
+          "ix": 3,
+          "cix": 2,
+          "np": 4,
           "it": [
             {
-              "ind": 0,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 1",
               "ix": 1,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       219.608,
@@ -4151,22 +4213,23 @@
                       398.274,
                       191.588
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 1",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
-              "ind": 1,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 2",
               "ix": 2,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       225.924,
@@ -4220,55 +4283,43 @@
                       409.728,
                       197.098
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 2",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
               "ty": "mm",
-              "mm": 1,
-              "nm": "Merge Paths 1",
+              "bm": 0,
+              "hd": false,
               "mn": "ADBE Vector Filter - Merge",
-              "hd": false
+              "nm": "Merge Paths 1",
+              "mm": 1
             },
             {
               "ty": "fl",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Graphic - Fill",
+              "nm": "Fill 1",
               "c": {
                 "a": 0,
                 "k": [
-                  0.458823559331,
-                  0.207843152214,
-                  0.992156922583,
-                  1
+                  0.4588,
+                  0.2078,
+                  0.9922
                 ],
                 "ix": 4
               },
+              "r": 1,
               "o": {
                 "a": 0,
                 "k": 100,
                 "ix": 5
-              },
-              "r": 1,
-              "bm": 0,
-              "nm": "Fill 1",
-              "mn": "ADBE Vector Graphic - Fill",
-              "hd": false
+              }
             },
             {
               "ty": "tr",
-              "p": {
-                "a": 0,
-                "k": [
-                  741.94,
-                  540.739
-                ],
-                "ix": 2
-              },
               "a": {
                 "a": 0,
                 "k": [
@@ -4285,47 +4336,59 @@
                 ],
                 "ix": 3
               },
-              "r": {
-                "a": 0,
-                "k": 0,
-                "ix": 6
-              },
-              "o": {
-                "a": 0,
-                "k": 100,
-                "ix": 7
-              },
               "sk": {
                 "a": 0,
                 "k": 0,
                 "ix": 4
+              },
+              "p": {
+                "a": 0,
+                "k": [
+                  741.94,
+                  540.739
+                ],
+                "ix": 2
+              },
+              "r": {
+                "a": 0,
+                "k": 0,
+                "ix": 6
               },
               "sa": {
                 "a": 0,
                 "k": 0,
                 "ix": 5
               },
-              "nm": "Transform"
+              "o": {
+                "a": 0,
+                "k": 100,
+                "ix": 7
+              }
             }
-          ],
-          "nm": "Group 2",
-          "np": 4,
-          "cix": 2,
-          "bm": 0,
-          "ix": 3,
-          "mn": "ADBE Vector Group",
-          "hd": false
+          ]
         },
         {
           "ty": "gr",
+          "bm": 0,
+          "hd": false,
+          "mn": "ADBE Vector Group",
+          "nm": "Group 4",
+          "ix": 4,
+          "cix": 2,
+          "np": 4,
           "it": [
             {
-              "ind": 0,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 1",
               "ix": 1,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       117.857,
@@ -4379,48 +4442,35 @@
                       213.397,
                       -453.98
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 1",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
               "ty": "fl",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Graphic - Fill",
+              "nm": "Fill 1",
               "c": {
                 "a": 0,
                 "k": [
-                  0.603921568627,
-                  0.513725490196,
-                  0.968627510819,
-                  1
+                  0.6039,
+                  0.5137,
+                  0.9686
                 ],
                 "ix": 4
               },
+              "r": 1,
               "o": {
                 "a": 0,
                 "k": 100,
                 "ix": 5
-              },
-              "r": 1,
-              "bm": 0,
-              "nm": "Fill 1",
-              "mn": "ADBE Vector Graphic - Fill",
-              "hd": false
+              }
             },
             {
               "ty": "tr",
-              "p": {
-                "a": 0,
-                "k": [
-                  741.94,
-                  551.105
-                ],
-                "ix": 2
-              },
               "a": {
                 "a": 0,
                 "k": [
@@ -4437,102 +4487,55 @@
                 ],
                 "ix": 3
               },
-              "r": {
-                "a": 0,
-                "k": 0,
-                "ix": 6
-              },
-              "o": {
-                "a": 0,
-                "k": 100,
-                "ix": 7
-              },
               "sk": {
                 "a": 0,
                 "k": 0,
                 "ix": 4
+              },
+              "p": {
+                "a": 0,
+                "k": [
+                  741.94,
+                  551.105
+                ],
+                "ix": 2
+              },
+              "r": {
+                "a": 0,
+                "k": 0,
+                "ix": 6
               },
               "sa": {
                 "a": 0,
                 "k": 0,
                 "ix": 5
               },
-              "nm": "Transform"
+              "o": {
+                "a": 0,
+                "k": 100,
+                "ix": 7
+              }
             }
-          ],
-          "nm": "Group 4",
-          "np": 4,
-          "cix": 2,
-          "bm": 0,
-          "ix": 4,
-          "mn": "ADBE Vector Group",
-          "hd": false
+          ]
         }
       ],
-      "ip": 0,
-      "op": 718,
-      "st": 0,
-      "bm": 0
+      "ind": 5,
+      "parent": 7
     },
     {
-      "ddd": 0,
-      "ind": 6,
       "ty": 4,
       "nm": "Glear",
-      "tt": 1,
       "sr": 1,
+      "st": 0,
+      "op": 718,
+      "ip": 0,
+      "hd": false,
+      "ddd": 0,
+      "bm": 0,
+      "tt": 1,
+      "hasMask": false,
+      "ao": 0,
       "ks": {
-        "o": {
-          "a": 0,
-          "k": 10,
-          "ix": 11
-        },
-        "r": {
-          "a": 0,
-          "k": -43,
-          "ix": 10
-        },
-        "p": {
-          "a": 1,
-          "k": [
-            {
-              "i": {
-                "x": 0.833,
-                "y": 0.833
-              },
-              "o": {
-                "x": 0.167,
-                "y": 0.167
-              },
-              "t": 0,
-              "s": [
-                300.951,
-                166.33,
-                0
-              ],
-              "to": [
-                154.667,
-                150,
-                0
-              ],
-              "ti": [
-                -154.667,
-                -150,
-                0
-              ]
-            },
-            {
-              "t": 25,
-              "s": [
-                1228.951,
-                1066.33,
-                0
-              ]
-            }
-          ],
-          "ix": 2,
-          "x": "var $bm_rt;\n$bm_rt = loopOut('cycle', 0);"
-        },
         "a": {
           "a": 0,
           "k": [
@@ -4550,24 +4553,86 @@
             100
           ],
           "ix": 6
+        },
+        "sk": {
+          "a": 0,
+          "k": 0
+        },
+        "p": {
+          "a": 1,
+          "k": [
+            {
+              "o": {
+                "x": 0.167,
+                "y": 0.167
+              },
+              "i": {
+                "x": 0.833,
+                "y": 0.833
+              },
+              "s": [
+                300.951,
+                166.33,
+                0
+              ],
+              "t": 0,
+              "ti": [
+                -154.667,
+                -150,
+                0
+              ],
+              "to": [
+                154.667,
+                150,
+                0
+              ]
+            },
+            {
+              "s": [
+                1228.951,
+                1066.33,
+                0
+              ],
+              "t": 25
+            }
+          ],
+          "ix": 2,
+          "x": "var $bm_rt;\n$bm_rt = loopOut('cycle', 0);"
+        },
+        "r": {
+          "a": 0,
+          "k": -43,
+          "ix": 10
+        },
+        "sa": {
+          "a": 0,
+          "k": 0
+        },
+        "o": {
+          "a": 0,
+          "k": 10,
+          "ix": 11
         }
       },
-      "ao": 0,
+      "ef": [],
       "shapes": [
         {
           "ty": "gr",
+          "bm": 0,
+          "hd": false,
+          "mn": "ADBE Vector Group",
+          "nm": "Rectangle 1",
+          "ix": 1,
+          "cix": 2,
+          "np": 3,
           "it": [
             {
               "ty": "rc",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Rect",
+              "nm": "Rectangle Path 1",
               "d": 1,
-              "s": {
-                "a": 0,
-                "k": [
-                  1225.451,
-                  155.484
-                ],
-                "ix": 2
-              },
               "p": {
                 "a": 0,
                 "k": [
@@ -4581,43 +4646,39 @@
                 "k": 0,
                 "ix": 4
               },
-              "nm": "Rectangle Path 1",
-              "mn": "ADBE Vector Shape - Rect",
-              "hd": false
+              "s": {
+                "a": 0,
+                "k": [
+                  1225.451,
+                  155.484
+                ],
+                "ix": 2
+              }
             },
             {
               "ty": "fl",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Graphic - Fill",
+              "nm": "Fill 1",
               "c": {
                 "a": 0,
                 "k": [
-                  1,
                   1,
                   1,
                   1
                 ],
                 "ix": 4
               },
+              "r": 1,
               "o": {
                 "a": 0,
                 "k": 100,
                 "ix": 5
-              },
-              "r": 1,
-              "bm": 0,
-              "nm": "Fill 1",
-              "mn": "ADBE Vector Graphic - Fill",
-              "hd": false
+              }
             },
             {
               "ty": "tr",
-              "p": {
-                "a": 0,
-                "k": [
-                  92.725,
-                  -508.258
-                ],
-                "ix": 2
-              },
               "a": {
                 "a": 0,
                 "k": [
@@ -4634,165 +4695,53 @@
                 ],
                 "ix": 3
               },
-              "r": {
-                "a": 0,
-                "k": 0,
-                "ix": 6
-              },
-              "o": {
-                "a": 0,
-                "k": 100,
-                "ix": 7
-              },
               "sk": {
                 "a": 0,
                 "k": 0,
                 "ix": 4
+              },
+              "p": {
+                "a": 0,
+                "k": [
+                  92.725,
+                  -508.258
+                ],
+                "ix": 2
+              },
+              "r": {
+                "a": 0,
+                "k": 0,
+                "ix": 6
               },
               "sa": {
                 "a": 0,
                 "k": 0,
                 "ix": 5
               },
-              "nm": "Transform"
+              "o": {
+                "a": 0,
+                "k": 100,
+                "ix": 7
+              }
             }
-          ],
-          "nm": "Rectangle 1",
-          "np": 3,
-          "cix": 2,
-          "bm": 0,
-          "ix": 1,
-          "mn": "ADBE Vector Group",
-          "hd": false
+          ]
         }
       ],
-      "ip": 0,
-      "op": 718,
-      "st": 0,
-      "bm": 0
+      "ind": 6
     },
     {
-      "ddd": 0,
-      "ind": 7,
       "ty": 4,
       "nm": "Layer 5/Virtual account - Payment Outlines",
       "sr": 1,
+      "st": 0,
+      "op": 718,
+      "ip": 0,
+      "hd": false,
+      "ddd": 0,
+      "bm": 0,
+      "hasMask": false,
+      "ao": 0,
       "ks": {
-        "o": {
-          "a": 0,
-          "k": 100,
-          "ix": 11
-        },
-        "r": {
-          "a": 1,
-          "k": [
-            {
-              "i": {
-                "x": [
-                  0.667
-                ],
-                "y": [
-                  1
-                ]
-              },
-              "o": {
-                "x": [
-                  0.333
-                ],
-                "y": [
-                  0
-                ]
-              },
-              "t": 0,
-              "s": [
-                0
-              ]
-            },
-            {
-              "i": {
-                "x": [
-                  0.667
-                ],
-                "y": [
-                  1
-                ]
-              },
-              "o": {
-                "x": [
-                  0.333
-                ],
-                "y": [
-                  0
-                ]
-              },
-              "t": 2,
-              "s": [
-                18
-              ]
-            },
-            {
-              "i": {
-                "x": [
-                  0.667
-                ],
-                "y": [
-                  1
-                ]
-              },
-              "o": {
-                "x": [
-                  0.333
-                ],
-                "y": [
-                  0
-                ]
-              },
-              "t": 6,
-              "s": [
-                -28
-              ]
-            },
-            {
-              "i": {
-                "x": [
-                  0.667
-                ],
-                "y": [
-                  1
-                ]
-              },
-              "o": {
-                "x": [
-                  0.333
-                ],
-                "y": [
-                  0
-                ]
-              },
-              "t": 25,
-              "s": [
-                380
-              ]
-            },
-            {
-              "t": 29,
-              "s": [
-                360
-              ]
-            }
-          ],
-          "ix": 10,
-          "x": "var $bm_rt;\n$bm_rt = loopOut('cycle', 0);"
-        },
-        "p": {
-          "a": 0,
-          "k": [
-            743.059,
-            630.447,
-            0
-          ],
-          "ix": 2
-        },
         "a": {
           "a": 0,
           "k": [
@@ -4806,126 +4755,181 @@
           "a": 1,
           "k": [
             {
-              "i": {
-                "x": [
-                  0.667,
-                  0.667,
-                  0.667
-                ],
-                "y": [
-                  1,
-                  1,
-                  1
-                ]
-              },
               "o": {
-                "x": [
-                  0.333,
-                  0.333,
-                  0.333
-                ],
-                "y": [
-                  0,
-                  0,
-                  0
-                ]
+                "x": 0.333,
+                "y": 0
               },
-              "t": 2,
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
               "s": [
                 100,
                 100,
                 100
-              ]
+              ],
+              "t": 2
             },
             {
-              "i": {
-                "x": [
-                  0.667,
-                  0.667,
-                  0.667
-                ],
-                "y": [
-                  1,
-                  1,
-                  1
-                ]
-              },
               "o": {
-                "x": [
-                  0.333,
-                  0.333,
-                  0.333
-                ],
-                "y": [
-                  0,
-                  0,
-                  0
-                ]
+                "x": 0.333,
+                "y": 0
               },
-              "t": 6,
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
               "s": [
                 110,
                 110,
                 100
-              ]
+              ],
+              "t": 6
             },
             {
-              "i": {
-                "x": [
-                  0.667,
-                  0.667,
-                  0.667
-                ],
-                "y": [
-                  1,
-                  1,
-                  1
-                ]
-              },
               "o": {
-                "x": [
-                  0.333,
-                  0.333,
-                  0.333
-                ],
-                "y": [
-                  0,
-                  0,
-                  0
-                ]
+                "x": 0.333,
+                "y": 0
               },
-              "t": 9,
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
               "s": [
                 100,
                 100,
                 100
-              ]
+              ],
+              "t": 9
             },
             {
-              "t": 29,
               "s": [
                 100,
                 100,
                 100
-              ]
+              ],
+              "t": 29
             }
           ],
           "ix": 6,
           "x": "var $bm_rt;\n$bm_rt = loopOut('cycle', 0);"
+        },
+        "sk": {
+          "a": 0,
+          "k": 0
+        },
+        "p": {
+          "a": 0,
+          "k": [
+            743.059,
+            630.447,
+            0
+          ],
+          "ix": 2
+        },
+        "r": {
+          "a": 1,
+          "k": [
+            {
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "s": [
+                0
+              ],
+              "t": 0
+            },
+            {
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "s": [
+                18
+              ],
+              "t": 2
+            },
+            {
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "s": [
+                -28
+              ],
+              "t": 6
+            },
+            {
+              "o": {
+                "x": 0.333,
+                "y": 0
+              },
+              "i": {
+                "x": 0.667,
+                "y": 1
+              },
+              "s": [
+                380
+              ],
+              "t": 25
+            },
+            {
+              "s": [
+                360
+              ],
+              "t": 29
+            }
+          ],
+          "ix": 10,
+          "x": "var $bm_rt;\n$bm_rt = loopOut('cycle', 0);"
+        },
+        "sa": {
+          "a": 0,
+          "k": 0
+        },
+        "o": {
+          "a": 0,
+          "k": 100,
+          "ix": 11
         }
       },
-      "ao": 0,
+      "ef": [],
       "shapes": [
         {
           "ty": "gr",
+          "bm": 0,
+          "hd": false,
+          "mn": "ADBE Vector Group",
+          "nm": "Group 3",
+          "ix": 1,
+          "cix": 2,
+          "np": 4,
           "it": [
             {
-              "ind": 0,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 1",
               "ix": 1,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       5.961,
@@ -5039,22 +5043,23 @@
                       172.125,
                       -377.412
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 1",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
-              "ind": 1,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 2",
               "ix": 2,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       200.229,
@@ -5132,55 +5137,43 @@
                       370.013,
                       158.39
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 2",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
               "ty": "mm",
-              "mm": 1,
-              "nm": "Merge Paths 1",
+              "bm": 0,
+              "hd": false,
               "mn": "ADBE Vector Filter - Merge",
-              "hd": false
+              "nm": "Merge Paths 1",
+              "mm": 1
             },
             {
               "ty": "fl",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Graphic - Fill",
+              "nm": "Fill 1",
               "c": {
                 "a": 0,
                 "k": [
-                  0.458823559331,
-                  0.207843152214,
-                  0.992156922583,
+                  1,
+                  1,
                   1
                 ],
                 "ix": 4
               },
+              "r": 1,
               "o": {
                 "a": 0,
                 "k": 100,
                 "ix": 5
-              },
-              "r": 1,
-              "bm": 0,
-              "nm": "Fill 1",
-              "mn": "ADBE Vector Graphic - Fill",
-              "hd": false
+              }
             },
             {
               "ty": "tr",
-              "p": {
-                "a": 0,
-                "k": [
-                  741.94,
-                  560.341
-                ],
-                "ix": 2
-              },
               "a": {
                 "a": 0,
                 "k": [
@@ -5197,47 +5190,59 @@
                 ],
                 "ix": 3
               },
-              "r": {
-                "a": 0,
-                "k": 0,
-                "ix": 6
-              },
-              "o": {
-                "a": 0,
-                "k": 100,
-                "ix": 7
-              },
               "sk": {
                 "a": 0,
                 "k": 0,
                 "ix": 4
+              },
+              "p": {
+                "a": 0,
+                "k": [
+                  741.94,
+                  560.341
+                ],
+                "ix": 2
+              },
+              "r": {
+                "a": 0,
+                "k": 0,
+                "ix": 6
               },
               "sa": {
                 "a": 0,
                 "k": 0,
                 "ix": 5
               },
-              "nm": "Transform"
+              "o": {
+                "a": 0,
+                "k": 100,
+                "ix": 7
+              }
             }
-          ],
-          "nm": "Group 3",
-          "np": 4,
-          "cix": 2,
-          "bm": 0,
-          "ix": 1,
-          "mn": "ADBE Vector Group",
-          "hd": false
+          ]
         },
         {
           "ty": "gr",
+          "bm": 0,
+          "hd": false,
+          "mn": "ADBE Vector Group",
+          "nm": "Group 1",
+          "ix": 2,
+          "cix": 2,
+          "np": 4,
           "it": [
             {
-              "ind": 0,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 1",
               "ix": 1,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       0,
@@ -5339,22 +5344,23 @@
                       -15.294,
                       -517.509
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 1",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
-              "ind": 1,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 2",
               "ix": 2,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       84.753,
@@ -5420,55 +5426,43 @@
                       -3.001,
                       -526.925
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 2",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
               "ty": "mm",
-              "mm": 4,
-              "nm": "Merge Paths 1",
+              "bm": 0,
+              "hd": false,
               "mn": "ADBE Vector Filter - Merge",
-              "hd": false
+              "nm": "Merge Paths 1",
+              "mm": 4
             },
             {
               "ty": "fl",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Graphic - Fill",
+              "nm": "Fill 1",
               "c": {
                 "a": 0,
                 "k": [
-                  0.603921568627,
-                  0.513725490196,
-                  0.968627510819,
-                  1
+                  0.3373,
+                  0.5686,
+                  0.9412
                 ],
                 "ix": 4
               },
+              "r": 1,
               "o": {
                 "a": 0,
                 "k": 100,
                 "ix": 5
-              },
-              "r": 1,
-              "bm": 0,
-              "nm": "Fill 1",
-              "mn": "ADBE Vector Graphic - Fill",
-              "hd": false
+              }
             },
             {
               "ty": "tr",
-              "p": {
-                "a": 0,
-                "k": [
-                  745.291,
-                  575.279
-                ],
-                "ix": 2
-              },
               "a": {
                 "a": 0,
                 "k": [
@@ -5485,47 +5479,59 @@
                 ],
                 "ix": 3
               },
-              "r": {
-                "a": 0,
-                "k": 0,
-                "ix": 6
-              },
-              "o": {
-                "a": 0,
-                "k": 100,
-                "ix": 7
-              },
               "sk": {
                 "a": 0,
                 "k": 0,
                 "ix": 4
+              },
+              "p": {
+                "a": 0,
+                "k": [
+                  745.291,
+                  575.279
+                ],
+                "ix": 2
+              },
+              "r": {
+                "a": 0,
+                "k": 0,
+                "ix": 6
               },
               "sa": {
                 "a": 0,
                 "k": 0,
                 "ix": 5
               },
-              "nm": "Transform"
+              "o": {
+                "a": 0,
+                "k": 100,
+                "ix": 7
+              }
             }
-          ],
-          "nm": "Group 1",
-          "np": 4,
-          "cix": 2,
-          "bm": 0,
-          "ix": 2,
-          "mn": "ADBE Vector Group",
-          "hd": false
+          ]
         },
         {
           "ty": "gr",
+          "bm": 0,
+          "hd": false,
+          "mn": "ADBE Vector Group",
+          "nm": "Group 2",
+          "ix": 3,
+          "cix": 2,
+          "np": 4,
           "it": [
             {
-              "ind": 0,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 1",
               "ix": 1,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       219.608,
@@ -5579,22 +5585,23 @@
                       398.274,
                       191.588
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 1",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
-              "ind": 1,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 2",
               "ix": 2,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       225.924,
@@ -5648,55 +5655,43 @@
                       409.728,
                       197.098
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 2",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
               "ty": "mm",
-              "mm": 1,
-              "nm": "Merge Paths 1",
+              "bm": 0,
+              "hd": false,
               "mn": "ADBE Vector Filter - Merge",
-              "hd": false
+              "nm": "Merge Paths 1",
+              "mm": 1
             },
             {
               "ty": "fl",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Graphic - Fill",
+              "nm": "Fill 1",
               "c": {
                 "a": 0,
                 "k": [
-                  0.458823559331,
-                  0.207843152214,
-                  0.992156922583,
+                  1,
+                  1,
                   1
                 ],
                 "ix": 4
               },
+              "r": 1,
               "o": {
                 "a": 0,
                 "k": 100,
                 "ix": 5
-              },
-              "r": 1,
-              "bm": 0,
-              "nm": "Fill 1",
-              "mn": "ADBE Vector Graphic - Fill",
-              "hd": false
+              }
             },
             {
               "ty": "tr",
-              "p": {
-                "a": 0,
-                "k": [
-                  741.94,
-                  540.739
-                ],
-                "ix": 2
-              },
               "a": {
                 "a": 0,
                 "k": [
@@ -5713,47 +5708,59 @@
                 ],
                 "ix": 3
               },
-              "r": {
-                "a": 0,
-                "k": 0,
-                "ix": 6
-              },
-              "o": {
-                "a": 0,
-                "k": 100,
-                "ix": 7
-              },
               "sk": {
                 "a": 0,
                 "k": 0,
                 "ix": 4
+              },
+              "p": {
+                "a": 0,
+                "k": [
+                  741.94,
+                  540.739
+                ],
+                "ix": 2
+              },
+              "r": {
+                "a": 0,
+                "k": 0,
+                "ix": 6
               },
               "sa": {
                 "a": 0,
                 "k": 0,
                 "ix": 5
               },
-              "nm": "Transform"
+              "o": {
+                "a": 0,
+                "k": 100,
+                "ix": 7
+              }
             }
-          ],
-          "nm": "Group 2",
-          "np": 4,
-          "cix": 2,
-          "bm": 0,
-          "ix": 3,
-          "mn": "ADBE Vector Group",
-          "hd": false
+          ]
         },
         {
           "ty": "gr",
+          "bm": 0,
+          "hd": false,
+          "mn": "ADBE Vector Group",
+          "nm": "Group 4",
+          "ix": 4,
+          "cix": 2,
+          "np": 4,
           "it": [
             {
-              "ind": 0,
               "ty": "sh",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Shape - Group",
+              "nm": "Path 1",
               "ix": 1,
+              "d": 1,
               "ks": {
                 "a": 0,
                 "k": {
+                  "c": true,
                   "i": [
                     [
                       117.857,
@@ -5807,48 +5814,35 @@
                       213.397,
                       -453.98
                     ]
-                  ],
-                  "c": true
+                  ]
                 },
                 "ix": 2
-              },
-              "nm": "Path 1",
-              "mn": "ADBE Vector Shape - Group",
-              "hd": false
+              }
             },
             {
               "ty": "fl",
+              "bm": 0,
+              "hd": false,
+              "mn": "ADBE Vector Graphic - Fill",
+              "nm": "Fill 1",
               "c": {
                 "a": 0,
                 "k": [
-                  0.603921568627,
-                  0.513725490196,
-                  0.968627510819,
-                  1
+                  0.3373,
+                  0.5686,
+                  0.9412
                 ],
                 "ix": 4
               },
+              "r": 1,
               "o": {
                 "a": 0,
                 "k": 100,
                 "ix": 5
-              },
-              "r": 1,
-              "bm": 0,
-              "nm": "Fill 1",
-              "mn": "ADBE Vector Graphic - Fill",
-              "hd": false
+              }
             },
             {
               "ty": "tr",
-              "p": {
-                "a": 0,
-                "k": [
-                  741.94,
-                  551.105
-                ],
-                "ix": 2
-              },
               "a": {
                 "a": 0,
                 "k": [
@@ -5865,43 +5859,44 @@
                 ],
                 "ix": 3
               },
-              "r": {
-                "a": 0,
-                "k": 0,
-                "ix": 6
-              },
-              "o": {
-                "a": 0,
-                "k": 100,
-                "ix": 7
-              },
               "sk": {
                 "a": 0,
                 "k": 0,
                 "ix": 4
+              },
+              "p": {
+                "a": 0,
+                "k": [
+                  741.94,
+                  551.105
+                ],
+                "ix": 2
+              },
+              "r": {
+                "a": 0,
+                "k": 0,
+                "ix": 6
               },
               "sa": {
                 "a": 0,
                 "k": 0,
                 "ix": 5
               },
-              "nm": "Transform"
+              "o": {
+                "a": 0,
+                "k": 100,
+                "ix": 7
+              }
             }
-          ],
-          "nm": "Group 4",
-          "np": 4,
-          "cix": 2,
-          "bm": 0,
-          "ix": 4,
-          "mn": "ADBE Vector Group",
-          "hd": false
+          ]
         }
       ],
-      "ip": 0,
-      "op": 718,
-      "st": 0,
-      "bm": 0
+      "ind": 7
     }
   ],
-  "markers": []
+  "v": "4.8.0",
+  "fr": 24,
+  "op": 86,
+  "ip": 0,
+  "assets": []
 }

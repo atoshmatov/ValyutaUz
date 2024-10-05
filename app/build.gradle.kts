@@ -16,7 +16,7 @@ android {
         applicationId = "uz.toshmatov.currency"
         minSdk = 21
         targetSdk = 34
-        versionCode = 2
+        versionCode = 6
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -40,18 +40,6 @@ android {
             applicationIdSuffix = ".debug"
             isDebuggable = true
         }
-
-        flavorDimensions += "mobile_uz"
-        productFlavors {
-            create("dev") {
-                applicationId = "uz.toshmatov.currency"
-                dimension = "mobile_uz"
-            }
-            create("prod") {
-                applicationId = "uz.toshmatov.currency"
-                dimension = "mobile_uz"
-            }
-        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -72,10 +60,18 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
     ktlint {
         version = "12.1.0"
         android = true
         ignoreFailures = false
+    }
+    hilt {
+        enableAggregatingTask = true
     }
 }
 

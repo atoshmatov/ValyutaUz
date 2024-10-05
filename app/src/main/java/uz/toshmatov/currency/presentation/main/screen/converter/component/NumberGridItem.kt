@@ -61,12 +61,13 @@ fun NumberGridItem(
                             if (number.isNotEmpty())
                                 number.removeAt(number.size - 1)
                         } else if (numbers[it] == ",") {
-                            if (number.isNotEmpty())
+                            if (number.isNotEmpty() && number.none { it == "." } && number.size < 10)
                                 number.add(".")
-                        } else if (numbers[it] == "0" && number.isEmpty()) {
+                        } else if (numbers[it] == "0" && number.isEmpty() && number.size < 10) {
                             number.add("0.")
                         } else {
-                            number.add(numbers[it])
+                            if (number.size < 10)
+                                number.add(numbers[it])
                         }
                         number
                             .toList()

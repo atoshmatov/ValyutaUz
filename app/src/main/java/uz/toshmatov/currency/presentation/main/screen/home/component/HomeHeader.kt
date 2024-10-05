@@ -44,7 +44,9 @@ fun HomeHeader(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                modifier = Modifier.clickable { onClick() },
+                modifier = Modifier
+                    .clickable { onClick() }
+                    .padding(4.dp),
                 text = string.home_all_item.resource,
                 color = CurrencyColors.iconGray,
                 style = CurrencyTypography.textSemiBold

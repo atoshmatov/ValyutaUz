@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import uz.toshmatov.currency.core.logger.logError
 import uz.toshmatov.currency.domain.model.ExchangeBankModel
 import uz.toshmatov.currency.domain.repository.ExchangeBankRepository
@@ -41,33 +42,35 @@ class BankDetailViewModel @Inject constructor(
     }
 
     fun getExchangeBankData() {
-        exchangeBankRepository.exchangeBankData()
-            .onStart {
-                _state.update { detailState ->
-                    detailState.copy(loading = true)
-                }
-            }.onEach { exchangeRateModel ->
-                exchangeRateModel.apply {
-                    bankList.clear()
-                    bankList.addAll(this)
-                    filter()
-                }
+        viewModelScope.launch {
+            exchangeBankRepository.exchangeBankData()
+                .onStart {
+                    _state.update { detailState ->
+                        detailState.copy(loading = true)
+                    }
+                }.onEach { exchangeRateModel ->
+                    exchangeRateModel.apply {
+                        bankList.clear()
+                        bankList.addAll(this)
+                        filter()
+                    }
 
-                _state.update { homeState ->
-                    homeState.copy(
-                        loading = false,
-                        listSize = exchangeRateModel.size
-                    )
-                }
-            }.catch {
-                _state.update { detailState ->
-                    detailState.copy(
-                        error = "Error",
-                        loading = false
-                    )
-                }
-                logError { it.localizedMessage ?: "" }
-            }.launchIn(viewModelScope)
+                    _state.update { homeState ->
+                        homeState.copy(
+                            loading = false,
+                            listSize = exchangeRateModel.size
+                        )
+                    }
+                }.catch {
+                    _state.update { detailState ->
+                        detailState.copy(
+                            error = "Error",
+                            loading = false
+                        )
+                    }
+                    logError { it.localizedMessage ?: "" }
+                }.launchIn(viewModelScope)
+        }
     }
 
     private fun filter() {

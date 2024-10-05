@@ -2,6 +2,7 @@ package uz.toshmatov.currency.data.remote.repository
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -28,7 +29,6 @@ class CBURepositoryImpl @Inject constructor(
     override fun getCBUCurrencyList(): Flow<List<CBUModel>> {
         val lastUpdate = prefs.get(PrefKeys.cbuDateKey, 0L)
 
-        // 6 hour
         val isLocalDataActual = isLocalDataUpToDate(lastUpdate)
         return if (isLocalDataActual) {
             getLocalCBUCurrencyList()
@@ -45,17 +45,19 @@ class CBURepositoryImpl @Inject constructor(
         return cbuDao.getCBUDataList()
             .map { cbuEntityList ->
                 cbuEntityList.map(cbuDaoMapper::mapFromEntity)
-            }.flowOn(Dispatchers.IO)
+            }.catch { }
+            .flowOn(Dispatchers.IO)
     }
 
     private fun getRemoteCBUCurrencyList(): Flow<List<CBUModel>> {
         return cbuApiService.getCBUCurrencyList()
             .onEach { cbuDtoList ->
                 updateLocalData(cbuDtoList)
-                prefs.save(PrefKeys.cbuDateKey, System.currentTimeMillis())
+                prefs.save(PrefKeys.cbuDateKey, cbuDtoList.first().date)
             }.map { cbuDtoList ->
                 cbuDtoList.map(cbuMapper::mapFromEntity)
-            }.flowOn(Dispatchers.IO)
+            }.catch { }
+            .flowOn(Dispatchers.IO)
     }
 
     private suspend fun updateLocalData(cbuDtoList: List<CBUDto>) {

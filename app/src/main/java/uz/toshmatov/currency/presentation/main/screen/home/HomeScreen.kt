@@ -34,7 +34,7 @@ import uz.toshmatov.currency.core.uicompoenent.CcyLoading
 import uz.toshmatov.currency.core.utils.drawable
 import uz.toshmatov.currency.core.utils.resource
 import uz.toshmatov.currency.core.utils.string
-import uz.toshmatov.currency.data.enum.CurrencyType
+import uz.toshmatov.currency.data.enumclass.CurrencyType
 import uz.toshmatov.currency.presentation.main.screen.converter.ConverterScreen
 import uz.toshmatov.currency.presentation.main.screen.detail.DetailScreen
 import uz.toshmatov.currency.presentation.main.screen.home.component.BankCurrencyItems

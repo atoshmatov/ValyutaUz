@@ -48,10 +48,10 @@ object NetworkModule {
             .create()
         return Retrofit.Builder()
             .baseUrl(CBU_BASE_URL)
-            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addCallAdapterFactory(FlowCallAdapterFactory)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(okHttpClient)
             .build()
     }
 
@@ -69,10 +69,10 @@ object NetworkModule {
             .create()
         return Retrofit.Builder()
             .baseUrl(NBU_BASE_URL)
-            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addCallAdapterFactory(FlowCallAdapterFactory)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(okHttpClient)
             .build()
     }
 

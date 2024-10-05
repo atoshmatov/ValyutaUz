@@ -3,6 +3,7 @@ package uz.toshmatov.currency.data.remote.repository
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -27,7 +28,6 @@ class ExchangeBankRepositoryImpl @Inject constructor(
 ) : ExchangeBankRepository {
     override fun exchangeBankData(): Flow<List<ExchangeBankModel>> {
         val lastUpdate = prefs.get(PrefKeys.bankDateKey, 0L)
-
         val isLocalDataActual = isLocalDataUpToDate(lastUpdate)
         return if (isLocalDataActual) {
             getLocalCBUCurrencyList()
@@ -44,7 +44,8 @@ class ExchangeBankRepositoryImpl @Inject constructor(
         return bankDao.getAll()
             .map { bankEntityList ->
                 bankEntityList.map(bankDaoMapper::mapFromEntity)
-            }.flowOn(Dispatchers.IO)
+            }.catch { }
+            .flowOn(Dispatchers.IO)
     }
 
     private fun getRemoteCBUCurrencyList(): Flow<List<ExchangeBankModel>> {
@@ -56,7 +57,8 @@ class ExchangeBankRepositoryImpl @Inject constructor(
                 bankJson.get("exchange_rates").asJsonArray.map { jsonElement ->
                     bankMapper.mapFromEntity(jsonElement.asJsonObject)
                 }
-            }.flowOn(Dispatchers.IO)
+            }.catch { }
+            .flowOn(Dispatchers.IO)
     }
 
     private suspend fun updateLocalData(cbuDtoList: JsonObject) {

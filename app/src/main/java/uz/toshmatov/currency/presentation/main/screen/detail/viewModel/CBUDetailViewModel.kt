@@ -47,39 +47,41 @@ class CBUDetailViewModel @Inject constructor(
     }
 
     fun getCBUCurrencyList() {
-        cbuRepository.getCBUCurrencyList()
-            .onStart {
-                _state.update { detailState ->
-                    detailState.copy(loading = true)
-                }
-            }.onEach { cbuModel ->
-                cbuModel.apply {
-                    cbuList.clear()
-                    cbuList.addAll(this)
-                    filter()
-                }
+        viewModelScope.launch {
+            cbuRepository.getCBUCurrencyList()
+                .onStart {
+                    _state.update { detailState ->
+                        detailState.copy(loading = true)
+                    }
+                }.onEach { cbuModel ->
+                    cbuModel.apply {
+                        cbuList.clear()
+                        cbuList.addAll(this)
+                        filter()
+                    }
 
-                _state.update { homeState ->
-                    homeState.copy(
-                        loading = false,
-                        listSize = cbuModel.size
-                    )
-                }
+                    _state.update { homeState ->
+                        homeState.copy(
+                            loading = false,
+                            listSize = cbuModel.size
+                        )
+                    }
 
-                cbuModel.forEach {
-                    if (it.ccy == "USD")
-                        setCbuData(it.rate)
+                    cbuModel.forEach {
+                        if (it.ccy == "USD")
+                            setCbuData(it.rate)
+                    }
+                }.catch {
+                    _state.update { detailState ->
+                        detailState.copy(
+                            error = "Error",
+                            loading = false
+                        )
+                    }
+                    logError { it.localizedMessage ?: "" }
                 }
-            }.catch {
-                _state.update { detailState ->
-                    detailState.copy(
-                        error = "Error",
-                        loading = false
-                    )
-                }
-                logError { it.localizedMessage ?: "" }
-            }
-            .launchIn(viewModelScope)
+                .launchIn(viewModelScope)
+        }
     }
 
     private fun filter() {

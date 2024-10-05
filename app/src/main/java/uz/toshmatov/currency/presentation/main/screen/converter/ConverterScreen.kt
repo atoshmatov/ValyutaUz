@@ -15,7 +15,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.androidx.AndroidScreen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -73,7 +72,6 @@ fun ConverterScreenContent(
         )
         ConverterItem(
             modifier = Modifier
-                .height(120.dp)
                 .padding(horizontal = CurrencyDimensions.medium),
             number = number.ifEmpty { "0" }.plus(" $code"),
             codeName = codeName,
@@ -82,10 +80,9 @@ fun ConverterScreenContent(
         Spacer(modifier = Modifier.height(CurrencyDimensions.small))
         ConverterItem(
             modifier = Modifier
-                .height(120.dp)
                 .padding(horizontal = CurrencyDimensions.medium),
             number = (number.convertSomToDouble() * rate.convertSomToDouble())
-                .formatNumberDynamically().toNumber2().ifEmpty { "0" }.plus(" so'm"),
+                .formatNumberDynamically().toNumber2().plus(" so'm"),
             rate = (1 / rate.convertSomToDouble()).formatNumberDynamically()
                 .plus(" $code")
         )

@@ -2,7 +2,6 @@ package uz.toshmatov.currency.presentation.splash
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
@@ -30,14 +29,10 @@ class SplashScreen : AndroidScreen() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             val navigator = LocalNavigator.current
-            Box {
                 AnimatedPreloader(modifier = Modifier
-                    .size(200.dp)
-                    .align(Alignment.Center),
+                    .size(200.dp),
                     raw.currency_app_animation
                 )
-            }
-
             LaunchedEffect(Unit) {
                 delay(2000)
                 navigator?.replace(MainScreen())

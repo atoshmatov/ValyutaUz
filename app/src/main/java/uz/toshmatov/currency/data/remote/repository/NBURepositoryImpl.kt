@@ -2,6 +2,7 @@ package uz.toshmatov.currency.data.remote.repository
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -27,6 +28,7 @@ class NBURepositoryImpl @Inject constructor(
 ) : NBURepository {
     override fun getNBUCurrencyList(): Flow<List<NBUModel>> {
         val lastUpdate = prefs.get(PrefKeys.nbuDateKey, 0L)
+
         val isLocalDataActual = isLocalDataUpToDate(lastUpdate)
         return if (isLocalDataActual) {
             getLocalNBUCurrencyList()
@@ -47,7 +49,8 @@ class NBURepositoryImpl @Inject constructor(
                     .filter { nbu ->
                         nbu.nbuCellPrice.isNotEmpty() && nbu.nbuBuyPrice.isNotEmpty()
                     }
-            }.flowOn(Dispatchers.IO)
+            }.catch { }
+            .flowOn(Dispatchers.IO)
     }
 
     private fun getRemoteNBUCurrencyList(): Flow<List<NBUModel>> {
@@ -60,7 +63,8 @@ class NBURepositoryImpl @Inject constructor(
                     .filter { nbu ->
                         nbu.nbuCellPrice.isNotEmpty() && nbu.nbuBuyPrice.isNotEmpty()
                     }
-            }.flowOn(Dispatchers.IO)
+            }.catch { }
+            .flowOn(Dispatchers.IO)
     }
 
     private suspend fun updateLocalData(nbuDtoList: List<NBUDto>) {

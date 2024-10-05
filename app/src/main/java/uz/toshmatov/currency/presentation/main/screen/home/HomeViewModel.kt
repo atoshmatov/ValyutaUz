@@ -40,81 +40,87 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getCBUCurrencyList() {
-        cbuRepository.getCBUCurrencyList()
-            .onStart {
-                _state.update { homeState ->
-                    homeState.copy(isLoading = true)
+        viewModelScope.launch {
+            cbuRepository.getCBUCurrencyList()
+                .onStart {
+                    _state.update { homeState ->
+                        homeState.copy(isLoading = true)
+                    }
+                }.onEach { cbuModel ->
+                    _state.update { homeState ->
+                        homeState.copy(
+                            cbuList = cbuModel.toPersistentList(),
+                            isLoading = false
+                        )
+                    }
+                    cbuModel.forEach {
+                        if (it.ccy == "USD")
+                            setCbuData(it.rate)
+                    }
+                }.catch {
+                    _state.update { homeState ->
+                        homeState.copy(
+                            error = "Error",
+                            isLoading = false
+                        )
+                    }
+                    logError { it.localizedMessage ?: "" }
                 }
-            }.onEach { cbuModel ->
-                _state.update { homeState ->
-                    homeState.copy(
-                        cbuList = cbuModel.toPersistentList(),
-                        isLoading = false
-                    )
-                }
-                cbuModel.forEach {
-                    if (it.ccy == "USD")
-                        setCbuData(it.rate)
-                }
-            }.catch {
-                _state.update { homeState ->
-                    homeState.copy(
-                        error = "Error",
-                        isLoading = false
-                    )
-                }
-                logError { it.localizedMessage ?: "" }
-            }
-            .launchIn(viewModelScope)
+                .launchIn(viewModelScope)
+        }
     }
 
     private fun getNBUCurrencyList() {
-        nbuRepository.getNBUCurrencyList()
-            .onStart {
-                _state.update { homeState ->
-                    homeState.copy(isLoading = true)
+        viewModelScope.launch {
+            nbuRepository.getNBUCurrencyList()
+                .onStart {
+                    _state.update { homeState ->
+                        homeState.copy(isLoading = true)
+                    }
+                }.onEach { nbuModel ->
+                    _state.update { homeState ->
+                        homeState.copy(
+                            nbuList = nbuModel.toPersistentList(),
+                            isLoading = false
+                        )
+                    }
+                }.catch {
+                    _state.update { homeState ->
+                        homeState.copy(
+                            error = "Error",
+                            isLoading = false
+                        )
+                    }
+                    logError { it.localizedMessage ?: "" }
                 }
-            }.onEach { nbuModel ->
-                _state.update { homeState ->
-                    homeState.copy(
-                        nbuList = nbuModel.toPersistentList(),
-                        isLoading = false
-                    )
-                }
-            }.catch {
-                _state.update { homeState ->
-                    homeState.copy(
-                        error = "Error",
-                        isLoading = false
-                    )
-                }
-                logError { it.localizedMessage ?: "" }
-            }
-            .launchIn(viewModelScope)
+                .launchIn(viewModelScope)
+        }
     }
 
     private fun getExchangeBankData() {
-        exchangeBankRepository.exchangeBankData()
-            .onStart {
-                _state.update { homeState ->
-                    homeState.copy(isLoading = true)
-                }
-            }.onEach { exchangeRateModel ->
-                _state.update { homeState ->
-                    homeState.copy(
-                        exchangeRateList = exchangeRateModel.toPersistentList(),
-                        isLoading = false
-                    )
-                }
-            }.catch {
-                _state.update { homeState ->
-                    homeState.copy(
-                        error = "Error",
-                        isLoading = false
-                    )
-                }
-                logError { it.localizedMessage ?: "" }
-            }.launchIn(viewModelScope)
+        viewModelScope.launch {
+            exchangeBankRepository.exchangeBankData()
+                .onStart {
+                    _state.update { homeState ->
+                        homeState.copy(isLoading = true)
+                    }
+                }.onEach { exchangeRateModel ->
+                    _state.update { homeState ->
+                        homeState.copy(
+                            exchangeRateList = exchangeRateModel.toPersistentList(),
+                            isLoading = false
+                        )
+                    }
+                }.catch {
+                    _state.update { homeState ->
+                        homeState.copy(
+                            error = "Error",
+                            isLoading = false
+                        )
+                    }
+                    logError { it.localizedMessage ?: "" }
+                }.launchIn(viewModelScope)
+        }
     }
 
     private fun setCbuData(cbuData: String) {
