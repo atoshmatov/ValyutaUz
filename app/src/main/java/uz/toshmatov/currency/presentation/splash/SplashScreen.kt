@@ -1,5 +1,6 @@
 package uz.toshmatov.currency.presentation.splash
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,7 @@ import uz.toshmatov.currency.presentation.main.MainScreen
 import uz.toshmatov.currency.presentation.splash.component.AnimatedPreloader
 
 class SplashScreen : AndroidScreen() {
+    @SuppressLint("SuspiciousIndentation")
     @Composable
     override fun Content() {
         Column(

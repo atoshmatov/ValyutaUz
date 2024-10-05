@@ -18,9 +18,6 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.androidx.AndroidScreen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import uz.toshmatov.currency.core.extensions.convertSomToDouble
 import uz.toshmatov.currency.core.extensions.formatNumberDynamically
 import uz.toshmatov.currency.core.extensions.toNumber2
@@ -96,27 +93,4 @@ fun ConverterScreenContent(
             modifier = Modifier.height(CurrencyDimensions.medium)
         )
     }
-}
-
-fun main() {
-    val totalTime = runBlocking {
-        val time1 = async { delayFunction1() }
-        val time2 = async { delayFunction2() }
-        val result1 = time1.await()
-        val result2 = time2.await()
-        println("Total time: ${result1 + result2}")
-    }
-    println("Done")
-}
-
-suspend fun delayFunction1(): Long {
-    val delayTime = 1000L
-    delay(delayTime)
-    return delayTime
-}
-
-suspend fun delayFunction2(): Long {
-    val delayTime = 500L
-    delay(delayTime)
-    return delayTime
 }
