@@ -53,7 +53,7 @@ class CBURepositoryImpl @Inject constructor(
         return cbuApiService.getCBUCurrencyList()
             .onEach { cbuDtoList ->
                 updateLocalData(cbuDtoList)
-                prefs.save(PrefKeys.cbuDateKey, cbuDtoList.first().date)
+                prefs.save(PrefKeys.cbuDateKey, System.currentTimeMillis())
             }.map { cbuDtoList ->
                 cbuDtoList.map(cbuMapper::mapFromEntity)
             }.catch { }

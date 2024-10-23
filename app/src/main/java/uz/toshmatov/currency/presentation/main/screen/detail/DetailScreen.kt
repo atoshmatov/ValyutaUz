@@ -110,6 +110,7 @@ class DetailScreen(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CBUScreen(
     state: DetailState,
@@ -212,6 +213,7 @@ fun NBUScreen(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun BankScreen(
     state: DetailState,

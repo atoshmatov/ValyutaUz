@@ -22,7 +22,7 @@ class LanguageViewModel @Inject constructor() : ViewModel() {
 
     private val languageList = listOf(
         LanguageModel(string.uzbek_language, drawable.uzbekista_n, LangType.UZBEK, "uz"),
-        LanguageModel(string.cyrillic_language, drawable.uzbekista_n, LangType.CYRILLIC, "csr"),
+        LanguageModel(string.cyrillic_language, drawable.uzbekista_n, LangType.CYRILLIC, "cr"),
         LanguageModel(string.english_language, drawable.united_states, LangType.ENGLISH, "en"),
         LanguageModel(string.russian_language, drawable.russia, LangType.RUSSIAN, "ru"),
     )

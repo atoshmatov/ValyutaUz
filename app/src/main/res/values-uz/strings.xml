@@ -5,6 +5,7 @@
   <string name="app_name_prod">ValyutaUz-prod</string>
 
   // Main text
+  <string name="soon">Tez kunda qo\'shiladi!</string>
   <string name="tab_home">Asosiy</string>
   <string name="tab_converter">Konverter</string>
   <string name="tab_crypto">Kripto</string>

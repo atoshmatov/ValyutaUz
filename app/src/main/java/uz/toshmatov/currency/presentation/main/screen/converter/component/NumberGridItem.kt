@@ -34,13 +34,11 @@ fun NumberGridItem(
             "1", "2", "3",
             "4", "5", "6",
             "7", "8", "9",
-            ",", "0", "C"
+            ".", "0", "C"
         )
     }
 
-    val number = remember {
-        mutableStateListOf<String>()
-    }
+    val number = remember { mutableStateListOf("0") }
 
     LazyVerticalStaggeredGrid(
         modifier = modifier
@@ -57,17 +55,39 @@ fun NumberGridItem(
                     .clip(RoundedCornerShape(CurrencyDimensions.small))
                     .background(CurrencyColors.bottomBar)
                     .clickable {
-                        if (numbers[it] == "C") {
-                            if (number.isNotEmpty())
-                                number.removeAt(number.size - 1)
-                        } else if (numbers[it] == ",") {
-                            if (number.isNotEmpty() && number.none { it == "." } && number.size < 10)
-                                number.add(".")
-                        } else if (numbers[it] == "0" && number.isEmpty() && number.size < 10) {
-                            number.add("0.")
-                        } else {
-                            if (number.size < 10)
-                                number.add(numbers[it])
+                        when (numbers[it]) {
+                            "C" -> {
+                                if (number.size > 1) {
+                                    number.removeAt(number.size - 1)
+                                } else if (number.size == 1) {
+                                    number[0] = "0"
+                                }
+                            }
+
+                            "." -> {
+                                if (number.none { it == "." } && number.size < 10) {
+                                    number.add(".")
+                                }
+                            }
+
+                            "0" -> {
+                                if (number.size == 1 && number[0] == "0") {
+                                    // TODO: no action
+                                } else if (number.isEmpty()) {
+                                    number.add("0")
+                                    number.add(".")
+                                } else if (number.size < 10) {
+                                    number.add("0")
+                                }
+                            }
+
+                            else -> {
+                                if (number.size == 1 && number[0] == "0") {
+                                    number[0] = numbers[it]
+                                } else if (number.size < 10) {
+                                    number.add(numbers[it])
+                                }
+                            }
                         }
                         number
                             .toList()

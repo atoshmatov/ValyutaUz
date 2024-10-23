@@ -9,7 +9,6 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
-import com.google.android.play.core.review.ReviewManagerFactory
 import dagger.hilt.android.AndroidEntryPoint
 import uz.toshmatov.currency.core.extensions.getCurrentThemeMode
 import uz.toshmatov.currency.core.theme.CurrencyTheme
@@ -22,7 +21,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        showFeedback()
         setContent {
             val themeMode by viewModel.isDarkMode.collectAsStateWithLifecycle()
             CurrencyTheme(
@@ -37,16 +35,6 @@ class MainActivity : ComponentActivity() {
                 ) {
                     SlideTransition(it)
                 }
-            }
-        }
-    }
-
-    private fun showFeedback() {
-        val reviewManager = ReviewManagerFactory.create(this)
-
-        reviewManager.requestReviewFlow().addOnCompleteListener {
-            if (it.isSuccessful) {
-                reviewManager.launchReviewFlow(this, it.result)
             }
         }
     }

@@ -13,14 +13,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import uz.toshmatov.currency.core.theme.CurrencyColors
 import uz.toshmatov.currency.core.theme.CurrencyDimensions
 import uz.toshmatov.currency.core.theme.CurrencyTheme
 import uz.toshmatov.currency.core.theme.CurrencyTypography
-import uz.toshmatov.currency.core.uicompoenent.CurrencyIcon
-import uz.toshmatov.currency.core.utils.drawable
 
 @Composable
 fun ConverterItem(
@@ -29,6 +28,7 @@ fun ConverterItem(
     codeName: String = "so'm",
     rate: String,
 ) {
+    val context = LocalContext.current
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -38,7 +38,7 @@ fun ConverterItem(
             .padding(CurrencyDimensions.medium),
         horizontalAlignment = Alignment.Start,
 
-    ) {
+        ) {
         Text(
             modifier = Modifier,
             text = "1 $codeName = $rate",
@@ -62,14 +62,16 @@ fun ConverterItem(
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
-            CurrencyIcon(
+            /*CurrencyIcon(
                 modifier = Modifier
                     .align(Alignment.CenterVertically),
                 image = drawable.ic_arrow_down,
                 tint = CurrencyColors.success,
-                onClick = {},
+                onClick = {
+                    context.makeToast(string.soon)
+                },
                 contentDescription = "arrow down"
-            )
+            )*/
         }
     }
 }

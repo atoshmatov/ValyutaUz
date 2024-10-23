@@ -3,6 +3,8 @@
   <string name="app_name_dev">ValyutaUz-debug</string>
   <string name="app_name_prod">ValyutaUz-prod</string>
 
+  <string name="soon">Coming soon!</string>
+
   // Main text
   <string name="tab_home">Main</string>
   <string name="tab_converter">Converter</string>

@@ -5,6 +5,7 @@
   <string name="app_name_prod">ValyutaUz-prod</string>
 
   // Main text
+  <string name="soon">Скоро будет добавлено!</string>
   <string name="tab_home">Основной</string>
   <string name="tab_converter">Конвертер</string>
   <string name="tab_crypto">Крипто</string>

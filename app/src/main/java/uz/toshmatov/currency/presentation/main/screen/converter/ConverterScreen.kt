@@ -1,6 +1,5 @@
 package uz.toshmatov.currency.presentation.main.screen.converter
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -36,23 +35,21 @@ class ConverterScreen(
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-
         ConverterScreenContent(
             backClick = navigator::pop,
             codeName = codeName,
             code = code,
-            rate = rate
+            rate = rate,
         )
     }
 }
 
-@SuppressLint("DefaultLocale")
 @Composable
 fun ConverterScreenContent(
     backClick: () -> Unit,
     codeName: String,
     code: String = "",
-    rate: String = ""
+    rate: String = "",
 ) {
     var number by remember { mutableStateOf("") }
     Column(
@@ -81,7 +78,7 @@ fun ConverterScreenContent(
             number = (number.convertSomToDouble() * rate.convertSomToDouble())
                 .formatNumberDynamically().toNumber2().plus(" so'm"),
             rate = (1 / rate.convertSomToDouble()).formatNumberDynamically()
-                .plus(" $code")
+                .plus(" $code"),
         )
         Spacer(
             modifier = Modifier.weight(1f)
