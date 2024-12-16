@@ -1,7 +1,9 @@
 package uz.toshmatov.currency.core.uicompoenent
 
-import android.annotation.SuppressLint
 import androidx.annotation.StringRes
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -13,6 +15,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -30,7 +33,6 @@ import uz.toshmatov.currency.core.utils.drawable
 import uz.toshmatov.currency.core.utils.resource
 import uz.toshmatov.currency.core.utils.string
 
-@SuppressLint("UnrememberedMutableInteractionSource")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CurrencyTextField(
@@ -40,7 +42,7 @@ fun CurrencyTextField(
     onFocus: () -> Unit = {},
 ) {
     var text by rememberSaveable { mutableStateOf("") }
-    val interactionSource = MutableInteractionSource()
+    val interactionSource = remember { MutableInteractionSource() }
 
     BasicTextField(
         value = text,
@@ -92,7 +94,29 @@ fun CurrencyTextField(
             visualTransformation = VisualTransformation.None,
             interactionSource = interactionSource,
             leadingIcon = {
-                CurrencyIcon(image = drawable.ic_search, size = 16.dp, contentDescription = "search")
+                CurrencyIcon(
+                    image = drawable.ic_search,
+                    size = 16.dp,
+                    contentDescription = "search"
+                )
+            },
+            trailingIcon = {
+                AnimatedVisibility(
+                    visible = text.isNotBlank(),
+                    enter = fadeIn(),
+                    exit = fadeOut()
+                ) {
+                    CurrencyIcon(
+                        image = drawable.ic_close,
+                        size = 16.dp,
+                        contentDescription = "search",
+                        tint = CurrencyColors.textSecondary,
+                        onClick = {
+                            text = ""
+                            onValueChange(text)
+                        }
+                    )
+                }
             },
             contentPadding = TextFieldDefaults.contentPaddingWithoutLabel(
                 top = CurrencyDimensions.empty,

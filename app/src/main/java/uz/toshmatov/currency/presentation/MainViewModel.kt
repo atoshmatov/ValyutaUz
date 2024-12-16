@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import uz.toshmatov.currency.data.local.model.ThemeMode
-import uz.toshmatov.currency.data.local.repository.DataStoreRepository
+import uz.toshmatov.currency.domain.repository.DataStoreRepository
 import javax.inject.Inject
 
 @HiltViewModel

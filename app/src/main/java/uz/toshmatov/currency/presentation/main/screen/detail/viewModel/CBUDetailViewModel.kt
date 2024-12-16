@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import uz.toshmatov.currency.core.logger.logError
-import uz.toshmatov.currency.data.local.repository.DataStoreRepository
+import uz.toshmatov.currency.domain.repository.DataStoreRepository
 import uz.toshmatov.currency.domain.model.CBUModel
 import uz.toshmatov.currency.domain.repository.CBURepository
 import uz.toshmatov.currency.presentation.main.screen.detail.intents.DetailEvents
@@ -29,9 +29,11 @@ class CBUDetailViewModel @Inject constructor(
 
     private val _state: MutableStateFlow<DetailState> = MutableStateFlow(DetailState())
     val state: StateFlow<DetailState> = _state.asStateFlow()
+
     private val cbuList = ArrayList<CBUModel>()
 
     init {
+        getCBUCurrencyList()
         getCBUData()
     }
 
@@ -46,7 +48,7 @@ class CBUDetailViewModel @Inject constructor(
         }
     }
 
-    fun getCBUCurrencyList() {
+    private fun getCBUCurrencyList() {
         viewModelScope.launch {
             cbuRepository.getCBUCurrencyList()
                 .onStart {
@@ -61,15 +63,11 @@ class CBUDetailViewModel @Inject constructor(
                     }
 
                     _state.update { homeState ->
-                        homeState.copy(
-                            loading = false,
-                            listSize = cbuModel.size
-                        )
+                        homeState.copy(loading = false)
                     }
 
                     cbuModel.forEach {
-                        if (it.ccy == "USD")
-                            setCbuData(it.rate)
+                        if (it.ccy == "USD") setCbuData(it.rate)
                     }
                 }.catch {
                     _state.update { detailState ->
@@ -79,8 +77,7 @@ class CBUDetailViewModel @Inject constructor(
                         )
                     }
                     logError { it.localizedMessage ?: "" }
-                }
-                .launchIn(viewModelScope)
+                }.launchIn(viewModelScope)
         }
     }
 
@@ -98,7 +95,9 @@ class CBUDetailViewModel @Inject constructor(
         _state.update {
             it.copy(
                 cbuList = cbuList.filter { cbu ->
-                    cbu.ccy.contains(query, ignoreCase = true) || cbu.ccyName.contains(
+                    cbu.ccy.contains(
+                        query, ignoreCase = true
+                    ) || cbu.ccyName.contains(
                         query,
                         ignoreCase = true
                     )
@@ -123,5 +122,4 @@ class CBUDetailViewModel @Inject constructor(
                 }.launchIn(viewModelScope)
         }
     }
-
 }

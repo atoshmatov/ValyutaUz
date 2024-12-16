@@ -9,15 +9,42 @@ import androidx.compose.ui.unit.sp
 import uz.toshmatov.currency.core.utils.font
 
 private val font_montserrat = FontFamily(
-    Font(font.montserrat_black, FontWeight.Normal),
-    Font(font.montserrat_bold, FontWeight.Bold),
-    Font(font.montserrat_extra_bold, FontWeight.ExtraBold),
-    Font(font.montserrat_extra_light, FontWeight.ExtraLight),
-    Font(font.montserrat_light, FontWeight.Light),
-    Font(font.montserrat_medium, FontWeight.Medium),
-    Font(font.montserrat_regular, FontWeight.Normal),
-    Font(font.montserrat_semi_bold, FontWeight.SemiBold),
-    Font(font.montserrat_thin, FontWeight.Thin),
+    Font(
+        resId = font.montserrat_black,
+        weight = FontWeight.Normal
+    ),
+    Font(
+        resId = font.montserrat_bold,
+        weight = FontWeight.Bold
+    ),
+    Font(
+        resId = font.montserrat_extra_bold,
+        weight = FontWeight.ExtraBold
+    ),
+    Font(
+        resId = font.montserrat_extra_light,
+        weight = FontWeight.ExtraLight
+    ),
+    Font(
+        resId = font.montserrat_light,
+        weight = FontWeight.Light
+    ),
+    Font(
+        resId = font.montserrat_medium,
+        weight = FontWeight.Medium
+    ),
+    Font(
+        resId = font.montserrat_regular,
+        weight = FontWeight.Normal
+    ),
+    Font(
+        resId = font.montserrat_semi_bold,
+        weight = FontWeight.SemiBold
+    ),
+    Font(
+        resId = font.montserrat_thin,
+        weight = FontWeight.Thin
+    ),
 )
 
 data class CurrencyTypography(

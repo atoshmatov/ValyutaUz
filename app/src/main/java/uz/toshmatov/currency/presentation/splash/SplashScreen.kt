@@ -10,14 +10,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.androidx.AndroidScreen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import coil.compose.AsyncImage
 import kotlinx.coroutines.delay
 import uz.toshmatov.currency.core.theme.CurrencyColors
-import uz.toshmatov.currency.core.utils.raw
+import uz.toshmatov.currency.core.theme.CurrencyPreview
+import uz.toshmatov.currency.core.utils.drawable
+import uz.toshmatov.currency.core.utils.resource
+import uz.toshmatov.currency.core.utils.string
 import uz.toshmatov.currency.presentation.main.MainScreen
-import uz.toshmatov.currency.presentation.splash.component.AnimatedPreloader
 
 class SplashScreen : AndroidScreen() {
     @SuppressLint("SuspiciousIndentation")
@@ -31,14 +35,26 @@ class SplashScreen : AndroidScreen() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             val navigator = LocalNavigator.current
-                AnimatedPreloader(modifier = Modifier
-                    .size(200.dp),
-                    raw.currency_app_animation
-                )
+
+            val configuration = LocalConfiguration.current
+            val screenWidth = configuration.screenWidthDp.dp
+
+            AsyncImage(
+                modifier = Modifier
+                    .size(screenWidth / 1.4f),
+                model = drawable.ic_launcher_foreground,
+                contentDescription = string.app_name.resource,
+            )
             LaunchedEffect(Unit) {
                 delay(2000)
                 navigator?.replace(MainScreen())
             }
         }
     }
+}
+
+@CurrencyPreview
+@Composable
+fun SplashScreenPreview() {
+    SplashScreen()
 }

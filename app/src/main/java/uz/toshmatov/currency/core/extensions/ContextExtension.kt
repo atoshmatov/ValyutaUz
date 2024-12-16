@@ -3,6 +3,7 @@ package uz.toshmatov.currency.core.extensions
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
 
 
 fun Context.openEmail() {
@@ -27,4 +28,8 @@ fun Context.openShareAppLink() {
 
     val shareIntent = Intent.createChooser(sendIntent, null)
     this.startActivity(shareIntent)
+}
+
+fun Context.makeToast(log: Int) {
+    Toast.makeText(this, log, Toast.LENGTH_LONG).show()
 }

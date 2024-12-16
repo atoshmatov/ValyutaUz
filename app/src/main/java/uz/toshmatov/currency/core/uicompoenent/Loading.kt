@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import uz.toshmatov.currency.core.theme.CurrencyColors
 
 @Composable
-fun CcyLoading(modifier: Modifier = Modifier) {
+fun CurrencyLoading(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()

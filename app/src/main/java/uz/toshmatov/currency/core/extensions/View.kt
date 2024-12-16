@@ -1,8 +1,6 @@
 package uz.toshmatov.currency.core.extensions
 
 import android.app.Activity
-import android.content.Context
-import android.widget.Toast
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material.ripple.rememberRipple
@@ -44,9 +42,5 @@ fun Modifier.iconIndication(radius: Dp) = composed {
             radius = radius
         )
     )
-}
-
-fun Context.makeToast(log: Int) {
-    Toast.makeText(this, log, Toast.LENGTH_LONG).show()
 }
 

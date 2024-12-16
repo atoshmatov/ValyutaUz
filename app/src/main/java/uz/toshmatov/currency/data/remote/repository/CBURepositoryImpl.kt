@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import uz.toshmatov.currency.core.logger.logError
 import uz.toshmatov.currency.data.local.prefs.PrefKeys
 import uz.toshmatov.currency.data.local.prefs.Prefs
 import uz.toshmatov.currency.data.local.room.dao.CBUDao
@@ -27,9 +28,10 @@ class CBURepositoryImpl @Inject constructor(
     private val cbuDao: CBUDao
 ) : CBURepository {
     override fun getCBUCurrencyList(): Flow<List<CBUModel>> {
-        val lastUpdate = prefs.get(PrefKeys.cbuDateKey, 0L)
+        val lastUpdate = prefs.get(PrefKeys.CBU_DATE_KEY, 0L)
 
         val isLocalDataActual = isLocalDataUpToDate(lastUpdate)
+
         return if (isLocalDataActual) {
             getLocalCBUCurrencyList()
         } else {
@@ -37,27 +39,28 @@ class CBURepositoryImpl @Inject constructor(
         }
     }
 
-    private fun isLocalDataUpToDate(lastUpdate: Long): Boolean {
-        return System.currentTimeMillis() - lastUpdate < 6 * 60 * 60 * 1000
-    }
+    private fun isLocalDataUpToDate(lastUpdate: Long) =
+        System.currentTimeMillis() - lastUpdate < 6 * 60 * 60 * 1000
 
     private fun getLocalCBUCurrencyList(): Flow<List<CBUModel>> {
         return cbuDao.getCBUDataList()
             .map { cbuEntityList ->
                 cbuEntityList.map(cbuDaoMapper::mapFromEntity)
-            }.catch { }
-            .flowOn(Dispatchers.IO)
+            }.catch {
+                logError { "getLocalCBUCurrencyList: ${it.message}" }
+            }.flowOn(Dispatchers.IO)
     }
 
     private fun getRemoteCBUCurrencyList(): Flow<List<CBUModel>> {
         return cbuApiService.getCBUCurrencyList()
             .onEach { cbuDtoList ->
                 updateLocalData(cbuDtoList)
-                prefs.save(PrefKeys.cbuDateKey, System.currentTimeMillis())
+                prefs.save(PrefKeys.CBU_DATE_KEY, System.currentTimeMillis())
             }.map { cbuDtoList ->
                 cbuDtoList.map(cbuMapper::mapFromEntity)
-            }.catch { }
-            .flowOn(Dispatchers.IO)
+            }.catch {
+                logError { "getRemoteCBUCurrencyList: ${it.message}" }
+            }.flowOn(Dispatchers.IO)
     }
 
     private suspend fun updateLocalData(cbuDtoList: List<CBUDto>) {

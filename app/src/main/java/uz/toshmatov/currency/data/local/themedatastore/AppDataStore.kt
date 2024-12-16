@@ -16,25 +16,30 @@ import javax.inject.Inject
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "current_theme")
 private val THEME_MODE_KEY = stringPreferencesKey("theme")
 private val CBU_DATA_KEY = stringPreferencesKey("cbu_data")
+private const val LIGHT = "Light"
+private const val DARK = "Dark"
+private const val SYSTEM = "System"
+
 class AppDataStore @Inject constructor(context: Context) {
     private val store = context.dataStore
 
     fun getThemeMode(): Flow<ThemeMode> {
-        return store.data.map { preferences ->
-            when (preferences[THEME_MODE_KEY]) {
-                "Light" -> ThemeMode.Light
-                "Dark" -> ThemeMode.Dark
-                "System" -> ThemeMode.System
-                else -> ThemeMode.System
-            }
-        }.flowOn(Dispatchers.IO)
+        return store.data
+            .map { preferences ->
+                when (preferences[THEME_MODE_KEY]) {
+                    LIGHT -> ThemeMode.Light
+                    DARK -> ThemeMode.Dark
+                    SYSTEM -> ThemeMode.System
+                    else -> ThemeMode.System
+                }
+            }.flowOn(Dispatchers.IO)
     }
 
     suspend fun setThemeMode(themeMode: ThemeMode) {
         val themeName = when (themeMode) {
-            ThemeMode.Light -> "Light"
-            ThemeMode.Dark -> "Dark"
-            ThemeMode.System -> "System"
+            ThemeMode.Light -> LIGHT
+            ThemeMode.Dark -> DARK
+            ThemeMode.System -> SYSTEM
         }
 
         store.edit { preferences ->
@@ -43,9 +48,10 @@ class AppDataStore @Inject constructor(context: Context) {
     }
 
     fun getCBUData(): Flow<String> {
-        return store.data.map { preferences ->
-            preferences[CBU_DATA_KEY] ?: ""
-        }.flowOn(Dispatchers.IO)
+        return store.data
+            .map { preferences ->
+                preferences[CBU_DATA_KEY] ?: ""
+            }.flowOn(Dispatchers.IO)
     }
 
     suspend fun setCBUData(data: String) {

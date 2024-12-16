@@ -3,6 +3,7 @@ package uz.toshmatov.currency.data.local.repository
 import kotlinx.coroutines.flow.Flow
 import uz.toshmatov.currency.data.local.model.ThemeMode
 import uz.toshmatov.currency.data.local.themedatastore.AppDataStore
+import uz.toshmatov.currency.domain.repository.DataStoreRepository
 import javax.inject.Inject
 
 class DataStoreRepositoryImpl @Inject constructor(
