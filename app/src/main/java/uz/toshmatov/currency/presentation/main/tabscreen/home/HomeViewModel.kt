@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import uz.toshmatov.currency.core.connect.ConnectivityObserver
 import uz.toshmatov.currency.core.logger.logError
 import uz.toshmatov.currency.domain.repository.CBURepository
 import uz.toshmatov.currency.domain.repository.DataStoreRepository
@@ -23,6 +24,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val cbuRepository: CBURepository,
     private val storeRepository: DataStoreRepository,
+    private val connectivityObserver: ConnectivityObserver
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<HomeState> = MutableStateFlow(HomeState())
@@ -31,6 +33,7 @@ class HomeViewModel @Inject constructor(
     init {
         getCBUCurrencyList()
         getCBUData()
+        getNetworkStatus()
     }
 
     private fun getCBUCurrencyList() {
@@ -42,8 +45,9 @@ class HomeViewModel @Inject constructor(
             }.onEach { cbuModel ->
                 _state.update { homeState ->
                     homeState.copy(
-                        cbuList = cbuModel.reversed().takeLast(20).reversed().toPersistentList(),
-                        isLoading = false
+                        cbuList = cbuModel.take(20).toPersistentList(),
+                        isLoading = false,
+                        isEmptyCbuList = cbuModel.isEmpty()
                     )
                 }
                 cbuModel.forEach {
@@ -73,6 +77,15 @@ class HomeViewModel @Inject constructor(
             .onEach { cbu ->
                 _state.update { homeState ->
                     homeState.copy(cbuData = cbu)
+                }
+            }.launchIn(viewModelScope)
+    }
+
+    private fun getNetworkStatus() {
+        connectivityObserver.observe()
+            .onEach { status ->
+                _state.update { homeState ->
+                    homeState.copy(networkStatus = status)
                 }
             }.launchIn(viewModelScope)
     }

@@ -38,4 +38,5 @@
   <string name="home_all_item">Хаммаси</string>
   <string name="version">версия</string>
   <string name="home_search">кидириш</string>
+  <string name="empty">Ҳозирда валюта курслари мавжуд эмас.\nМаълумотларни кўриш учун интернетга уланиб қайта уриниб кўринг.</string>
 </resources>

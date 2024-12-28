@@ -37,4 +37,6 @@
   <string name="home_update_date">Update date</string>
   <string name="home_all_item">See all</string>
   <string name="home_search">search</string>
+
+  <string name="empty">Currency rates are currently unavailable.\nPlease connect to the internet and try again.</string>
 </resources>

@@ -21,8 +21,8 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import uz.toshmatov.currency.core.theme.CurrencyColors
 import uz.toshmatov.currency.core.theme.CurrencyDimensions
-import uz.toshmatov.currency.core.uicompoenent.CurrencyLoading
 import uz.toshmatov.currency.core.uicompoenent.CurrencyTextField
+import uz.toshmatov.currency.core.uicompoenent.ShimmedList
 import uz.toshmatov.currency.core.uicompoenent.TopBar
 import uz.toshmatov.currency.core.utils.string
 import uz.toshmatov.currency.presentation.main.screen.converter.ConverterScreen
@@ -42,7 +42,7 @@ class DetailScreen : AndroidScreen() {
         val navigator = LocalNavigator.currentOrThrow
 
         if (cbuState.loading)
-            CurrencyLoading()
+            ShimmedList()
         else {
             CBUScreen(
                 state = cbuState,

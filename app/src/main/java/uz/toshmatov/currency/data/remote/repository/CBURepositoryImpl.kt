@@ -27,6 +27,7 @@ class CBURepositoryImpl @Inject constructor(
     private val prefs: Prefs,
     private val cbuDao: CBUDao
 ) : CBURepository {
+
     override fun getCBUCurrencyList(): Flow<List<CBUModel>> {
         val lastUpdate = prefs.get(PrefKeys.CBU_DATE_KEY, 0L)
 
