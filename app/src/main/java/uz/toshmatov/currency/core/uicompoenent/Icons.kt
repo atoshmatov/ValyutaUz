@@ -88,7 +88,7 @@ fun CurrencyIcon(
 }
 
 @Composable
-fun CommetaIconButton(
+fun CurrencyIconButton(
     modifier: Modifier = Modifier,
     shape: RoundedCornerShape = RoundedCornerShape(CurrencyDimensions.medium),
     color: Color = Color.Transparent,

@@ -3,12 +3,11 @@ package uz.toshmatov.currency.data.local.prefs
 import android.content.Context
 import android.content.SharedPreferences
 
-class Prefs constructor(context: Context) {
+class Prefs(context: Context) {
     private val prefsName: String = "Currency"
     private val prefs: SharedPreferences by lazy {
-       context.getSharedPreferences(prefsName, Context.MODE_PRIVATE)
+        context.getSharedPreferences(prefsName, Context.MODE_PRIVATE)
     }
-
 
     fun save(key: String, value: Int) {
         prefs.edit().putInt(key, value).apply()

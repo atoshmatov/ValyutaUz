@@ -28,13 +28,9 @@ fun CurrencyTheme(
     lightStatusBar: Boolean = !darkTheme,
     content: @Composable () -> Unit
 ) {
-
     val systemUiController = rememberSystemUiController()
-
     val colors: CurrencyColors = if (darkTheme) darkColors() else lightColors()
-
     val rippleIndication = rememberRipple()
-
     val rememberedColors = remember { colors.copy() }.apply { updateColorsFrom(colors) }
 
     StatusBarStyle(

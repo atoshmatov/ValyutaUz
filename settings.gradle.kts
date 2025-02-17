@@ -20,6 +20,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "currency"
+rootProject.name = "Valyuta uz"
 include(":app")
  

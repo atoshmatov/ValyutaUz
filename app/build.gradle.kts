@@ -16,7 +16,7 @@ android {
         applicationId = "uz.toshmatov.currency"
         minSdk = 21
         targetSdk = 34
-        versionCode = 8
+        versionCode = 9
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -142,7 +142,7 @@ dependencies {
     implementation(libs.gson)
 
     // room_database
-    annotationProcessor(libs.room.compiler)
+    annotationProcessor(libs.room.ksp.compiler)
     implementation(libs.room.paging)
     implementation(libs.room.ktx)
     implementation(libs.room)
@@ -161,25 +161,19 @@ dependencies {
     implementation(libs.chucker)
 
     // system ui
-    implementation(libs.accompanist.systemui)
     implementation(libs.accompanist.swiperefresh)
-
-    // jsoup
-    implementation(libs.jsoup)
+    implementation(libs.accompanist.systemui)
 
     // lingver
     implementation(libs.lingver)
 
     // datastore
-    implementation(libs.androidx.dataStore.core)
     implementation(libs.androidx.dataStore.preferences)
+    implementation(libs.androidx.dataStore.core)
 
     // appwidget glance
-    implementation(libs.androidx.appwidget.glance)
-    implementation(libs.androidx.appwidget.glance.material)
     implementation(libs.androidx.appwidget.glance.material3)
+    implementation(libs.androidx.appwidget.glance.material)
+    implementation(libs.androidx.appwidget.glance)
 
-    // play review
-    implementation(libs.play.review.ktx)
-    implementation(libs.play.review)
 }

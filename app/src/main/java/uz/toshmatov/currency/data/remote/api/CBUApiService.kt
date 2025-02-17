@@ -5,7 +5,6 @@ import retrofit2.http.GET
 import uz.toshmatov.currency.data.remote.model.CBUDto
 
 interface CBUApiService {
-
     @GET("arkhiv-kursov-valyut/json/")
     fun getCBUCurrencyList(): Flow<List<CBUDto>>
 }

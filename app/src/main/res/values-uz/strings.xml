@@ -8,7 +8,6 @@
   <string name="soon">Tez kunda qo\'shiladi!</string>
   <string name="tab_home">Asosiy</string>
   <string name="tab_converter">Konverter</string>
-  <string name="tab_crypto">Kripto</string>
   <string name="tab_setting">Sozlamalar</string>
 
   // settings text
@@ -39,4 +38,5 @@
   <string name="home_all_item">Ko‘proq</string>
   <string name="version">versiya</string>
   <string name="home_search">qidirish</string>
+  <string name="empty">Hozirda valyuta kurslari mavjud emas.\nMa\'lumotlarni ko\'rish uchun internetga ulanib qayta urinib ko\'ring.</string>
 </resources>
