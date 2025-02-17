@@ -42,6 +42,14 @@ class HomeViewModel @Inject constructor(
                 _state.update { homeState ->
                     homeState.copy(isLoading = true)
                 }
+            }.catch {
+                _state.update { homeState ->
+                    homeState.copy(
+                        error = "Error",
+                        isLoading = false
+                    )
+                }
+                logError { it.localizedMessage ?: "" }
             }.onEach { cbuModel ->
                 _state.update { homeState ->
                     homeState.copy(
@@ -54,14 +62,6 @@ class HomeViewModel @Inject constructor(
                     if (it.ccy == "USD")
                         setCbuData(it.rate)
                 }
-            }.catch {
-                _state.update { homeState ->
-                    homeState.copy(
-                        error = "Error",
-                        isLoading = false
-                    )
-                }
-                logError { it.localizedMessage ?: "" }
             }.launchIn(viewModelScope)
 
     }

@@ -14,9 +14,9 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import uz.toshmatov.currency.core.logger.logError
-import uz.toshmatov.currency.domain.repository.DataStoreRepository
 import uz.toshmatov.currency.domain.model.CBUModel
 import uz.toshmatov.currency.domain.repository.CBURepository
+import uz.toshmatov.currency.domain.repository.DataStoreRepository
 import uz.toshmatov.currency.presentation.main.screen.detail.intents.DetailEvents
 import uz.toshmatov.currency.presentation.main.screen.detail.intents.DetailState
 import javax.inject.Inject
@@ -49,36 +49,35 @@ class CBUDetailViewModel @Inject constructor(
     }
 
     private fun getCBUCurrencyList() {
-        viewModelScope.launch {
-            cbuRepository.getCBUCurrencyList()
-                .onStart {
-                    _state.update { detailState ->
-                        detailState.copy(loading = true)
-                    }
-                }.onEach { cbuModel ->
-                    cbuModel.apply {
-                        cbuList.clear()
-                        cbuList.addAll(this)
-                        filter()
-                    }
+        cbuRepository.getCurrencyList()
+            .onStart {
+                _state.update { detailState ->
+                    detailState.copy(loading = true)
+                }
+            }.onEach { cbuModel ->
+                _state.update { homeState ->
+                    homeState.copy(loading = false)
+                }
 
-                    _state.update { homeState ->
-                        homeState.copy(loading = false)
-                    }
+                cbuModel.apply {
+                    cbuList.clear()
+                    cbuList.addAll(this.data ?: emptyList())
+                    filter()
+                }
 
-                    cbuModel.forEach {
-                        if (it.ccy == "USD") setCbuData(it.rate)
-                    }
-                }.catch {
-                    _state.update { detailState ->
-                        detailState.copy(
-                            error = "Error",
-                            loading = false
-                        )
-                    }
-                    logError { it.localizedMessage ?: "" }
-                }.launchIn(viewModelScope)
-        }
+                cbuModel.data?.forEach {
+                    if (it.ccy == "USD") setCbuData(it.rate)
+                } ?: emptyList<CBUModel>()
+
+            }.catch {
+                _state.update { detailState ->
+                    detailState.copy(
+                        error = "Error",
+                        loading = false
+                    )
+                }
+                logError { it.localizedMessage ?: "" }
+            }.launchIn(viewModelScope)
     }
 
     private fun filter() {

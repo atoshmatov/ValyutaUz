@@ -16,7 +16,7 @@ android {
         applicationId = "uz.toshmatov.currency"
         minSdk = 21
         targetSdk = 34
-        versionCode = 8
+        versionCode = 9
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -175,4 +175,5 @@ dependencies {
     implementation(libs.androidx.appwidget.glance.material3)
     implementation(libs.androidx.appwidget.glance.material)
     implementation(libs.androidx.appwidget.glance)
+
 }

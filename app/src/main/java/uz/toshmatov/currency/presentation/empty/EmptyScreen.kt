@@ -27,7 +27,7 @@ fun EmptyScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(CurrencyColors.background),
+            .background(CurrencyColors.itemBackground),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

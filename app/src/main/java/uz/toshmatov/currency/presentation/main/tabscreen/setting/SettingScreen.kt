@@ -32,6 +32,7 @@ import uz.toshmatov.currency.presentation.main.tabscreen.setting.component.Setti
 import uz.toshmatov.currency.presentation.main.tabscreen.setting.feature.appinfo.InfoScreen
 import uz.toshmatov.currency.presentation.main.tabscreen.setting.feature.language.LanguageScreen
 import uz.toshmatov.currency.presentation.main.tabscreen.setting.feature.theme.ThemeScreen
+import uz.toshmatov.currency.presentation.main.tabscreen.setting.intents.SettingsState
 import uz.toshmatov.currency.presentation.main.tabscreen.setting.model.ActionType
 
 object SettingScreen : Tab {
@@ -86,7 +87,7 @@ object SettingScreen : Tab {
 
 @Composable
 private fun SettingScreenContent(
-    state: uz.toshmatov.currency.presentation.main.tabscreen.setting.intents.SettingsState,
+    state: SettingsState,
     onClickItem: (ActionType) -> Unit
 ) {
     Column(

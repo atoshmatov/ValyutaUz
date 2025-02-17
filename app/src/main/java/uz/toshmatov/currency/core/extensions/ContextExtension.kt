@@ -30,6 +30,6 @@ fun Context.openShareAppLink() {
     this.startActivity(shareIntent)
 }
 
-fun Context.makeToast(log: Int) {
+fun Context.makeToast(log: CharSequence) {
     Toast.makeText(this, log, Toast.LENGTH_LONG).show()
 }

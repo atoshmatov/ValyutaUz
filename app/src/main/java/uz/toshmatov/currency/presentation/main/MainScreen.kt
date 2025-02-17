@@ -40,7 +40,7 @@ private fun MainScreenContent(
     val tabs = listOf(HomeScreen, SettingScreen)
 
     TabNavigator(
-        HomeScreen,
+        tab = HomeScreen,
         tabDisposable = {
             TabDisposable(
                 navigator = it,

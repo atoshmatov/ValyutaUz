@@ -6,5 +6,5 @@ import uz.toshmatov.currency.presentation.main.tabscreen.setting.model.SettingMo
 
 data class SettingsState(
     val isLoading: Boolean = false,
-    val settings: ImmutableList<uz.toshmatov.currency.presentation.main.tabscreen.setting.model.SettingModel> = persistentListOf()
+    val settings: ImmutableList<SettingModel> = persistentListOf()
 )

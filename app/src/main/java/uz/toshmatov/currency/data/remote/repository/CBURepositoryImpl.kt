@@ -3,10 +3,15 @@ package uz.toshmatov.currency.data.remote.repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import uz.toshmatov.currency.core.logger.logError
+import uz.toshmatov.currency.core.utils.Resource
+import uz.toshmatov.currency.core.utils.errorData
+import uz.toshmatov.currency.core.utils.loading
+import uz.toshmatov.currency.core.utils.success
 import uz.toshmatov.currency.data.local.prefs.PrefKeys
 import uz.toshmatov.currency.data.local.prefs.Prefs
 import uz.toshmatov.currency.data.local.room.dao.CBUDao
@@ -39,6 +44,25 @@ class CBURepositoryImpl @Inject constructor(
             getRemoteCBUCurrencyList()
         }
     }
+
+    override fun getCurrencyList(): Flow<Resource<List<CBUModel>>> =
+        flow {
+            emit(loading())
+            val lastUpdate = prefs.get(PrefKeys.CBU_DATE_KEY, 0L)
+
+            val isLocalDataActual = isLocalDataUpToDate(lastUpdate)
+
+            val response = if (isLocalDataActual) {
+                getLocalCBUCurrencyList()
+            } else {
+                getRemoteCBUCurrencyList()
+            }
+            response.collect {
+                emit(success(it))
+            }
+        }.catch {
+            emit(errorData(it.message))
+        }
 
     private fun isLocalDataUpToDate(lastUpdate: Long) =
         System.currentTimeMillis() - lastUpdate < 6 * 60 * 60 * 1000
