@@ -43,7 +43,8 @@ Ilova **O‘zbekiston Markaziy Banki** API dan foydalanadi:
 
 📲 **Play Market orqali yuklab olish:** 
 
-[<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Google Play Store" style="width: 20%;" />]([https://play.google.com/store/apps/details?id=uz.mahmudxon.currency](https://play.google.com/store/apps/details?id=uz.toshmatov.currency))
+[<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Google Play Store" style="width: 20%;" />](https://play.google.com/store/apps/details?id=uz.toshmatov.currency)
+
 
 ---
 
