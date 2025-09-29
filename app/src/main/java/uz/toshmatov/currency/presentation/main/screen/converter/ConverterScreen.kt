@@ -14,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.androidx.AndroidScreen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -89,5 +90,6 @@ fun ConverterScreenContent(
         Spacer(
             modifier = Modifier.height(CurrencyDimensions.medium)
         )
+        Spacer(Modifier.height(56.dp))
     }
 }

@@ -5,10 +5,15 @@ package uz.toshmatov.currency.presentation.main.tabscreen.home
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -17,11 +22,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import com.amurfm.android.core.networkConnect.NetworkConnectionState
+import com.amurfm.android.core.networkConnect.rememberConnectivityState
 import uz.toshmatov.currency.core.connect.ConnectivityObserver
 import uz.toshmatov.currency.core.theme.CurrencyColors
 import uz.toshmatov.currency.core.uicompoenent.ShimmedList
@@ -58,14 +66,16 @@ object HomeScreen : Tab {
         val viewModel = getViewModel<HomeViewModel>()
         val state by viewModel.state.collectAsState()
         val currentNavigator = LocalNavigator.currentOrThrow.parent!!
-        val status = state.networkStatus
+        //val status = state.networkStatus
+
+        val internetConnection = rememberConnectivityState()
 
         if (state.isLoading)
             ShimmedList()
-        else if ((status == ConnectivityObserver.Status.UNAVAILABLE ||
-                status == ConnectivityObserver.Status.LOST ||
-                status == ConnectivityObserver.Status.LOSING) &&
-            state.isEmptyCbuList
+        else if ((internetConnection.value == NetworkConnectionState.LOST ||
+                internetConnection.value == NetworkConnectionState.Unavailable ||
+                internetConnection.value == NetworkConnectionState.LOSING
+                ) && state.isEmptyCbuList
         ) {
             EmptyScreen(string.empty.resource)
         } else {
@@ -76,7 +86,7 @@ object HomeScreen : Tab {
                 },
                 itemClick = { codeName, code, rate ->
                     currentNavigator.push(ConverterScreen(codeName, code, rate))
-                }
+                },
             )
         }
     }
@@ -92,7 +102,9 @@ private fun HomeScreenContent(
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
-            .background(CurrencyColors.background),
+            .background(CurrencyColors.background)
+            .statusBarsPadding()
+            .navigationBarsPadding(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start,
     ) {
@@ -114,6 +126,9 @@ private fun HomeScreenContent(
                     itemClick(cbuModel.ccyName, cbuModel.ccy, cbuModel.rate)
                 }
             )
+        }
+        item {
+            Spacer(Modifier.height(80.dp))
         }
     }
 }

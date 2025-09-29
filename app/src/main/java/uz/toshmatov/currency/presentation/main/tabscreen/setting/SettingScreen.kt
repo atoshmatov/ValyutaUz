@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -59,7 +60,6 @@ object SettingScreen : Tab {
         val state by viewModel.state.collectAsState()
         val currentNavigator = LocalNavigator.currentOrThrow.parent!!
         val context = LocalContext.current
-        val activity = LocalContext.current as MainActivity
 
         SettingScreenContent(
             state = state,
@@ -94,6 +94,7 @@ private fun SettingScreenContent(
         modifier = Modifier
             .fillMaxSize()
             .background(CurrencyColors.background)
+            .statusBarsPadding()
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally

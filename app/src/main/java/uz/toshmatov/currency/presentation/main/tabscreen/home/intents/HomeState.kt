@@ -10,6 +10,6 @@ data class HomeState(
     val error: String = "",
     val cbuData: String = "",
     val isEmptyCbuList: Boolean = false,
-    val networkStatus: ConnectivityObserver.Status = ConnectivityObserver.Status.UNAVAILABLE,
+    //val networkStatus: ConnectivityObserver.Status = ConnectivityObserver.Status.UNAVAILABLE,
     val cbuList: ImmutableList<CBUModel> = persistentListOf(),
 )

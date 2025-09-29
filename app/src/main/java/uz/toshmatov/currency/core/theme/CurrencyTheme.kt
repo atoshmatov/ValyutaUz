@@ -8,11 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalView
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import uz.toshmatov.currency.core.extensions.StatusBarStyle
 import uz.toshmatov.currency.core.extensions.applyTheme
 import uz.toshmatov.currency.core.theme.color.CurrencyColors
 import uz.toshmatov.currency.core.theme.color.LocalColors
+import uz.toshmatov.currency.core.theme.color.SetLightStatusBarAppearance
 import uz.toshmatov.currency.core.theme.color.darkColors
 import uz.toshmatov.currency.core.theme.color.lightColors
 import uz.toshmatov.currency.core.theme.deminsion.CurrencyDimensions
@@ -25,22 +27,25 @@ fun CurrencyTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     typography: CurrencyTypography = CurrencyTypography,
     dimensions: CurrencyDimensions = CurrencyDimensions,
-    lightStatusBar: Boolean = !darkTheme,
     content: @Composable () -> Unit
 ) {
-    val systemUiController = rememberSystemUiController()
     val colors: CurrencyColors = if (darkTheme) darkColors() else lightColors()
     val rippleIndication = rememberRipple()
-    val rememberedColors = remember { colors.copy() }.apply { updateColorsFrom(colors) }
+    val rememberedColors = remember {
+        colors.copy()
+    }.apply { updateColorsFrom(colors) }
 
-    StatusBarStyle(
+    val view = LocalView.current
+    view.SetLightStatusBarAppearance(darkTheme)
+
+    /*StatusBarStyle(
         statusBarColor = colors.background,
         navigationBarColor = colors.background
-    )
+    )*/
 
-    SideEffect {
+    /*SideEffect {
         systemUiController.applyTheme(darkTheme && !lightStatusBar)
-    }
+    }*/
 
     CompositionLocalProvider(
         LocalColors provides rememberedColors,

@@ -10,14 +10,14 @@ plugins {
 
 android {
     namespace = "uz.toshmatov.currency"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "uz.toshmatov.currency"
         minSdk = 21
-        targetSdk = 34
-        versionCode = 9
-        versionName = "1.0.0"
+        targetSdk = 36
+        versionCode = 10
+        versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -175,5 +175,4 @@ dependencies {
     implementation(libs.androidx.appwidget.glance.material3)
     implementation(libs.androidx.appwidget.glance.material)
     implementation(libs.androidx.appwidget.glance)
-
 }

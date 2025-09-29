@@ -4,7 +4,11 @@ package uz.toshmatov.currency.presentation.main
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -56,7 +60,7 @@ private fun MainScreenContent(
         Scaffold(
             modifier = modifier,
             content = { padding ->
-                Column(modifier = Modifier.padding(padding)) { CurrentTab() }
+                Column(modifier = Modifier) { CurrentTab() }
             },
             bottomBar = {
                 BottomNavigatorBar(tabs = tabs.toPersistentList())

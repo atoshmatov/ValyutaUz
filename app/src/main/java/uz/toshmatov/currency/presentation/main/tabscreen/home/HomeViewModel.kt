@@ -24,7 +24,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val cbuRepository: CBURepository,
     private val storeRepository: DataStoreRepository,
-    private val connectivityObserver: ConnectivityObserver
+    //private val connectivityObserver: ConnectivityObserver
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<HomeState> = MutableStateFlow(HomeState())
@@ -33,7 +33,7 @@ class HomeViewModel @Inject constructor(
     init {
         getCBUCurrencyList()
         getCBUData()
-        getNetworkStatus()
+        //getNetworkStatus()
     }
 
     private fun getCBUCurrencyList() {
@@ -81,12 +81,12 @@ class HomeViewModel @Inject constructor(
             }.launchIn(viewModelScope)
     }
 
-    private fun getNetworkStatus() {
+    /*private fun getNetworkStatus() {
         connectivityObserver.observe()
             .onEach { status ->
                 _state.update { homeState ->
                     homeState.copy(networkStatus = status)
                 }
             }.launchIn(viewModelScope)
-    }
+    }*/
 }
