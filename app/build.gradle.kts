@@ -23,6 +23,11 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        ndk {
+            abiFilters.add("arm64-v8a")
+            abiFilters.add("armeabi-v7a")
+        }
     }
     signingConfigs {
         create("release") {
@@ -43,6 +48,12 @@ android {
                 "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("release")
+
+            ndk {
+                abiFilters.add("arm64-v8a")
+                abiFilters.add("armeabi-v7a")
+                debugSymbolLevel = "SYMBOL_TABLE"
+            }
         }
 
         debug {
@@ -57,6 +68,11 @@ android {
             )
 
             signingConfig = signingConfigs.getByName("debug")
+
+            ndk {
+                abiFilters.add("arm64-v8a")
+                abiFilters.add("armeabi-v7a")
+            }
         }
     }
     compileOptions {
@@ -91,6 +107,8 @@ android {
     hilt {
         enableAggregatingTask = true
     }
+
+    ndkVersion = "26.1.10909125"
 }
 
 dependencies {
