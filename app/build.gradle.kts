@@ -119,7 +119,6 @@ dependencies {
     // androidx lifecycle
     implementation(libs.androidx.lifecycle.viewModelCompose)
     implementation(libs.androidx.lifecycle.runtimeCompose)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
     // androidx compose
@@ -154,10 +153,6 @@ dependencies {
     // kotlin serialization
     implementation(libs.kotlinx.serialization.json)
 
-    // paging
-    implementation(libs.androidx.pager.compose)
-    implementation(libs.androidx.pager)
-
     // voyager
     implementation(libs.voyager.bottomsheet)
     implementation(libs.voyager.transitions)
@@ -170,7 +165,6 @@ dependencies {
     implementation(libs.okhttp)
 
     // retrofit
-    implementation(libs.retrofit.kotlin.serialization)
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.gson)
 
@@ -178,8 +172,6 @@ dependencies {
     implementation(libs.gson)
 
     // room_database
-    annotationProcessor(libs.room.ksp.compiler)
-    implementation(libs.room.paging)
     implementation(libs.room.ktx)
     implementation(libs.room)
     ksp(libs.room.ksp.compiler)
@@ -194,7 +186,8 @@ dependencies {
     implementation(libs.timber)
 
     // chucker
-    implementation(libs.chucker)
+    debugImplementation(libs.chucker)
+    releaseImplementation(libs.chucker.no.op)
 
     // system ui
     implementation(libs.accompanist.swiperefresh)
@@ -206,9 +199,4 @@ dependencies {
     // datastore
     implementation(libs.androidx.dataStore.preferences)
     implementation(libs.androidx.dataStore.core)
-
-    // appwidget glance
-    implementation(libs.androidx.appwidget.glance.material3)
-    implementation(libs.androidx.appwidget.glance.material)
-    implementation(libs.androidx.appwidget.glance)
 }

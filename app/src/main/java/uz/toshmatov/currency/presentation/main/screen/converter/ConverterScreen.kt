@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,6 +54,20 @@ fun ConverterScreenContent(
     rate: String = "",
 ) {
     var number by remember { mutableStateOf("") }
+
+    val convertedAmount by remember(number, rate) {
+        derivedStateOf {
+            (number.convertSomToDouble() * rate.convertSomToDouble())
+                .formatNumberDynamically().toNumber2().plus(" so'm")
+        }
+    }
+
+    val inverseRate by remember(rate, code) {
+        derivedStateOf {
+            (1 / rate.convertSomToDouble()).formatNumberDynamically().plus(" $code")
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -76,10 +91,8 @@ fun ConverterScreenContent(
         ConverterItem(
             modifier = Modifier
                 .padding(horizontal = CurrencyDimensions.medium),
-            number = (number.convertSomToDouble() * rate.convertSomToDouble())
-                .formatNumberDynamically().toNumber2().plus(" so'm"),
-            rate = (1 / rate.convertSomToDouble()).formatNumberDynamically()
-                .plus(" $code"),
+            number = convertedAmount,
+            rate = inverseRate,
         )
         Spacer(
             modifier = Modifier.weight(1f)

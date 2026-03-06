@@ -16,7 +16,9 @@ import javax.inject.Singleton
 class DatabaseModule {
     @[Provides Singleton]
     fun getAppDatabase(@ApplicationContext context: Context): CurrencyDatabase =
-        Room.databaseBuilder(context, CurrencyDatabase::class.java, "Currency").build()
+        Room.databaseBuilder(context, CurrencyDatabase::class.java, "Currency")
+            .fallbackToDestructiveMigration()
+            .build()
 
     @[Provides Singleton]
     fun getProvideCBUDao(database: CurrencyDatabase): CBUDao = database.getCBUDao()

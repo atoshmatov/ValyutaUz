@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import uz.toshmatov.currency.core.connect.ConnectivityObserver
 import uz.toshmatov.currency.core.logger.logError
 import uz.toshmatov.currency.domain.repository.CBURepository
 import uz.toshmatov.currency.domain.repository.DataStoreRepository
@@ -24,7 +23,6 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val cbuRepository: CBURepository,
     private val storeRepository: DataStoreRepository,
-    //private val connectivityObserver: ConnectivityObserver
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<HomeState> = MutableStateFlow(HomeState())
@@ -33,7 +31,10 @@ class HomeViewModel @Inject constructor(
     init {
         getCBUCurrencyList()
         getCBUData()
-        //getNetworkStatus()
+    }
+
+    fun refresh() {
+        getCBUCurrencyList()
     }
 
     private fun getCBUCurrencyList() {
@@ -45,7 +46,7 @@ class HomeViewModel @Inject constructor(
             }.catch {
                 _state.update { homeState ->
                     homeState.copy(
-                        error = "Error",
+                        error = it.localizedMessage ?: "Error",
                         isLoading = false
                     )
                 }
@@ -55,15 +56,14 @@ class HomeViewModel @Inject constructor(
                     homeState.copy(
                         cbuList = cbuModel.take(20).toPersistentList(),
                         isLoading = false,
-                        isEmptyCbuList = cbuModel.isEmpty()
+                        isEmptyCbuList = cbuModel.isEmpty(),
+                        error = ""
                     )
                 }
                 cbuModel.forEach {
-                    if (it.ccy == "USD")
-                        setCbuData(it.rate)
+                    if (it.ccy == "USD") setCbuData(it.rate)
                 }
             }.launchIn(viewModelScope)
-
     }
 
     private fun setCbuData(cbuData: String) {
@@ -80,13 +80,4 @@ class HomeViewModel @Inject constructor(
                 }
             }.launchIn(viewModelScope)
     }
-
-    /*private fun getNetworkStatus() {
-        connectivityObserver.observe()
-            .onEach { status ->
-                _state.update { homeState ->
-                    homeState.copy(networkStatus = status)
-                }
-            }.launchIn(viewModelScope)
-    }*/
 }

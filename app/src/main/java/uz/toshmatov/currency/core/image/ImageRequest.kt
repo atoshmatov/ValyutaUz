@@ -6,6 +6,9 @@ import coil.request.ImageRequest
 import uz.toshmatov.currency.core.extensions.CurrencyCode
 
 @Composable
-fun String.imageToRequest(): Any = ImageRequest.Builder(LocalContext.current)
-    .data(CurrencyCode.valueOf(this).flag).crossfade(true).build()
+fun String.imageToRequest(): Any {
+    val flag = runCatching { CurrencyCode.valueOf(this).flag }.getOrNull()
+    return ImageRequest.Builder(LocalContext.current)
+        .data(flag).crossfade(true).build()
+}
 

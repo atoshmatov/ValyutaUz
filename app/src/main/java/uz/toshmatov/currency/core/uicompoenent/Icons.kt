@@ -32,17 +32,12 @@ fun CurrencyIcon(
     onClick: (() -> Unit)? = null,
     contentDescription: String = "default",
 ) {
+    val clickableModifier = if (onClick != null) Modifier.clickable { onClick() } else Modifier
     Box(
         modifier = modifier
             .clip(CircleShape)
             .background(color)
-            .then(
-                if (onClick != null) {
-                    modifier.clickable { onClick() }
-                } else {
-                    modifier
-                },
-            )
+            .then(clickableModifier)
             .padding(padding),
     ) {
         Icon(
@@ -65,17 +60,12 @@ fun CurrencyIcon(
     color: Color = Color.Unspecified,
     onClick: (() -> Unit)? = null,
 ) {
+    val clickableModifier = if (onClick != null) Modifier.clickable { onClick() } else Modifier
     Box(
         modifier = modifier
             .clip(shape)
             .background(color)
-            .then(
-                if (onClick != null) {
-                    modifier.clickable { onClick() }
-                } else {
-                    modifier
-                },
-            )
+            .then(clickableModifier)
             .padding(padding),
     ) {
         Icon(

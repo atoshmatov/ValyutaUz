@@ -1,5 +1,6 @@
 package uz.toshmatov.currency.data.remote.repository
 
+import androidx.room.withTransaction
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -14,6 +15,7 @@ import uz.toshmatov.currency.core.utils.loading
 import uz.toshmatov.currency.core.utils.success
 import uz.toshmatov.currency.data.local.prefs.PrefKeys
 import uz.toshmatov.currency.data.local.prefs.Prefs
+import uz.toshmatov.currency.data.local.room.CurrencyDatabase
 import uz.toshmatov.currency.data.local.room.dao.CBUDao
 import uz.toshmatov.currency.data.mapper.cbu.CBUDaoMapper
 import uz.toshmatov.currency.data.mapper.cbu.CBUMapper
@@ -30,15 +32,13 @@ class CBURepositoryImpl @Inject constructor(
     private val cbuNetMapper: CBUNetMapper,
     private val cbuDaoMapper: CBUDaoMapper,
     private val prefs: Prefs,
-    private val cbuDao: CBUDao
+    private val cbuDao: CBUDao,
+    private val database: CurrencyDatabase
 ) : CBURepository {
 
     override fun getCBUCurrencyList(): Flow<List<CBUModel>> {
         val lastUpdate = prefs.get(PrefKeys.CBU_DATE_KEY, 0L)
-
-        val isLocalDataActual = isLocalDataUpToDate(lastUpdate)
-
-        return if (isLocalDataActual) {
+        return if (isLocalDataUpToDate(lastUpdate)) {
             getLocalCBUCurrencyList()
         } else {
             getRemoteCBUCurrencyList()
@@ -49,10 +49,7 @@ class CBURepositoryImpl @Inject constructor(
         flow {
             emit(loading())
             val lastUpdate = prefs.get(PrefKeys.CBU_DATE_KEY, 0L)
-
-            val isLocalDataActual = isLocalDataUpToDate(lastUpdate)
-
-            val response = if (isLocalDataActual) {
+            val response = if (isLocalDataUpToDate(lastUpdate)) {
                 getLocalCBUCurrencyList()
             } else {
                 getRemoteCBUCurrencyList()
@@ -89,7 +86,9 @@ class CBURepositoryImpl @Inject constructor(
     }
 
     private suspend fun updateLocalData(cbuDtoList: List<CBUDto>) {
-        cbuDao.deleteAll()
-        cbuDao.upsert(cbuDtoList.map(cbuNetMapper::mapToEntity))
+        database.withTransaction {
+            cbuDao.deleteAll()
+            cbuDao.upsert(cbuDtoList.map(cbuNetMapper::mapToEntity))
+        }
     }
 }

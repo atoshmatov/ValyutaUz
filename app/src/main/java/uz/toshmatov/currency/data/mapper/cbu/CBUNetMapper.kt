@@ -23,6 +23,18 @@ class CBUNetMapper @Inject constructor() : Mapper<CBUDto, CBUEntity> {
     }
 
     override fun mapFromEntity(entity: CBUEntity): CBUDto {
-        TODO("Not yet implemented")
+        return CBUDto(
+            id = entity.id,
+            code = entity.code,
+            currencyCode = entity.currencyCode,
+            nominal = entity.nominal,
+            rate = entity.rate,
+            difference = entity.difference,
+            date = entity.date,
+            currencyNameUZ = entity.currencyNameUZ,
+            currencyNameUZC = entity.currencyNameUZC,
+            currencyNameEN = entity.currencyNameEN,
+            currencyNameRU = entity.currencyNameRU
+        )
     }
 }

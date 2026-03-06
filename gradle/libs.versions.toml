@@ -176,6 +176,7 @@ androidx-pager = { group = "androidx.paging", name = "paging-runtime-ktx", versi
 
 # chucker
 chucker = { group = "com.github.chuckerteam.chucker", name = "library", version.ref = "chucker" }
+chucker-no-op = { group = "com.github.chuckerteam.chucker", name = "library-no-op", version.ref = "chucker" }
 
 # timber
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }

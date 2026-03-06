@@ -1,10 +1,8 @@
 package uz.toshmatov.currency.core.extensions
 
 import android.annotation.SuppressLint
-import android.os.Build
-import androidx.annotation.RequiresApi
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 fun String.getFlagUrl(): String =
     "https://flagcdn.com/h80/${this.subSequence(0, 2).toString().lowercase()}.png"
@@ -59,13 +57,14 @@ fun String.toNumber2(): String {
 
 
 
-@RequiresApi(Build.VERSION_CODES.O)
+@SuppressLint("SimpleDateFormat")
 fun String.formatDate(): String {
-    val inputFormat = "MM/dd/yyyy"
-    val outputFormat = "dd-MM-yyyy"
-    val inputFormatter = DateTimeFormatter.ofPattern(inputFormat)
-    val outputFormatter = DateTimeFormatter.ofPattern(outputFormat)
-
-    val date = LocalDate.parse(this, inputFormatter)
-    return date.format(outputFormatter)
+    return try {
+        val inputFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val date = inputFormat.parse(this)
+        if (date != null) outputFormat.format(date) else this
+    } catch (e: Exception) {
+        this
+    }
 }

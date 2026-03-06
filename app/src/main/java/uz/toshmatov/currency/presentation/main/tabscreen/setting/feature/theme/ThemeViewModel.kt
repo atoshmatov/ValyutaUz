@@ -57,7 +57,6 @@ class ThemeViewModel @Inject constructor(
         when (event) {
             is ThemeEvents.UpdateTheme -> {
                 updateTheme(event.themeMode)
-                getThemeMode()
             }
         }
     }

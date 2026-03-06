@@ -58,21 +58,17 @@ class CBUDetailViewModel @Inject constructor(
                 _state.update { homeState ->
                     homeState.copy(loading = false)
                 }
-
-                cbuModel.apply {
-                    cbuList.clear()
-                    cbuList.addAll(this.data ?: emptyList())
-                    filter()
-                }
+                cbuList.clear()
+                cbuList.addAll(cbuModel.data ?: emptyList())
+                filter()
 
                 cbuModel.data?.forEach {
                     if (it.ccy == "USD") setCbuData(it.rate)
-                } ?: emptyList<CBUModel>()
-
+                }
             }.catch {
                 _state.update { detailState ->
                     detailState.copy(
-                        error = "Error",
+                        error = it.localizedMessage ?: "Error",
                         loading = false
                     )
                 }
@@ -84,9 +80,7 @@ class CBUDetailViewModel @Inject constructor(
         val query = _state.value.searchQuery
         if (query.isEmpty()) {
             _state.update {
-                it.copy(
-                    cbuList = cbuList.toPersistentList()
-                )
+                it.copy(cbuList = cbuList.toPersistentList())
             }
             return
         }
@@ -94,12 +88,8 @@ class CBUDetailViewModel @Inject constructor(
         _state.update {
             it.copy(
                 cbuList = cbuList.filter { cbu ->
-                    cbu.ccy.contains(
-                        query, ignoreCase = true
-                    ) || cbu.ccyName.contains(
-                        query,
-                        ignoreCase = true
-                    )
+                    cbu.ccy.contains(query, ignoreCase = true) ||
+                        cbu.ccyName.contains(query, ignoreCase = true)
                 }.toPersistentList()
             )
         }
@@ -112,13 +102,11 @@ class CBUDetailViewModel @Inject constructor(
     }
 
     private fun getCBUData() {
-        viewModelScope.launch {
-            storeRepository.getCBUData()
-                .onEach { cbu ->
-                    _state.update { homeState ->
-                        homeState.copy(cbuData = cbu)
-                    }
-                }.launchIn(viewModelScope)
-        }
+        storeRepository.getCBUData()
+            .onEach { cbu ->
+                _state.update { homeState ->
+                    homeState.copy(cbuData = cbu)
+                }
+            }.launchIn(viewModelScope)
     }
 }

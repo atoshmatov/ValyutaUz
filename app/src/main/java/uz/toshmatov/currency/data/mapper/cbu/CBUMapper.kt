@@ -10,7 +10,19 @@ import javax.inject.Inject
 
 class CBUMapper @Inject constructor() : Mapper<CBUModel, CBUDto> {
     override fun mapToEntity(model: CBUModel): CBUDto {
-        TODO("Not yet implemented")
+        return CBUDto(
+            id = model.id,
+            code = model.code,
+            currencyCode = model.ccy,
+            nominal = model.nominal,
+            rate = model.rate,
+            difference = model.diff,
+            date = model.date,
+            currencyNameUZ = model.ccyName,
+            currencyNameUZC = model.ccyName,
+            currencyNameEN = model.ccyName,
+            currencyNameRU = model.ccyName
+        )
     }
 
     override fun mapFromEntity(entity: CBUDto): CBUModel {
@@ -23,11 +35,13 @@ class CBUMapper @Inject constructor() : Mapper<CBUModel, CBUDto> {
             diff = entity.difference,
             date = entity.date,
             ccyName = when (Locale.getDefault().language) {
-                "uz" -> entity.currencyNameUZ
-                "cr" -> entity.currencyNameUZC
+                "uz" -> {
+                    val script = Locale.getDefault().script
+                    if (script == "Cyrl") entity.currencyNameUZC else entity.currencyNameUZ
+                }
                 "en" -> entity.currencyNameEN
                 "ru" -> entity.currencyNameRU
-                else -> ""
+                else -> entity.currencyNameUZ
             }
         )
     }
