@@ -16,8 +16,8 @@ android {
         applicationId = "uz.toshmatov.currency"
         minSdk = 21
         targetSdk = 36
-        versionCode = 11
-        versionName = "1.0.2"
+        versionCode = 13
+        versionName = "1.0.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -90,6 +90,11 @@ android {
         kotlinCompilerExtensionVersion = "1.5.3"
     }
     packaging {
+        // AGP 8.3.x + Play 16 KB page size requirement:
+        // package .so as compressed to avoid 4K zip-alignment issue in bundles.
+        jniLibs {
+            useLegacyPackaging = true
+        }
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
