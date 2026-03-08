@@ -4,24 +4,30 @@ package uz.toshmatov.currency.presentation.main.tabscreen.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.hilt.getViewModel
@@ -35,8 +41,8 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import uz.toshmatov.currency.core.theme.CurrencyColors
 import uz.toshmatov.currency.core.theme.CurrencyTypography
-import uz.toshmatov.currency.core.uicompoenent.ShimmedList
 import uz.toshmatov.currency.core.utils.drawable
+import uz.toshmatov.currency.core.uicompoenent.ShimmedList
 import uz.toshmatov.currency.core.utils.resource
 import uz.toshmatov.currency.core.utils.string
 import uz.toshmatov.currency.presentation.empty.EmptyScreen
@@ -51,8 +57,7 @@ object HomeScreen : Tab {
 
     override val options: TabOptions
         @Composable get() {
-            val icon =
-                rememberVectorPainter(ImageVector.vectorResource(id = drawable.ic_tab_home))
+            val icon = painterResource(id = drawable.ic_tab_home)
             val title = string.tab_home.resource
 
             return remember {
@@ -77,8 +82,12 @@ object HomeScreen : Tab {
             state = swipeRefreshState,
             onRefresh = { viewModel.refresh() }
         ) {
+            val isOffline = internetConnection.value == NetworkConnectionState.LOST ||
+                internetConnection.value == NetworkConnectionState.Unavailable ||
+                internetConnection.value == NetworkConnectionState.LOSING
+
             when {
-                state.isLoading -> ShimmedList()
+                state.isLoading && state.cbuList.isEmpty() -> ShimmedList()
                 state.error.isNotEmpty() && state.cbuList.isEmpty() -> {
                     Box(
                         modifier = Modifier
@@ -93,10 +102,7 @@ object HomeScreen : Tab {
                         )
                     }
                 }
-                (internetConnection.value == NetworkConnectionState.LOST ||
-                    internetConnection.value == NetworkConnectionState.Unavailable ||
-                    internetConnection.value == NetworkConnectionState.LOSING) &&
-                    state.isEmptyCbuList -> {
+                isOffline && state.isEmptyCbuList -> {
                     EmptyScreen(string.empty.resource)
                 }
                 else -> {
@@ -108,6 +114,8 @@ object HomeScreen : Tab {
                         itemClick = { codeName, code, rate ->
                             currentNavigator.push(ConverterScreen(codeName, code, rate))
                         },
+                        showOfflineStaleWarning = isOffline && state.isDataStale && state.cbuList.isNotEmpty(),
+                        onRefreshData = viewModel::refresh
                     )
                 }
             }
@@ -121,6 +129,8 @@ private fun HomeScreenContent(
     state: HomeState,
     onClickSeeAll: () -> Unit = {},
     itemClick: (codeName: String, code: String, rate: String) -> Unit,
+    showOfflineStaleWarning: Boolean = false,
+    onRefreshData: () -> Unit = {},
 ) {
     LazyColumn(
         modifier = modifier
@@ -134,8 +144,14 @@ private fun HomeScreenContent(
         stickyHeader(key = "CBU") {
             HomeHeader(
                 title = string.home_cbu.resource,
-                onClick = { onClickSeeAll() }
+                onClick = { onClickSeeAll() },
+                isDataStale = state.isDataStale
             )
+        }
+        if (showOfflineStaleWarning) {
+            item(key = "stale_warning") {
+                StaleDataWarningCard(onRefreshData = onRefreshData)
+            }
         }
         items(
             items = state.cbuList,
@@ -145,6 +161,7 @@ private fun HomeScreenContent(
         ) { cbuModel ->
             CBUCurrencyItems(
                 cbuModel = cbuModel,
+                isDataStale = state.isDataStale,
                 cbuItemClick = {
                     itemClick(cbuModel.ccyName, cbuModel.ccy, cbuModel.rate)
                 }
@@ -152,6 +169,56 @@ private fun HomeScreenContent(
         }
         item {
             Spacer(Modifier.height(80.dp))
+        }
+    }
+}
+
+@Composable
+private fun StaleDataWarningCard(
+    onRefreshData: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val isDarkTheme = CurrencyColors.background.luminance() < 0.5f
+
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 6.dp),
+        shape = RoundedCornerShape(12.dp),
+        border = BorderStroke(
+            width = if (isDarkTheme) 1.dp else 0.8.dp,
+            color = CurrencyColors.error.copy(alpha = if (isDarkTheme) 0.45f else 0.25f)
+        ),
+        colors = CardDefaults.cardColors(
+            containerColor = CurrencyColors.error.copy(alpha = if (isDarkTheme) 0.16f else 0.08f)
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp)
+        ) {
+            Text(
+                text = string.home_stale_title.resource,
+                color = CurrencyColors.text,
+                style = CurrencyTypography.textSemiBold
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = string.home_stale_offline_message.resource,
+                color = CurrencyColors.textSecondary,
+                style = CurrencyTypography.captionRegular
+            )
+            androidx.compose.material3.TextButton(
+                onClick = onRefreshData,
+                modifier = Modifier.padding(top = 4.dp)
+            ) {
+                Text(
+                    text = string.home_stale_refresh.resource,
+                    color = CurrencyColors.button,
+                    style = CurrencyTypography.textSemiBold
+                )
+            }
         }
     }
 }

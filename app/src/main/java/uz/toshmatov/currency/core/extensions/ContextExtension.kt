@@ -1,9 +1,11 @@
 package uz.toshmatov.currency.core.extensions
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
+import androidx.core.net.toUri
 
 
 fun Context.openEmail() {
@@ -28,6 +30,24 @@ fun Context.openShareAppLink() {
 
     val shareIntent = Intent.createChooser(sendIntent, null)
     this.startActivity(shareIntent)
+}
+
+fun Context.openRateAppPage() {
+    val packageName = this.packageName
+    val marketIntent = Intent(
+        Intent.ACTION_VIEW,
+        "market://details?id=uz.toshmatov.currency".toUri()
+    )
+
+    try {
+        this.startActivity(marketIntent)
+    } catch (_: ActivityNotFoundException) {
+        val webIntent = Intent(
+            Intent.ACTION_VIEW,
+            "https://play.google.com/store/apps/details?id=uz.toshmatov.currency".toUri()
+        )
+        this.startActivity(webIntent)
+    }
 }
 
 fun Context.makeToast(log: CharSequence) {

@@ -4,6 +4,7 @@ import androidx.room.withTransaction
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
@@ -36,6 +37,10 @@ class CBURepositoryImpl @Inject constructor(
     private val database: CurrencyDatabase
 ) : CBURepository {
 
+    companion object {
+        private const val DATA_FRESHNESS_WINDOW_MILLIS = 6 * 60 * 60 * 1000L
+    }
+
     override fun getCBUCurrencyList(): Flow<List<CBUModel>> {
         val lastUpdate = prefs.get(PrefKeys.CBU_DATE_KEY, 0L)
         return if (isLocalDataUpToDate(lastUpdate)) {
@@ -48,7 +53,7 @@ class CBURepositoryImpl @Inject constructor(
     override fun getCurrencyList(): Flow<Resource<List<CBUModel>>> =
         flow {
             emit(loading())
-            val lastUpdate = prefs.get(PrefKeys.CBU_DATE_KEY, 0L)
+            val lastUpdate = getLastUpdateTimestamp()
             val response = if (isLocalDataUpToDate(lastUpdate)) {
                 getLocalCBUCurrencyList()
             } else {
@@ -61,8 +66,17 @@ class CBURepositoryImpl @Inject constructor(
             emit(errorData(it.message))
         }
 
-    private fun isLocalDataUpToDate(lastUpdate: Long) =
-        System.currentTimeMillis() - lastUpdate < 6 * 60 * 60 * 1000
+    override fun getLastUpdateTimestamp(): Long {
+        return prefs.get(PrefKeys.CBU_DATE_KEY, 0L)
+    }
+
+    override fun isLocalDataStale(): Boolean {
+        return !isLocalDataUpToDate(getLastUpdateTimestamp())
+    }
+
+    private fun isLocalDataUpToDate(lastUpdate: Long): Boolean {
+        return System.currentTimeMillis() - lastUpdate < DATA_FRESHNESS_WINDOW_MILLIS
+    }
 
     private fun getLocalCBUCurrencyList(): Flow<List<CBUModel>> {
         return cbuDao.getCBUDataList()
@@ -82,6 +96,7 @@ class CBURepositoryImpl @Inject constructor(
                 cbuDtoList.map(cbuMapper::mapFromEntity)
             }.catch {
                 logError { "getRemoteCBUCurrencyList: ${it.message}" }
+                emitAll(getLocalCBUCurrencyList())
             }.flowOn(Dispatchers.IO)
     }
 

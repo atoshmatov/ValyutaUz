@@ -9,6 +9,7 @@ import javax.inject.Inject
 class DataStoreRepositoryImpl @Inject constructor(
     private val dataStore: AppDataStore
 ) : DataStoreRepository {
+
     override fun getThemeMode(): Flow<ThemeMode> {
         return dataStore.getThemeMode()
     }
@@ -23,5 +24,29 @@ class DataStoreRepositoryImpl @Inject constructor(
 
     override suspend fun setCBUData(data: String) {
         dataStore.setCBUData(data)
+    }
+
+    override fun getSelectedWidgetCodes(): Flow<Set<String>> {
+        return dataStore.getSelectedWidgetCodes()
+    }
+
+    override suspend fun setSelectedWidgetCodes(codes: Set<String>) {
+        dataStore.setSelectedWidgetCodes(codes)
+    }
+
+    override fun getDailyNotificationEnabled(): Flow<Boolean> {
+        return dataStore.getDailyNotificationEnabled()
+    }
+
+    override suspend fun setDailyNotificationEnabled(enabled: Boolean) {
+        dataStore.setDailyNotificationEnabled(enabled)
+    }
+
+    override fun getDailyNotificationTime(): Flow<String> {
+        return dataStore.getDailyNotificationTime()
+    }
+
+    override suspend fun setDailyNotificationTime(time: String) {
+        dataStore.setDailyNotificationTime(time)
     }
 }

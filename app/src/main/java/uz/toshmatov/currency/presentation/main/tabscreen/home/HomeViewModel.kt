@@ -24,24 +24,30 @@ class HomeViewModel @Inject constructor(
     private val cbuRepository: CBURepository,
     private val storeRepository: DataStoreRepository,
 ) : ViewModel() {
+    companion object {
+        private var hasLoadedOnce: Boolean = false
+    }
 
     private val _state: MutableStateFlow<HomeState> = MutableStateFlow(HomeState())
     val state: StateFlow<HomeState> = _state.asStateFlow()
 
     init {
-        getCBUCurrencyList()
+        getCBUCurrencyList(showLoading = !hasLoadedOnce)
         getCBUData()
+        updateFreshnessState()
     }
 
     fun refresh() {
-        getCBUCurrencyList()
+        getCBUCurrencyList(showLoading = true)
     }
 
-    private fun getCBUCurrencyList() {
+    private fun getCBUCurrencyList(showLoading: Boolean) {
         cbuRepository.getCBUCurrencyList()
             .onStart {
-                _state.update { homeState ->
-                    homeState.copy(isLoading = true)
+                if (showLoading) {
+                    _state.update { homeState ->
+                        homeState.copy(isLoading = true)
+                    }
                 }
             }.catch {
                 _state.update { homeState ->
@@ -50,6 +56,8 @@ class HomeViewModel @Inject constructor(
                         isLoading = false
                     )
                 }
+                hasLoadedOnce = false
+                updateFreshnessState()
                 logError { it.localizedMessage ?: "" }
             }.onEach { cbuModel ->
                 _state.update { homeState ->
@@ -60,6 +68,8 @@ class HomeViewModel @Inject constructor(
                         error = ""
                     )
                 }
+                updateFreshnessState()
+                hasLoadedOnce = cbuModel.isNotEmpty()
                 cbuModel.forEach {
                     if (it.ccy == "USD") setCbuData(it.rate)
                 }
@@ -79,5 +89,16 @@ class HomeViewModel @Inject constructor(
                     homeState.copy(cbuData = cbu)
                 }
             }.launchIn(viewModelScope)
+    }
+
+    private fun updateFreshnessState() {
+        val timestamp = cbuRepository.getLastUpdateTimestamp()
+        val isStale = cbuRepository.isLocalDataStale()
+        _state.update { homeState ->
+            homeState.copy(
+                lastUpdateTimestamp = timestamp,
+                isDataStale = isStale
+            )
+        }
     }
 }

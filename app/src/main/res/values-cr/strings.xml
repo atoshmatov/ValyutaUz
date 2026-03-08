@@ -9,6 +9,10 @@
   <string name="tab_home">Асосий</string>
   <string name="tab_converter">Конвертер</string>
   <string name="tab_setting">Созламалар</string>
+  <string name="converter_from">Сиз берасиз</string>
+  <string name="converter_to">Сиз оласиз</string>
+  <string name="converter_enter_amount">Микдорни киритинг</string>
+  <string name="converter_select_currency">Валютани танланг</string>
 
   // settings text
   <string name="settings_language">Илова Тили</string>
@@ -20,6 +24,12 @@
   <string name="settings_contact">Биз билан боғланинг</string>
   <string name="settings_rate">Иловани баҳоланг</string>
   <string name="settings_share">Иловани улашинг</string>
+  <string name="settings_daily_updates">Кунлик янгиланишлар</string>
+  <string name="settings_daily_notification">Кунлик билдиришнома</string>
+  <string name="settings_daily_notification_desc">Ҳар куни танланган валюта маълумотларини олинг</string>
+  <string name="settings_notify_time">Билдиришнома вақти</string>
+  <string name="settings_select_currencies">Виджет учун валюталарни танланг</string>
+  <string name="settings_selected_count">Танланганлар: %1$d</string>
 
   // language text
   <string name="settings_info_title">\"Валюта УЗ\" — бу Узбекистон миллий валютаси со’мнинг халькаро валюталарга нисбатан курсларини реал вакт режимида кориш имкониятини берувчи илова.</string>
@@ -38,5 +48,17 @@
   <string name="home_all_item">Хаммаси</string>
   <string name="version">версия</string>
   <string name="home_search">кидириш</string>
+  <string name="home_stale_title">Маълумотлар эскирган</string>
+  <string name="home_stale_chip">Эскирган</string>
+  <string name="home_stale_offline_message">Интернетни ёқинг ёки Wi-Fi га уланиб маълумотларни янгиланг.</string>
+  <string name="home_stale_refresh">Янгилаш</string>
   <string name="empty">Ҳозирда валюта курслари мавжуд эмас.\nМаълумотларни кўриш учун интернетга уланиб қайта уриниб кўринг.</string>
+  <string name="widget_loading">Юкланмоқда...</string>
+  <string name="widget_no_data">Маълумот йўқ</string>
+  <string name="widget_empty_selection">Созламаларда валюта танланг</string>
+  <string name="widget_more_count">+яна %1$d та</string>
+  <string name="widget_description">Танланган валюталарнинг кунлик курслари</string>
+  <string name="common_save">Сақлаш</string>
+  <string name="common_cancel">Бекор қилиш</string>
+  <string name="notification_title_daily">Кунлик валюта янгиланиши</string>
 </resources>

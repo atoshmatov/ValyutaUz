@@ -5,11 +5,23 @@ import uz.toshmatov.currency.data.local.model.ThemeMode
 
 interface DataStoreRepository {
 
-    fun getThemeMode():Flow<ThemeMode>
+    fun getThemeMode(): Flow<ThemeMode>
 
     suspend fun setThemeMode(themeMode: ThemeMode)
 
     fun getCBUData(): Flow<String>
 
     suspend fun setCBUData(data: String)
+
+    fun getSelectedWidgetCodes(): Flow<Set<String>>
+
+    suspend fun setSelectedWidgetCodes(codes: Set<String>)
+
+    fun getDailyNotificationEnabled(): Flow<Boolean>
+
+    suspend fun setDailyNotificationEnabled(enabled: Boolean)
+
+    fun getDailyNotificationTime(): Flow<String>
+
+    suspend fun setDailyNotificationTime(time: String)
 }

@@ -129,6 +129,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.material3)
+    implementation("androidx.compose.material:material-icons-extended")
     implementation(libs.androidx.ui)
 
     // test
@@ -142,7 +143,10 @@ dependencies {
 
     // hilt
     implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.work)
     ksp(libs.hilt.compiler)
+    ksp(libs.androidx.hilt.compiler)
+
 
     // kotlin coroutines
     implementation(libs.kotlinx.coroutines.core)
@@ -199,4 +203,7 @@ dependencies {
     // datastore
     implementation(libs.androidx.dataStore.preferences)
     implementation(libs.androidx.dataStore.core)
+
+    // work manager
+    implementation(libs.androidx.work.runtime.ktx)
 }

@@ -6,16 +6,14 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.ime
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -92,7 +90,8 @@ fun CBUScreen(
         modifier = modifier
             .fillMaxSize()
             .background(CurrencyColors.background)
-            .statusBarsPadding(),
+            .statusBarsPadding()
+            .navigationBarsPadding(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start,
     ) {
@@ -127,7 +126,7 @@ fun CBUScreen(
             )
         }
         item {
-            Spacer(Modifier.height(56.dp))
+            Spacer(Modifier.height(CurrencyDimensions.medium))
         }
     }
 }
