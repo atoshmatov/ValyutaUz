@@ -35,9 +35,21 @@ Ilova **O‘zbekiston Markaziy Banki** API dan foydalanadi:
 
 ## 📌 Ekran rasmlari
 
-| Asosiy ekran | Internet yo'q bo'lsa |
-|-------------|----------------|
-| ![Main Screen](image/screen_2.jpg) | ![Sozlamalr](image/screen_1.jpg) |
+| Home | Settings |
+|---|---|
+| ![Home](image/screenshots/v2_0_0/01_home.png) | ![Settings](image/screenshots/v2_0_0/02_settings.png) |
+
+| Language | Theme |
+|---|---|
+| ![Language](image/screenshots/v2_0_0/03_language.png) | ![Theme](image/screenshots/v2_0_0/04_theme.png) |
+
+| Daily Updates | Info |
+|---|---|
+| ![Daily Updates](image/screenshots/v2_0_0/05_daily_updates.png) | ![Info](image/screenshots/v2_0_0/06_info.png) |
+
+| Detail | Converter |
+|---|---|
+| ![Detail](image/screenshots/v2_0_0/07_detail.png) | ![Converter](image/screenshots/v2_0_0/08_converter.png) |
 
 ## 📥 Yuklab olish
 
@@ -49,4 +61,3 @@ Ilova **O‘zbekiston Markaziy Banki** API dan foydalanadi:
 ---
 
 **📩 Aloqa:** Taklif yoki muammolar bo‘lsa, GitHub Issues orqali xabar bering yoki a.toshmatov.dev@gmail.com.
-
