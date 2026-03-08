@@ -1,9 +1,10 @@
 [versions]
 # android
 agp = "8.3.2"
-gmsPlugin = "4.4.1"
+gmsPlugin = "4.4.2"
 
 # Linters
+hiltCompiler = "1.2.0"
 ktlint = "12.1.0"
 
 # ksp
@@ -13,10 +14,10 @@ ksp = "1.9.10-1.0.13"
 kotlin = "1.9.10"
 
 # androidx core
-coreKtx = "1.13.0"
+coreKtx = "1.15.0"
 
 # androidx fragment & lifecycle
-androidxLifecycle = "2.7.0"
+androidxLifecycle = "2.8.7"
 
 # test
 espressoCore = "3.5.1"
@@ -24,7 +25,7 @@ junitVersion = "1.1.5"
 junit = "4.13.2"
 
 # compose
-activityCompose = "1.9.0"
+activityCompose = "1.9.3"
 composeBom = "2024.04.01"
 
 # constraint layout
@@ -34,7 +35,7 @@ constraintLayout = "1.1.0"
 voyagerVersion = "1.0.0-rc09"
 
 # coil
-coil = "2.6.0"
+coil = "2.7.0"
 
 # lottie
 lottie = "4.0.0"
@@ -56,13 +57,13 @@ room_version = "2.6.1"
 hilt = "2.48.1"
 
 # kotlin coroutine
-kotlinxCoroutinesCore = "1.7.3"
+kotlinxCoroutinesCore = "1.8.1"
 
 # immutable
-kotlinxCollectionsImmutable = "0.3.7"
+kotlinxCollectionsImmutable = "0.3.8"
 
 # serialization
-kotlinxSerializationJson = "1.6.3"
+kotlinxSerializationJson = "1.7.3"
 
 # accompanist
 accompanist = "0.34.0"
@@ -85,13 +86,17 @@ lingver = "1.3.0"
 androidxDataStore = "1.1.1"
 
 # app widget glance
-glance = "1.1.0"
+glance = "1.1.1"
+
+# work manager
+androidxWork = "2.10.0"
 
 [libraries]
 # androidx core
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 
 # androidx lifecycle
+
 androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "androidxLifecycle" }
@@ -154,6 +159,8 @@ room-paging = { group = "androidx.room", name = "room-paging", version.ref = "ro
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room_version" }
 
 # dagger hilt
+androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompiler" }
+androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltCompiler" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 
@@ -176,6 +183,7 @@ androidx-pager = { group = "androidx.paging", name = "paging-runtime-ktx", versi
 
 # chucker
 chucker = { group = "com.github.chuckerteam.chucker", name = "library", version.ref = "chucker" }
+chucker-no-op = { group = "com.github.chuckerteam.chucker", name = "library-no-op", version.ref = "chucker" }
 
 # timber
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
@@ -191,6 +199,9 @@ androidx-dataStore-preferences = { group = "androidx.datastore", name = "datasto
 androidx-appwidget-glance = { group = "androidx.glance", name = "glance-appwidget", version.ref = "glance" }
 androidx-appwidget-glance-material3 = { group = "androidx.glance", name = "glance-material3", version.ref = "glance" }
 androidx-appwidget-glance-material = { group = "androidx.glance", name = "glance-material", version.ref = "glance" }
+
+# work manager
+androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "androidxWork" }
 
 [plugins]
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

@@ -17,12 +17,14 @@ import uz.toshmatov.currency.data.remote.api.CBUApiService
 import uz.toshmatov.currency.data.remote.retrofit.adapter.CoroutineCallAdapterFactory
 import uz.toshmatov.currency.data.remote.retrofit.adapter.FlowCallAdapterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
     @Provides
+    @Singleton
     fun provideOkHttp(): OkHttpClient {
         return OkHttpClient.Builder()
             .retryOnConnectionFailure(true)
@@ -35,6 +37,7 @@ object NetworkModule {
     }
 
     @Provides
+    @Singleton
     fun provideRetrofitCbu(okHttpClient: OkHttpClient): Retrofit {
         val gson = GsonBuilder()
             .setLenient()
@@ -49,18 +52,19 @@ object NetworkModule {
     }
 
     @Provides
-    fun providesCBUService(
-        retrofit: Retrofit,
-    ): CBUApiService {
+    @Singleton
+    fun providesCBUService(retrofit: Retrofit): CBUApiService {
         return retrofit.create(CBUApiService::class.java)
     }
 
     @Provides
+    @Singleton
     fun providesContext(application: Application): Context {
         return application.applicationContext
     }
 
     @Provides
+    @Singleton
     fun providePrefs(context: Context): Prefs {
         return Prefs(context)
     }

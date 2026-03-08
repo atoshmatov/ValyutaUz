@@ -1,44 +1,74 @@
 package uz.toshmatov.currency.presentation.main.screen.converter.component
 
-import android.annotation.SuppressLint
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.luminance
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import uz.toshmatov.currency.core.theme.CurrencyColors
 import uz.toshmatov.currency.core.theme.CurrencyDimensions
 import uz.toshmatov.currency.core.theme.CurrencyTypography
 
-@SuppressLint("MutableCollectionMutableState")
+sealed interface NumberKeyboardAction {
+    data class Digit(val value: String) : NumberKeyboardAction
+    data object Decimal : NumberKeyboardAction
+    data object Backspace : NumberKeyboardAction
+    data object ClearAll : NumberKeyboardAction
+}
+
+private data class NumberKeyboardKey(
+    val label: String,
+    val action: NumberKeyboardAction,
+    val longPressAction: NumberKeyboardAction? = null,
+)
+
+private val keyboardKeys = listOf(
+    NumberKeyboardKey(label = "1", action = NumberKeyboardAction.Digit("1")),
+    NumberKeyboardKey(label = "2", action = NumberKeyboardAction.Digit("2")),
+    NumberKeyboardKey(label = "3", action = NumberKeyboardAction.Digit("3")),
+    NumberKeyboardKey(label = "4", action = NumberKeyboardAction.Digit("4")),
+    NumberKeyboardKey(label = "5", action = NumberKeyboardAction.Digit("5")),
+    NumberKeyboardKey(label = "6", action = NumberKeyboardAction.Digit("6")),
+    NumberKeyboardKey(label = "7", action = NumberKeyboardAction.Digit("7")),
+    NumberKeyboardKey(label = "8", action = NumberKeyboardAction.Digit("8")),
+    NumberKeyboardKey(label = "9", action = NumberKeyboardAction.Digit("9")),
+    NumberKeyboardKey(label = ".", action = NumberKeyboardAction.Decimal),
+    NumberKeyboardKey(label = "0", action = NumberKeyboardAction.Digit("0")),
+    NumberKeyboardKey(
+        label = "C",
+        action = NumberKeyboardAction.Backspace,
+        longPressAction = NumberKeyboardAction.ClearAll
+    )
+)
+
 @Composable
+@OptIn(ExperimentalFoundationApi::class)
 fun NumberGridItem(
     modifier: Modifier = Modifier,
-    numberClick: (String) -> Unit
+    keyHeight: Dp = 80.dp,
+    onAction: (NumberKeyboardAction) -> Unit
 ) {
-    val numbers = remember {
-        listOf(
-            "1", "2", "3",
-            "4", "5", "6",
-            "7", "8", "9",
-            ".", "0", "C"
-        )
-    }
-
-    val number = remember { mutableStateListOf("0") }
+    val isDarkTheme = CurrencyColors.background.luminance() < 0.5f
 
     LazyVerticalStaggeredGrid(
         modifier = modifier
@@ -49,61 +79,41 @@ fun NumberGridItem(
         verticalItemSpacing = CurrencyDimensions.extraSmall
     ) {
         items(12) {
-            Box(
+            val keyboardKey = keyboardKeys[it]
+            val shape = RoundedCornerShape(CurrencyDimensions.medium)
+            Card(
                 modifier = Modifier
-                    .height(80.dp)
-                    .clip(RoundedCornerShape(CurrencyDimensions.small))
-                    .background(CurrencyColors.bottomBar)
-                    .clickable {
-                        when (numbers[it]) {
-                            "C" -> {
-                                if (number.size > 1) {
-                                    number.removeAt(number.size - 1)
-                                } else if (number.size == 1) {
-                                    number[0] = "0"
-                                }
-                            }
-
-                            "." -> {
-                                if (number.none { it == "." } && number.size < 10) {
-                                    number.add(".")
-                                }
-                            }
-
-                            "0" -> {
-                                if (number.size == 1 && number[0] == "0") {
-                                    // TODO: no action
-                                } else if (number.isEmpty()) {
-                                    number.add("0")
-                                    number.add(".")
-                                } else if (number.size < 10) {
-                                    number.add("0")
-                                }
-                            }
-
-                            else -> {
-                                if (number.size == 1 && number[0] == "0") {
-                                    number[0] = numbers[it]
-                                } else if (number.size < 10) {
-                                    number.add(numbers[it])
-                                }
-                            }
+                    .height(keyHeight)
+                    .clip(shape)
+                    .combinedClickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = rememberRipple(),
+                        onClick = { onAction(keyboardKey.action) },
+                        onLongClick = keyboardKey.longPressAction?.let { action ->
+                            { onAction(action) }
                         }
-                        number
-                            .toList()
-                            .joinToString("")
-                            .let { number ->
-                                numberClick(number)
-                            }
+                    ),
+                shape = shape,
+                border = BorderStroke(
+                    width = if (isDarkTheme) 1.dp else 0.8.dp,
+                    color = if (isDarkTheme) {
+                        CurrencyColors.textSecondary.copy(alpha = 0.2f)
+                    } else {
+                        CurrencyColors.textSecondary.copy(alpha = 0.12f)
                     }
+                ),
+                colors = CardDefaults.cardColors(containerColor = CurrencyColors.bottomBar)
             ) {
-                Text(
-                    modifier = Modifier
-                        .align(Alignment.Center),
-                    text = numbers[it],
-                    color = CurrencyColors.text,
-                    style = CurrencyTypography.buttonCalculator
-                )
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = keyboardKey.label,
+                        color = CurrencyColors.text,
+                        style = CurrencyTypography.buttonCalculator
+                    )
+                }
             }
         }
     }

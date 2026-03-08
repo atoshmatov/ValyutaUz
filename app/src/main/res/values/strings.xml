@@ -8,6 +8,10 @@
   <string name="tab_home">Main</string>
   <string name="tab_converter">Converter</string>
   <string name="tab_setting">Settings</string>
+  <string name="converter_from">You send</string>
+  <string name="converter_to">You get</string>
+  <string name="converter_enter_amount">Enter amount</string>
+  <string name="converter_select_currency">Select currency</string>
 
   // settings text
   <string name="settings_language">Language</string>
@@ -19,6 +23,12 @@
   <string name="settings_contact">Contact Us</string>
   <string name="settings_rate">App Rate</string>
   <string name="settings_share">Share App</string>
+  <string name="settings_daily_updates">Daily updates</string>
+  <string name="settings_daily_notification">Daily notification</string>
+  <string name="settings_daily_notification_desc">Get selected currency info every day</string>
+  <string name="settings_notify_time">Notification time</string>
+  <string name="settings_select_currencies">Select currencies for widget</string>
+  <string name="settings_selected_count">Selected: %1$d</string>
   <string name="version">version</string>
   <string name="settings_info_title">\"Valyuta UZ\" is an application that allows you to see real-time exchange rates of the national currency of Uzbekistan, the soum, against international currencies.</string>
 
@@ -37,6 +47,18 @@
   <string name="home_update_date">Update date</string>
   <string name="home_all_item">See all</string>
   <string name="home_search">search</string>
+  <string name="home_stale_title">Data is outdated</string>
+  <string name="home_stale_chip">Outdated</string>
+  <string name="home_stale_offline_message">Turn on mobile data or connect to Wi-Fi and refresh rates.</string>
+  <string name="home_stale_refresh">Refresh</string>
 
   <string name="empty">Currency rates are currently unavailable.\nPlease connect to the internet and try again.</string>
+  <string name="widget_loading">Loading...</string>
+  <string name="widget_no_data">No data</string>
+  <string name="widget_empty_selection">Select currencies in Settings</string>
+  <string name="widget_more_count">+%1$d more</string>
+  <string name="widget_description">Daily selected currency rates</string>
+  <string name="common_save">Save</string>
+  <string name="common_cancel">Cancel</string>
+  <string name="notification_title_daily">Daily currency update</string>
 </resources>

@@ -9,6 +9,10 @@
   <string name="tab_home">Asosiy</string>
   <string name="tab_converter">Konverter</string>
   <string name="tab_setting">Sozlamalar</string>
+  <string name="converter_from">Siz berasiz</string>
+  <string name="converter_to">Siz olasiz</string>
+  <string name="converter_enter_amount">Miqdorni kiriting</string>
+  <string name="converter_select_currency">Valyutani tanlang</string>
 
   // settings text
   <string name="settings_language">Ilova Tili</string>
@@ -20,6 +24,12 @@
   <string name="settings_contact">Biz bilan bog‘laning</string>
   <string name="settings_rate">Ilovani baholang</string>
   <string name="settings_share">Ilovani ulashing</string>
+  <string name="settings_daily_updates">Kunlik yangilanishlar</string>
+  <string name="settings_daily_notification">Kunlik bildirishnoma</string>
+  <string name="settings_daily_notification_desc">Har kuni tanlangan valyuta ma\'lumotlarini oling</string>
+  <string name="settings_notify_time">Bildirishnoma vaqti</string>
+  <string name="settings_select_currencies">Widget uchun valyutalarni tanlang</string>
+  <string name="settings_selected_count">Tanlanganlar: %1$d</string>
 
   // language text
   <string name="settings_info_title">\"Valyuta UZ\" — bu O‘zbekiston milliy valyutasi so‘mning xalqaro valyutalarga nisbatan kurslarini real vaqt rejimida ko‘rish imkoniyatini beruvchi ilova.</string>
@@ -38,5 +48,17 @@
   <string name="home_all_item">Ko‘proq</string>
   <string name="version">versiya</string>
   <string name="home_search">qidirish</string>
+  <string name="home_stale_title">Ma\'lumotlar eskirgan</string>
+  <string name="home_stale_chip">Eskirgan</string>
+  <string name="home_stale_offline_message">Internetni yoqing yoki Wi-Fi ga ulanib ma\'lumotlarni yangilang.</string>
+  <string name="home_stale_refresh">Yangilash</string>
   <string name="empty">Hozirda valyuta kurslari mavjud emas.\nMa\'lumotlarni ko\'rish uchun internetga ulanib qayta urinib ko\'ring.</string>
+  <string name="widget_loading">Yuklanmoqda...</string>
+  <string name="widget_no_data">Ma\'lumot yo\'q</string>
+  <string name="widget_empty_selection">Sozlamalarda valyuta tanlang</string>
+  <string name="widget_more_count">+%1$d ta ko‘proq</string>
+  <string name="widget_description">Tanlangan valyutalarning kunlik kurslari</string>
+  <string name="common_save">Saqlash</string>
+  <string name="common_cancel">Bekor qilish</string>
+  <string name="notification_title_daily">Kunlik valyuta yangilanishi</string>
 </resources>

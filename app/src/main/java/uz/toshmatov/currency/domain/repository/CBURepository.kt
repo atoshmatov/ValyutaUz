@@ -9,4 +9,8 @@ interface CBURepository {
     fun getCBUCurrencyList(): Flow<List<CBUModel>>
 
     fun getCurrencyList(): Flow<Resource<List<CBUModel>>>
+
+    fun getLastUpdateTimestamp(): Long
+
+    fun isLocalDataStale(): Boolean
 }

@@ -9,6 +9,10 @@
   <string name="tab_home">Основной</string>
   <string name="tab_converter">Конвертер</string>
   <string name="tab_setting">Настройки</string>
+  <string name="converter_from">Вы отдаете</string>
+  <string name="converter_to">Вы получаете</string>
+  <string name="converter_enter_amount">Введите сумму</string>
+  <string name="converter_select_currency">Выберите валюту</string>
 
   // settings text
   <string name="settings_language">Язык</string>
@@ -20,6 +24,12 @@
   <string name="settings_contact">Свяжитесь с нами</string>
   <string name="settings_rate">Оценить приложение</string>
   <string name="settings_share">Поделиться приложением</string>
+  <string name="settings_daily_updates">Ежедневные обновления</string>
+  <string name="settings_daily_notification">Ежедневное уведомление</string>
+  <string name="settings_daily_notification_desc">Получайте данные по выбранным валютам каждый день</string>
+  <string name="settings_notify_time">Время уведомления</string>
+  <string name="settings_select_currencies">Выберите валюты для виджета</string>
+  <string name="settings_selected_count">Выбрано: %1$d</string>
 
   // language text
   <string name="settings_info_title">\"Валюта УЗ\" — приложение, которое позволяет в режиме реального времени видеть курсы национальной валюты Узбекистана, сума, по отношению к международным валютам.</string>
@@ -38,5 +48,17 @@
   <string name="home_all_item">Все</string>
   <string name="version">версия</string>
   <string name="home_search">поиск</string>
+  <string name="home_stale_title">Данные устарели</string>
+  <string name="home_stale_chip">Устарело</string>
+  <string name="home_stale_offline_message">Включите интернет или подключитесь к Wi-Fi и обновите данные.</string>
+  <string name="home_stale_refresh">Обновить</string>
   <string name="empty">Курсы валют в данный момент недоступны.\nПодключитесь к интернету и попробуйте снова.</string>
+  <string name="widget_loading">Загрузка...</string>
+  <string name="widget_no_data">Нет данных</string>
+  <string name="widget_empty_selection">Выберите валюты в Настройках</string>
+  <string name="widget_more_count">+ещё %1$d</string>
+  <string name="widget_description">Ежедневные курсы выбранных валют</string>
+  <string name="common_save">Сохранить</string>
+  <string name="common_cancel">Отмена</string>
+  <string name="notification_title_daily">Ежедневное обновление валют</string>
 </resources>

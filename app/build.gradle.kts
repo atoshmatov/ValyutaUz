@@ -119,7 +119,6 @@ dependencies {
     // androidx lifecycle
     implementation(libs.androidx.lifecycle.viewModelCompose)
     implementation(libs.androidx.lifecycle.runtimeCompose)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
     // androidx compose
@@ -130,6 +129,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.material3)
+    implementation("androidx.compose.material:material-icons-extended")
     implementation(libs.androidx.ui)
 
     // test
@@ -143,7 +143,10 @@ dependencies {
 
     // hilt
     implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.work)
     ksp(libs.hilt.compiler)
+    ksp(libs.androidx.hilt.compiler)
+
 
     // kotlin coroutines
     implementation(libs.kotlinx.coroutines.core)
@@ -153,10 +156,6 @@ dependencies {
 
     // kotlin serialization
     implementation(libs.kotlinx.serialization.json)
-
-    // paging
-    implementation(libs.androidx.pager.compose)
-    implementation(libs.androidx.pager)
 
     // voyager
     implementation(libs.voyager.bottomsheet)
@@ -170,7 +169,6 @@ dependencies {
     implementation(libs.okhttp)
 
     // retrofit
-    implementation(libs.retrofit.kotlin.serialization)
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.gson)
 
@@ -178,8 +176,6 @@ dependencies {
     implementation(libs.gson)
 
     // room_database
-    annotationProcessor(libs.room.ksp.compiler)
-    implementation(libs.room.paging)
     implementation(libs.room.ktx)
     implementation(libs.room)
     ksp(libs.room.ksp.compiler)
@@ -194,7 +190,8 @@ dependencies {
     implementation(libs.timber)
 
     // chucker
-    implementation(libs.chucker)
+    debugImplementation(libs.chucker)
+    releaseImplementation(libs.chucker.no.op)
 
     // system ui
     implementation(libs.accompanist.swiperefresh)
@@ -207,8 +204,6 @@ dependencies {
     implementation(libs.androidx.dataStore.preferences)
     implementation(libs.androidx.dataStore.core)
 
-    // appwidget glance
-    implementation(libs.androidx.appwidget.glance.material3)
-    implementation(libs.androidx.appwidget.glance.material)
-    implementation(libs.androidx.appwidget.glance)
+    // work manager
+    implementation(libs.androidx.work.runtime.ktx)
 }

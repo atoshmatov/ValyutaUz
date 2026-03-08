@@ -45,7 +45,7 @@ class NetworkConnectivityObserver @Inject constructor(
             }
             connectivityManager.registerDefaultNetworkCallback(callback)
             awaitClose {
-                connectivityManager.registerDefaultNetworkCallback(callback)
+                connectivityManager.unregisterNetworkCallback(callback)
             }
         }.distinctUntilChanged()
     }

@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import uz.toshmatov.currency.core.connect.ConnectivityObserver
 import uz.toshmatov.currency.core.logger.logError
 import uz.toshmatov.currency.domain.repository.CBURepository
 import uz.toshmatov.currency.domain.repository.DataStoreRepository
@@ -24,46 +23,57 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val cbuRepository: CBURepository,
     private val storeRepository: DataStoreRepository,
-    //private val connectivityObserver: ConnectivityObserver
 ) : ViewModel() {
+    companion object {
+        private var hasLoadedOnce: Boolean = false
+    }
 
     private val _state: MutableStateFlow<HomeState> = MutableStateFlow(HomeState())
     val state: StateFlow<HomeState> = _state.asStateFlow()
 
     init {
-        getCBUCurrencyList()
+        getCBUCurrencyList(showLoading = !hasLoadedOnce)
         getCBUData()
-        //getNetworkStatus()
+        updateFreshnessState()
     }
 
-    private fun getCBUCurrencyList() {
+    fun refresh() {
+        getCBUCurrencyList(showLoading = true)
+    }
+
+    private fun getCBUCurrencyList(showLoading: Boolean) {
         cbuRepository.getCBUCurrencyList()
             .onStart {
-                _state.update { homeState ->
-                    homeState.copy(isLoading = true)
+                if (showLoading) {
+                    _state.update { homeState ->
+                        homeState.copy(isLoading = true)
+                    }
                 }
             }.catch {
                 _state.update { homeState ->
                     homeState.copy(
-                        error = "Error",
+                        error = it.localizedMessage ?: "Error",
                         isLoading = false
                     )
                 }
+                hasLoadedOnce = false
+                updateFreshnessState()
                 logError { it.localizedMessage ?: "" }
             }.onEach { cbuModel ->
                 _state.update { homeState ->
                     homeState.copy(
                         cbuList = cbuModel.take(20).toPersistentList(),
                         isLoading = false,
-                        isEmptyCbuList = cbuModel.isEmpty()
+                        isEmptyCbuList = cbuModel.isEmpty(),
+                        error = ""
                     )
                 }
+                updateFreshnessState()
+                hasLoadedOnce = cbuModel.isNotEmpty()
                 cbuModel.forEach {
-                    if (it.ccy == "USD")
-                        setCbuData(it.rate)
+                    if (it.ccy == "USD") setCbuData(it.rate)
                 }
             }.launchIn(viewModelScope)
-
     }
 
     private fun setCbuData(cbuData: String) {
@@ -81,12 +91,14 @@ class HomeViewModel @Inject constructor(
             }.launchIn(viewModelScope)
     }
 
-    /*private fun getNetworkStatus() {
-        connectivityObserver.observe()
-            .onEach { status ->
-                _state.update { homeState ->
-                    homeState.copy(networkStatus = status)
-                }
-            }.launchIn(viewModelScope)
-    }*/
+    private fun updateFreshnessState() {
+        val timestamp = cbuRepository.getLastUpdateTimestamp()
+        val isStale = cbuRepository.isLocalDataStale()
+        _state.update { homeState ->
+            homeState.copy(
+                lastUpdateTimestamp = timestamp,
+                isDataStale = isStale
+            )
+        }
+    }
 }

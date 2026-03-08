@@ -33,21 +33,14 @@ class SettingsViewModel @Inject constructor() : ViewModel() {
             ActionType.THEME
         ),
         uz.toshmatov.currency.presentation.main.tabscreen.setting.model.SettingModel(
+            string.settings_daily_updates,
+            drawable.ic_update,
+            ActionType.DAILY_UPDATES
+        ),
+        uz.toshmatov.currency.presentation.main.tabscreen.setting.model.SettingModel(
             string.settings_info,
             drawable.ic_info_app,
             ActionType.ABOUT_APP
-        ),
-        uz.toshmatov.currency.presentation.main.tabscreen.setting.model.SettingModel(
-            string.settings_contact,
-            drawable.ic_contact,
-            ActionType.CONTACT_US,
-            true
-        ),
-        uz.toshmatov.currency.presentation.main.tabscreen.setting.model.SettingModel(
-            string.settings_share,
-            drawable.ic_share,
-            ActionType.SHARE_APP,
-            true
         ),
     )
 

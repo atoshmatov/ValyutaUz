@@ -8,14 +8,14 @@ import androidx.room.Upsert
 
 interface BaseDao<T> {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(t: T)
+    suspend fun insert(t: T)
 
     @Upsert
-    fun upsert(t: List<T>)
+    suspend fun upsert(t: List<T>)
 
     @Update
-    fun upDate(t: T)
+    suspend fun update(t: T)
 
     @Delete
-    fun delete(t: T)
+    suspend fun delete(t: T)
 }
