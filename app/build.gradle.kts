@@ -187,6 +187,7 @@ dependencies {
 
     // coil
     implementation(libs.coil.kt.compose)
+    implementation(libs.coil.svg)
 
     // lottie
     implementation(libs.lottie)
