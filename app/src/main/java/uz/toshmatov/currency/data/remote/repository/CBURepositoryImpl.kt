@@ -18,12 +18,15 @@ import uz.toshmatov.currency.data.local.prefs.PrefKeys
 import uz.toshmatov.currency.data.local.prefs.Prefs
 import uz.toshmatov.currency.data.local.room.CurrencyDatabase
 import uz.toshmatov.currency.data.local.room.dao.CBUDao
+import uz.toshmatov.currency.data.local.room.dao.CurrencyHistoryDao
+import uz.toshmatov.currency.data.local.room.entity.CurrencyHistoryEntity
 import uz.toshmatov.currency.data.mapper.cbu.CBUDaoMapper
 import uz.toshmatov.currency.data.mapper.cbu.CBUMapper
 import uz.toshmatov.currency.data.mapper.cbu.CBUNetMapper
 import uz.toshmatov.currency.data.remote.api.CBUApiService
 import uz.toshmatov.currency.data.remote.model.CBUDto
 import uz.toshmatov.currency.domain.model.CBUModel
+import uz.toshmatov.currency.domain.model.CurrencyChartPoint
 import uz.toshmatov.currency.domain.repository.CBURepository
 import javax.inject.Inject
 
@@ -34,6 +37,7 @@ class CBURepositoryImpl @Inject constructor(
     private val cbuDaoMapper: CBUDaoMapper,
     private val prefs: Prefs,
     private val cbuDao: CBUDao,
+    private val historyDao: CurrencyHistoryDao,
     private val database: CurrencyDatabase
 ) : CBURepository {
 
@@ -98,6 +102,42 @@ class CBURepositoryImpl @Inject constructor(
                 logError { "getRemoteCBUCurrencyList: ${it.message}" }
                 emitAll(getLocalCBUCurrencyList())
             }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getCurrencyHistory(code: String, days: Int): List<CurrencyChartPoint> {
+        val calendar = java.util.Calendar.getInstance()
+        val dates = (0 until days).map { i ->
+            calendar.time.let {
+                val day = "%02d".format(calendar.get(java.util.Calendar.DAY_OF_MONTH))
+                val month = "%02d".format(calendar.get(java.util.Calendar.MONTH) + 1)
+                val year = calendar.get(java.util.Calendar.YEAR)
+                "$day.$month.$year"
+            }.also { calendar.add(java.util.Calendar.DAY_OF_MONTH, -1) }
+        }.reversed()
+
+        val cachedDates = historyDao.getCachedDates(code).toSet()
+        val missingDates = dates.filter { it !in cachedDates }
+
+        val newEntities = mutableListOf<CurrencyHistoryEntity>()
+        for (date in missingDates) {
+            try {
+                val result = cbuApiService.getCBUByDate(date)
+                result.find { it.currencyCode == code }?.let { dto ->
+                    newEntities.add(
+                        CurrencyHistoryEntity(
+                            currencyCode = code,
+                            date = date,
+                            rate = dto.rate.toFloatOrNull() ?: 0f
+                        )
+                    )
+                }
+            } catch (e: Exception) {
+                logError { "getCurrencyHistory $date: ${e.message}" }
+            }
+        }
+        if (newEntities.isNotEmpty()) historyDao.insertAll(newEntities)
+
+        return historyDao.getHistory(code).map { CurrencyChartPoint(it.date, it.rate) }
     }
 
     private suspend fun updateLocalData(cbuDtoList: List<CBUDto>) {
