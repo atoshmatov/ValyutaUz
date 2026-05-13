@@ -11,7 +11,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import cafe.adriel.voyager.androidx.AndroidScreen
+import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -23,7 +23,7 @@ import uz.toshmatov.currency.presentation.main.tabscreen.setting.feature.theme.c
 import uz.toshmatov.currency.presentation.main.tabscreen.setting.feature.theme.intents.ThemeEvents
 import uz.toshmatov.currency.presentation.main.tabscreen.setting.feature.theme.intents.ThemeState
 
-class ThemeScreen : AndroidScreen() {
+class ThemeScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow

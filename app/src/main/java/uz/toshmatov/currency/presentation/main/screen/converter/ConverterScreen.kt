@@ -44,7 +44,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import cafe.adriel.voyager.androidx.AndroidScreen
+import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -68,7 +68,7 @@ class ConverterScreen(
     val codeName: String,
     val code: String,
     val rate: String
-) : AndroidScreen() {
+) : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow

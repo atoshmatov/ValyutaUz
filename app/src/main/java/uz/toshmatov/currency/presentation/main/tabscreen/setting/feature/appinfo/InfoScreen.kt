@@ -30,7 +30,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.androidx.AndroidScreen
+import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import uz.toshmatov.currency.BuildConfig
@@ -47,7 +47,7 @@ import uz.toshmatov.currency.core.utils.drawable
 import uz.toshmatov.currency.core.utils.resource
 import uz.toshmatov.currency.core.utils.string
 
-class InfoScreen : AndroidScreen() {
+class InfoScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow

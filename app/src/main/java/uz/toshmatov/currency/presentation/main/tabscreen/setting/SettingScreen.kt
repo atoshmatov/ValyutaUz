@@ -1,5 +1,6 @@
 package uz.toshmatov.currency.presentation.main.tabscreen.setting
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,7 +8,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
@@ -26,8 +26,10 @@ import androidx.compose.ui.res.painterResource
 import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import uz.toshmatov.currency.presentation.main.tabscreen.home.HomeScreen
 import uz.toshmatov.currency.core.theme.CurrencyColors
 import uz.toshmatov.currency.core.theme.CurrencyDimensions
 import uz.toshmatov.currency.core.theme.CurrencyTypography
@@ -64,6 +66,9 @@ object SettingScreen : Tab {
         val viewModel = getViewModel<SettingsViewModel>()
         val state by viewModel.state.collectAsState()
         val currentNavigator = LocalNavigator.currentOrThrow.parent!!
+        val tabNavigator = LocalTabNavigator.current
+
+        BackHandler { tabNavigator.current = HomeScreen }
 
         SettingScreenContent(
             state = state,
@@ -93,7 +98,6 @@ private fun SettingScreenContent(
             .background(CurrencyColors.background)
             .statusBarsPadding()
             .verticalScroll(rememberScrollState())
-            .navigationBarsPadding()
             .padding(
                 horizontal = CurrencyDimensions.medium,
                 vertical = CurrencyDimensions.small

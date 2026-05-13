@@ -47,6 +47,11 @@
       android:exported="false"
       android:permission="android.permission.BIND_REMOTEVIEWS" />
 
+    <!-- AdMob App ID. TEST ID hozircha. Haqiqiy ID: https://admob.google.com -->
+    <meta-data
+      android:name="com.google.android.gms.ads.APPLICATION_ID"
+      android:value="ca-app-pub-8019829901651660~7803313873" />
+
     <provider
       android:name="androidx.startup.InitializationProvider"
       android:authorities="${applicationId}.androidx-startup"

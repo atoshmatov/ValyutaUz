@@ -18,3 +18,9 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Sensitive files
+google-services.json
+gradle.properties
+*.jks
+*.keystore
