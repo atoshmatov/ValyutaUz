@@ -1,19 +1,21 @@
 package uz.toshmatov.currency.core.theme.color
 
-internal fun lightColors(): CurrencyColors = CurrencyColors(
+import androidx.compose.ui.graphics.Color
+
+internal fun lightColors(accent: Color = BLUE): CurrencyColors = CurrencyColors(
     background = GRAY10,
     text = BLACK,
     textSecondary = GRAY50,
-    icon = BLUE60,
+    icon = accent,
     iconGray = GRAY40,
     error = RED60,
     success = GREEN,
-    button = BLUE60,
+    button = accent,
     bottomBar = WHITE,
     bottomBarIcon = GRAY,
-    bottomBarIconSelected = BLUE,
+    bottomBarIconSelected = accent,
     bottomBarText = GRAY,
-    bottomBarTextSelected = BLUE,
+    bottomBarTextSelected = accent,
     bottomBarIndicator = WHITE,
     itemBackground = WHITE,
     shimmer = ShimmerLight,

@@ -1,6 +1,7 @@
 package uz.toshmatov.currency.data.local.repository
 
 import kotlinx.coroutines.flow.Flow
+import uz.toshmatov.currency.data.local.model.AccentColor
 import uz.toshmatov.currency.data.local.model.ThemeMode
 import uz.toshmatov.currency.data.local.themedatastore.AppDataStore
 import uz.toshmatov.currency.domain.repository.DataStoreRepository
@@ -17,6 +18,10 @@ class DataStoreRepositoryImpl @Inject constructor(
     override suspend fun setThemeMode(themeMode: ThemeMode) {
         dataStore.setThemeMode(themeMode)
     }
+
+    override fun getAccentColor(): Flow<AccentColor> = dataStore.getAccentColor()
+
+    override suspend fun setAccentColor(accent: AccentColor) = dataStore.setAccentColor(accent)
 
     override fun getCBUData(): Flow<String> {
         return dataStore.getCBUData()
