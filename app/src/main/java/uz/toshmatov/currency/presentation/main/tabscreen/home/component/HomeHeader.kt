@@ -31,6 +31,7 @@ fun HomeHeader(
     modifier: Modifier = Modifier,
     title: String = "",
     onSettingsClick: () -> Unit = {},
+    onBankRatesClick: () -> Unit = {},
     isDataStale: Boolean = false
 ) {
     val isDarkTheme = CurrencyColors.background.luminance() < 0.5f
@@ -70,13 +71,23 @@ fun HomeHeader(
                 )
             }
         }
-        IconButton(onClick = onSettingsClick) {
-            Icon(
-                painter = painterResource(id = drawable.ic_tab_setting),
-                contentDescription = "settings",
-                tint = CurrencyColors.button,
-                modifier = Modifier.size(22.dp)
-            )
+        Row {
+            IconButton(onClick = onBankRatesClick) {
+                Icon(
+                    painter = painterResource(id = drawable.ic_time),
+                    contentDescription = "bank rates",
+                    tint = CurrencyColors.button,
+                    modifier = Modifier.size(22.dp)
+                )
+            }
+            IconButton(onClick = onSettingsClick) {
+                Icon(
+                    painter = painterResource(id = drawable.ic_tab_setting),
+                    contentDescription = "settings",
+                    tint = CurrencyColors.button,
+                    modifier = Modifier.size(22.dp)
+                )
+            }
         }
     }
 }
