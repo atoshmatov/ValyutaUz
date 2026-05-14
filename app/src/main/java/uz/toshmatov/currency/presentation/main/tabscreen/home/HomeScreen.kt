@@ -39,6 +39,7 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import uz.toshmatov.currency.presentation.bankrates.BankRatesScreen
+import uz.toshmatov.currency.presentation.main.screen.detail.CurrencyDetailScreen
 import uz.toshmatov.currency.presentation.main.tabscreen.setting.SettingScreen
 import com.amurfm.android.core.networkConnect.NetworkConnectionState
 import com.amurfm.android.core.networkConnect.rememberConnectivityState
@@ -118,7 +119,7 @@ object HomeScreen : Tab {
                         onBankRatesClick = { currentNavigator.push(BankRatesScreen()) },
                         onClickSeeAll = { currentNavigator.push(DetailScreen()) },
                         itemClick = { codeName, code, rate ->
-                            currentNavigator.push(ConverterScreen(codeName, code, rate))
+                            currentNavigator.push(CurrencyDetailScreen(codeName, code, rate))
                         },
                         showOfflineStaleWarning = isOffline && state.isDataStale && state.cbuList.isNotEmpty(),
                         onRefreshData = viewModel::refresh

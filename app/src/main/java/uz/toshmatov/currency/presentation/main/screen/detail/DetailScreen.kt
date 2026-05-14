@@ -33,7 +33,7 @@ import uz.toshmatov.currency.core.uicompoenent.CurrencyTextField
 import uz.toshmatov.currency.core.uicompoenent.ShimmedList
 import uz.toshmatov.currency.core.uicompoenent.TopBar
 import uz.toshmatov.currency.core.utils.string
-import uz.toshmatov.currency.presentation.main.screen.converter.ConverterScreen
+import uz.toshmatov.currency.presentation.main.screen.detail.CurrencyDetailScreen
 import uz.toshmatov.currency.presentation.main.screen.detail.intents.DetailEvents
 import uz.toshmatov.currency.presentation.main.screen.detail.intents.DetailState
 import uz.toshmatov.currency.presentation.main.screen.detail.viewModel.CBUDetailViewModel
@@ -70,7 +70,7 @@ class DetailScreen : Screen {
                 searchQuery = { query -> cbuViewModel.reduce(DetailEvents.SearchQuery(query)) },
                 backClick = { navigator.pop() },
                 itemClick = { codeName, code, rate ->
-                    navigator.push(ConverterScreen(codeName, code, rate))
+                    navigator.push(CurrencyDetailScreen(codeName, code, rate))
                 }
             )
         }

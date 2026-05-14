@@ -60,8 +60,6 @@ import uz.toshmatov.currency.core.utils.drawable
 import uz.toshmatov.currency.core.utils.resource
 import uz.toshmatov.currency.core.utils.string
 import uz.toshmatov.currency.domain.model.CBUModel
-import uz.toshmatov.currency.presentation.main.screen.converter.chart.ChartViewModel
-import uz.toshmatov.currency.presentation.main.screen.converter.chart.CurrencyChartSection
 import uz.toshmatov.currency.presentation.main.screen.converter.component.ConverterItem
 import uz.toshmatov.currency.presentation.main.screen.converter.component.NumberGridItem
 import uz.toshmatov.currency.presentation.main.screen.converter.component.NumberKeyboardAction
@@ -75,7 +73,6 @@ class ConverterScreen(
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         val viewModel = getViewModel<ConverterViewModel>()
-        val chartViewModel = getViewModel<ChartViewModel>()
         val availableCurrencies by viewModel.currencies.collectAsStateWithLifecycle()
 
         ConverterScreenContent(
@@ -83,8 +80,7 @@ class ConverterScreen(
             codeName = codeName,
             code = code,
             rate = rate,
-            availableCurrencies = availableCurrencies,
-            chartViewModel = chartViewModel
+            availableCurrencies = availableCurrencies
         )
     }
 }
@@ -97,7 +93,6 @@ fun ConverterScreenContent(
     code: String = "",
     rate: String = "",
     availableCurrencies: List<CBUModel> = emptyList(),
-    chartViewModel: ChartViewModel? = null,
 ) {
     var enteredAmount by remember { mutableStateOf(DEFAULT_INPUT) }
     var cursorIndex by remember { mutableIntStateOf(DEFAULT_INPUT.length) }
@@ -342,13 +337,7 @@ fun ConverterScreenContent(
                 )
             }
 
-            chartViewModel?.let {
-                CurrencyChartSection(
-                    currencyCode = activeCurrency.code,
-                    viewModel = it,
-                    modifier = Modifier.padding(top = 8.dp, bottom = 4.dp)
-                )
-            }
+            Spacer(modifier = Modifier.weight(1f))
 
             NumberGridItem(
                 keyHeight = keyHeight,
@@ -485,7 +474,7 @@ private data class ConverterCurrency(
 private const val SOM_LABEL = "so'm"
 private const val SOM_CURRENCY_CODE = "UZS"
 private const val DEFAULT_INPUT = "0"
-private const val MAX_INTEGER_DIGITS = 9
+private const val MAX_INTEGER_DIGITS = 15
 private const val MAX_DECIMAL_DIGITS = 4
 private const val CURSOR_MARKER = "|"
 

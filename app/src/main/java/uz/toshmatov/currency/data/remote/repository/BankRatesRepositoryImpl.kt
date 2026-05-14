@@ -6,25 +6,36 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import uz.toshmatov.currency.domain.model.BankRateModel
 import uz.toshmatov.currency.domain.repository.BankRatesRepository
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class BankRatesRepositoryImpl @Inject constructor(
-    private val okHttpClient: OkHttpClient
-) : BankRatesRepository {
+class BankRatesRepositoryImpl @Inject constructor() : BankRatesRepository {
+
+    private val client = OkHttpClient.Builder()
+        .followRedirects(true)
+        .followSslRedirects(true)
+        .connectTimeout(15, TimeUnit.SECONDS)
+        .readTimeout(15, TimeUnit.SECONDS)
+        .build()
 
     override suspend fun getBankRates(currency: String): List<BankRateModel> =
         withContext(Dispatchers.IO) {
             val url = "https://kurs.uz/oz/data/currencies?by_bank=all&by_currency=$currency&sort_by=buy"
-            val request = Request.Builder().url(url)
+            val request = Request.Builder()
+                .url(url)
                 .addHeader("X-Requested-With", "XMLHttpRequest")
+                .addHeader("Accept", "text/html")
+                .addHeader("User-Agent", "Mozilla/5.0 (Android)")
                 .build()
-            val html = okHttpClient.newCall(request).execute().use { it.body?.string() ?: "" }
+
+            val html = client.newCall(request).execute().use { it.body?.string() ?: "" }
             parseHtml(html, currency)
         }
 
     private fun parseHtml(html: String, currency: String): List<BankRateModel> {
+        if (html.isBlank()) return emptyList()
         val pattern = Regex(
-            """href="/oz/banks/([^/\"]+)/[^\"]+">.*?<span>([^<]+)</span>.*?data-curr="(\d+)".*?data-curr="(\d+)"""",
+            """banks/(\w+)/\w+[^>]*>.*?<span>([^<]+)</span>.*?data-curr="(\d+)".*?data-curr="(\d+)"""",
             RegexOption.DOT_MATCHES_ALL
         )
         return pattern.findAll(html).map { match ->

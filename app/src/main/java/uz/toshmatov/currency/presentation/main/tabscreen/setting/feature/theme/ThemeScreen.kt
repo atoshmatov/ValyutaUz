@@ -1,5 +1,7 @@
 package uz.toshmatov.currency.presentation.main.tabscreen.setting.feature.theme
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -49,12 +51,7 @@ class ThemeScreen : Screen {
         val navigator = LocalNavigator.currentOrThrow
         val viewModel = getViewModel<ThemeViewModel>()
         val state by viewModel.state.collectAsState()
-
-        ThemeContent(
-            state = state,
-            reduce = viewModel::reduce,
-            backClick = navigator::pop
-        )
+        ThemeContent(state = state, reduce = viewModel::reduce, backClick = navigator::pop)
     }
 }
 
@@ -66,18 +63,11 @@ fun ThemeContent(
     backClick: () -> Unit
 ) {
     Column(
-        modifier = modifier
-            .fillMaxSize()
-            .background(CurrencyColors.background),
+        modifier = modifier.fillMaxSize().background(CurrencyColors.background),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TopBar(
-            titleId = string.settings_theme,
-            onBackClick = backClick,
-            contentDescription = "Back"
-        )
-
+        TopBar(titleId = string.settings_theme, onBackClick = backClick, contentDescription = "Back")
         Column(
             modifier = Modifier
                 .padding(horizontal = CurrencyDimensions.medium)
@@ -97,10 +87,7 @@ fun ThemeContent(
 }
 
 @Composable
-private fun ThemeModeSection(
-    currentMode: ThemeMode,
-    onModeSelect: (ThemeMode) -> Unit
-) {
+private fun ThemeModeSection(currentMode: ThemeMode, onModeSelect: (ThemeMode) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text(
             text = stringResource(string.settings_theme),
@@ -111,27 +98,9 @@ private fun ThemeModeSection(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            ThemeModeChip(
-                modifier = Modifier.weight(1f),
-                label = stringResource(string.settings_system),
-                icon = drawable.ic_system,
-                selected = currentMode == ThemeMode.System,
-                onClick = { onModeSelect(ThemeMode.System) }
-            )
-            ThemeModeChip(
-                modifier = Modifier.weight(1f),
-                label = stringResource(string.settings_light),
-                icon = drawable.ic_light,
-                selected = currentMode == ThemeMode.Light,
-                onClick = { onModeSelect(ThemeMode.Light) }
-            )
-            ThemeModeChip(
-                modifier = Modifier.weight(1f),
-                label = stringResource(string.settings_dark),
-                icon = drawable.ic_dark,
-                selected = currentMode == ThemeMode.Dark,
-                onClick = { onModeSelect(ThemeMode.Dark) }
-            )
+            ThemeModeChip(Modifier.weight(1f), stringResource(string.settings_system), drawable.ic_system, currentMode == ThemeMode.System) { onModeSelect(ThemeMode.System) }
+            ThemeModeChip(Modifier.weight(1f), stringResource(string.settings_light), drawable.ic_light, currentMode == ThemeMode.Light) { onModeSelect(ThemeMode.Light) }
+            ThemeModeChip(Modifier.weight(1f), stringResource(string.settings_dark), drawable.ic_dark, currentMode == ThemeMode.Dark) { onModeSelect(ThemeMode.Dark) }
         }
     }
 }
@@ -145,107 +114,90 @@ private fun ThemeModeChip(
     onClick: () -> Unit
 ) {
     val accent = CurrencyColors.button
+    val bgColor by animateColorAsState(
+        if (selected) accent.copy(alpha = 0.12f) else CurrencyColors.itemBackground,
+        animationSpec = tween(200), label = "chipBg"
+    )
+    val borderColor by animateColorAsState(
+        if (selected) accent else Color.Transparent,
+        animationSpec = tween(200), label = "chipBorder"
+    )
+    val contentColor by animateColorAsState(
+        if (selected) accent else CurrencyColors.textSecondary,
+        animationSpec = tween(200), label = "chipContent"
+    )
     Column(
         modifier = modifier
             .clip(RoundedCornerShape(14.dp))
-            .background(if (selected) accent.copy(alpha = 0.12f) else CurrencyColors.itemBackground)
-            .border(
-                width = if (selected) 2.dp else 1.dp,
-                color = if (selected) accent else CurrencyColors.itemBackground,
-                shape = RoundedCornerShape(14.dp)
-            )
+            .background(bgColor)
+            .border(2.dp, borderColor, RoundedCornerShape(14.dp))
             .clickable(onClick = onClick)
             .padding(vertical = 14.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(6.dp)
     ) {
-        Icon(
-            painter = painterResource(icon),
-            contentDescription = label,
-            tint = if (selected) accent else CurrencyColors.textSecondary,
-            modifier = Modifier.size(22.dp)
-        )
-        Text(
-            text = label,
-            style = CurrencyTypography.captionRegular,
-            color = if (selected) accent else CurrencyColors.textSecondary
-        )
+        Icon(painter = painterResource(icon), contentDescription = label, tint = contentColor, modifier = Modifier.size(22.dp))
+        Text(text = label, style = CurrencyTypography.captionRegular, color = contentColor)
     }
 }
 
 @Composable
-private fun AccentColorSection(
-    currentAccent: AccentColor,
-    onColorSelect: (AccentColor) -> Unit
-) {
+private fun AccentColorSection(currentAccent: AccentColor, onColorSelect: (AccentColor) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text(
-            text = "Asosiy rang",
-            style = CurrencyTypography.textSemiBold,
-            color = CurrencyColors.text
-        )
-        val colors = AccentColor.entries
-        val rows = colors.chunked(4)
-        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            rows.forEach { rowColors ->
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    rowColors.forEach { accent ->
-                        ColorCircle(
-                            modifier = Modifier.weight(1f),
-                            color = accent.color,
-                            selected = currentAccent == accent,
-                            onClick = { onColorSelect(accent) }
-                        )
-                    }
-                    repeat(4 - rowColors.size) {
-                        Spacer(modifier = Modifier.weight(1f))
-                    }
+        Text(text = "Asosiy rang", style = CurrencyTypography.textSemiBold, color = CurrencyColors.text)
+        AccentColor.entries.chunked(4).forEach { rowColors ->
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                rowColors.forEach { accent ->
+                    ColorCircle(
+                        modifier = Modifier.weight(1f),
+                        color = accent.color,
+                        selected = currentAccent == accent,
+                        onClick = { onColorSelect(accent) }
+                    )
                 }
+                repeat(4 - rowColors.size) { Spacer(modifier = Modifier.weight(1f)) }
             }
         }
     }
 }
 
 @Composable
-private fun ColorCircle(
-    modifier: Modifier = Modifier,
-    color: Color,
-    selected: Boolean,
-    onClick: () -> Unit
-) {
-    Box(
-        modifier = modifier,
-        contentAlignment = Alignment.Center
-    ) {
+private fun ColorCircle(modifier: Modifier = Modifier, color: Color, selected: Boolean, onClick: () -> Unit) {
+    val ringColor by animateColorAsState(
+        if (selected) color.copy(alpha = 0.45f) else Color.Transparent,
+        animationSpec = tween(220), label = "ring"
+    )
+    val innerBorderColor by animateColorAsState(
+        if (selected) CurrencyColors.background else Color.Transparent,
+        animationSpec = tween(220), label = "innerBorder"
+    )
+
+    Box(modifier = modifier.size(64.dp), contentAlignment = Alignment.Center) {
+        // Outer ring — always 60dp, color animates
         Box(
             modifier = Modifier
-                .size(52.dp)
+                .size(60.dp)
+                .border(2.dp, ringColor, CircleShape)
+        )
+        // Inner circle — always 48dp
+        Box(
+            modifier = Modifier
+                .size(48.dp)
                 .clip(CircleShape)
                 .background(color)
-                .then(
-                    if (selected) Modifier.border(3.dp, CurrencyColors.background, CircleShape)
-                    else Modifier
-                )
+                .border(3.dp, innerBorderColor, CircleShape)
                 .clickable(onClick = onClick),
             contentAlignment = Alignment.Center
         ) {
-            if (selected) {
-                Icon(
-                    painter = painterResource(drawable.ic_check),
-                    contentDescription = null,
-                    tint = if (color.luminance() > 0.4f) Color.Black else Color.White,
-                    modifier = Modifier.size(20.dp)
-                )
-            }
-        }
-        if (selected) {
-            Box(
-                modifier = Modifier
-                    .size(60.dp)
-                    .border(2.dp, color.copy(alpha = 0.4f), CircleShape)
+            val iconAlpha by animateColorAsState(
+                if (selected) (if (color.luminance() > 0.4f) Color.Black else Color.White) else Color.Transparent,
+                animationSpec = tween(180), label = "check"
+            )
+            Icon(
+                painter = painterResource(drawable.ic_check),
+                contentDescription = null,
+                tint = iconAlpha,
+                modifier = Modifier.size(18.dp)
             )
         }
     }

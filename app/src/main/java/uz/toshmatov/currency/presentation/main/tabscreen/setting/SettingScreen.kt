@@ -1,6 +1,7 @@
 package uz.toshmatov.currency.presentation.main.tabscreen.setting
 
 import androidx.activity.compose.BackHandler
+import uz.toshmatov.currency.core.uicompoenent.TopBar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -72,6 +73,7 @@ object SettingScreen : Tab {
 
         SettingScreenContent(
             state = state,
+            onBack = { tabNavigator.current = HomeScreen },
             onClickItem = {
                 when (it) {
                     ActionType.LANGUAGE -> currentNavigator.push(LanguageScreen())
@@ -90,31 +92,37 @@ object SettingScreen : Tab {
 @Composable
 private fun SettingScreenContent(
     state: SettingsState,
+    onBack: () -> Unit = {},
     onClickItem: (ActionType) -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(CurrencyColors.background)
-            .statusBarsPadding()
-            .verticalScroll(rememberScrollState())
-            .padding(
-                horizontal = CurrencyDimensions.medium,
-                vertical = CurrencyDimensions.small
-            ),
+            .statusBarsPadding(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        SettingsHeaderCard()
-        Spacer(modifier = Modifier.height(CurrencyDimensions.medium))
-        for (setting in state.settings) {
-            SettingItem(
-                modifier = Modifier.padding(bottom = CurrencyDimensions.small),
-                settingModel = setting,
-                onClick = onClickItem
-            )
+        TopBar(
+            titleId = string.tab_setting,
+            onBackClick = onBack,
+            contentDescription = "back"
+        )
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = CurrencyDimensions.medium, vertical = CurrencyDimensions.small)
+        ) {
+            Spacer(modifier = Modifier.height(CurrencyDimensions.small))
+            for (setting in state.settings) {
+                SettingItem(
+                    modifier = Modifier.padding(bottom = CurrencyDimensions.small),
+                    settingModel = setting,
+                    onClick = onClickItem
+                )
+            }
+            Spacer(modifier = Modifier.height(CurrencyDimensions.small))
         }
-        Spacer(modifier = Modifier.height(CurrencyDimensions.small))
     }
 }
 
