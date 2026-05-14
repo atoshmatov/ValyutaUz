@@ -10,16 +10,17 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.viewinterop.AndroidView
+import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.LoadAdError
+import android.util.Log
 import uz.toshmatov.currency.BuildConfig
 import uz.toshmatov.currency.core.theme.CurrencyColors
 
-private val BANNER_AD_UNIT_ID = if (BuildConfig.DEBUG)
-    "ca-app-pub-3940256099942544/9214589741"  // Google test banner ID
-else
-    "ca-app-pub-8019829901651660/6714369155"  // Real banner ID
+// TODO: "ca-app-pub-8019829901651660/6714369155" ga almashtirish kerak AdMob tasdiqlagandan so'ng
+private const val BANNER_AD_UNIT_ID = "ca-app-pub-3940256099942544/9214589741"
 
 @Composable
 fun AdBanner(modifier: Modifier = Modifier) {
@@ -39,12 +40,22 @@ fun AdBanner(modifier: Modifier = Modifier) {
                 AdView(context).apply {
                     setAdSize(
                         AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
-                            context,
-                            screenWidthDp
+                            context, screenWidthDp
                         )
                     )
                     adUnitId = BANNER_AD_UNIT_ID
                     setBackgroundColor(bgColor.toArgb())
+                    adListener = object : AdListener() {
+                        override fun onAdLoaded() {
+                            Log.d("AdBanner", "loaded OK unit=$BANNER_AD_UNIT_ID")
+                        }
+                        override fun onAdFailedToLoad(error: LoadAdError) {
+                            Log.e("AdBanner", "FAILED code=${error.code} msg=${error.message}")
+                        }
+                        override fun onAdImpression() {
+                            Log.d("AdBanner", "impression")
+                        }
+                    }
                     loadAd(AdRequest.Builder().build())
                 }
             },

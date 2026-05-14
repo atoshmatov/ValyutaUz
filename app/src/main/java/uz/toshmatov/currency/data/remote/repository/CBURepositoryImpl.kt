@@ -92,31 +92,37 @@ class CBURepositoryImpl @Inject constructor(
     override suspend fun getCurrencyHistory(code: String, days: Int): List<CurrencyChartPoint> =
         withContext(Dispatchers.IO) {
             val calendar = Calendar.getInstance()
-            // Build list of (displayDate DD.MM.YYYY, apiDate YYYY-MM-DD) pairs
+
+            // Build ordered list: (display: DD.MM.YYYY, api: YYYY-MM-DD, sortKey: YYYYMMDD)
+            data class DateEntry(val display: String, val api: String, val sortKey: Int)
+
             val dates = (0 until days).map {
                 val day = "%02d".format(calendar.get(Calendar.DAY_OF_MONTH))
                 val month = "%02d".format(calendar.get(Calendar.MONTH) + 1)
                 val year = calendar.get(Calendar.YEAR)
-                val display = "$day.$month.$year"
-                val api = "$year-$month-$day"
                 calendar.add(Calendar.DAY_OF_MONTH, -1)
-                display to api
-            }.reversed()
+                DateEntry(
+                    display = "$day.$month.$year",
+                    api = "$year-$month-$day",
+                    sortKey = "$year$month$day".toInt()
+                )
+            }.reversed() // oldest → newest
 
+            val targetDisplayDates = dates.map { it.display }.toSet()
             val cachedDates = historyDao.getCachedDates(code).toSet()
-            val missing = dates.filter { (display, _) -> display !in cachedDates }
+            val missing = dates.filter { it.display !in cachedDates }
 
+            // Fetch missing dates in parallel (max 10 concurrent)
             if (missing.isNotEmpty()) {
-                // Fetch missing dates in parallel (max 10 concurrent)
                 val newEntities = coroutineScope {
                     missing.chunked(10).flatMap { chunk ->
-                        chunk.map { (display, apiDate) ->
+                        chunk.map { entry ->
                             async {
                                 try {
-                                    val result = cbuApiService.getCurrencyByDate(code, apiDate)
+                                    val result = cbuApiService.getCurrencyByDate(code, entry.api)
                                     result.firstOrNull()?.let { dto ->
                                         val rate = dto.rate.toFloatOrNull() ?: return@let null
-                                        if (rate > 0f) CurrencyHistoryEntity(code, display, rate)
+                                        if (rate > 0f) CurrencyHistoryEntity(code, entry.display, rate)
                                         else null
                                     }
                                 } catch (e: Exception) { null }
@@ -127,7 +133,15 @@ class CBURepositoryImpl @Inject constructor(
                 if (newEntities.isNotEmpty()) historyDao.insertAll(newEntities)
             }
 
-            historyDao.getHistory(code).map { CurrencyChartPoint(it.date, it.rate) }
+            // Fetch only requested dates and sort correctly (DD.MM.YYYY → YYYYMMDD)
+            historyDao.getHistory(code)
+                .filter { it.date in targetDisplayDates }
+                .sortedBy { entity ->
+                    val p = entity.date.split(".")
+                    if (p.size == 3) "${p[2]}${p[1]}${p[0]}".toIntOrNull() ?: 0 else 0
+                }
+                .filter { it.rate > 0f }
+                .map { CurrencyChartPoint(it.date, it.rate) }
         }
 
     private suspend fun updateLocalData(cbuDtoList: List<CBUDto>) {
