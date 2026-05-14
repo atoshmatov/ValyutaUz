@@ -19,8 +19,10 @@ import android.util.Log
 import uz.toshmatov.currency.BuildConfig
 import uz.toshmatov.currency.core.theme.CurrencyColors
 
-// TODO: "ca-app-pub-8019829901651660/6714369155" ga almashtirish kerak AdMob tasdiqlagandan so'ng
-private const val BANNER_AD_UNIT_ID = "ca-app-pub-3940256099942544/9214589741"
+private val BANNER_AD_UNIT_ID = if (BuildConfig.DEBUG)
+    "ca-app-pub-3940256099942544/9214589741"   // test
+else
+    "ca-app-pub-8019829901651660/6714369155"   // real
 
 @Composable
 fun AdBanner(modifier: Modifier = Modifier) {
