@@ -12,10 +12,18 @@ import uz.toshmatov.currency.domain.model.CurrencyChartPoint
 import uz.toshmatov.currency.domain.repository.CBURepository
 import javax.inject.Inject
 
+enum class ChartPeriod(val days: Int, val label: String) {
+    WEEK_1(7, "1H"),
+    MONTH_1(30, "1O"),
+    MONTH_3(90, "3O"),
+    MONTH_6(180, "6O"),
+    YEAR_1(365, "1Y")
+}
+
 data class ChartState(
     val points: List<CurrencyChartPoint> = emptyList(),
     val isLoading: Boolean = false,
-    val selectedDays: Int = 30,
+    val period: ChartPeriod = ChartPeriod.MONTH_1,
     val loadedCode: String = ""
 )
 
@@ -29,12 +37,14 @@ class ChartViewModel @Inject constructor(
 
     private var loadJob: Job? = null
 
-    fun load(currencyCode: String, days: Int = 30) {
+    fun load(currencyCode: String, period: ChartPeriod = ChartPeriod.MONTH_1) {
         loadJob?.cancel()
         loadJob = viewModelScope.launch {
-            _state.update { it.copy(isLoading = true, selectedDays = days, points = emptyList(), loadedCode = currencyCode) }
+            _state.update {
+                it.copy(isLoading = true, period = period, points = emptyList(), loadedCode = currencyCode)
+            }
             try {
-                val points = cbuRepository.getCurrencyHistory(currencyCode, days)
+                val points = cbuRepository.getCurrencyHistory(currencyCode, period.days)
                 _state.update { it.copy(points = points, isLoading = false) }
             } catch (e: Exception) {
                 _state.update { it.copy(isLoading = false) }

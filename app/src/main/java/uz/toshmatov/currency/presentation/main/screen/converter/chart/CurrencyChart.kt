@@ -44,10 +44,11 @@ fun CurrencyChartSection(
     val state by viewModel.state.collectAsState()
 
     LaunchedEffect(currencyCode) {
-        viewModel.load(currencyCode, 30)
+        viewModel.load(currencyCode, ChartPeriod.MONTH_1)
     }
 
     Column(modifier = modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
+        // Header: title + period chips
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -58,16 +59,21 @@ fun CurrencyChartSection(
                 style = CurrencyTypography.textSemiBold,
                 color = CurrencyColors.text
             )
-            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                PeriodChip("7k", state.selectedDays == 7) { viewModel.load(currencyCode, 7) }
-                PeriodChip("30k", state.selectedDays == 30) { viewModel.load(currencyCode, 30) }
+            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                ChartPeriod.entries.forEach { period ->
+                    PeriodChip(
+                        label = period.label,
+                        selected = state.period == period,
+                        onClick = { viewModel.load(currencyCode, period) }
+                    )
+                }
             }
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
         when {
-            state.isLoading && state.points.isEmpty() -> {
+            state.isLoading -> {
                 Box(
                     modifier = Modifier.fillMaxWidth().height(160.dp),
                     contentAlignment = Alignment.Center
@@ -76,11 +82,43 @@ fun CurrencyChartSection(
                 }
             }
             state.points.size >= 2 -> {
+                // Diff info row
+                val first = state.points.first().rate
+                val last = state.points.last().rate
+                val diff = last - first
+                val diffPct = if (first > 0f) (diff / first * 100f) else 0f
+                val isUp = diff >= 0f
+                val diffColor = if (isUp) CurrencyColors.success else CurrencyColors.error
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "${if (isUp) "▲" else "▼"} %,.2f so'm (%.2f%%)".format(
+                            kotlin.math.abs(diff), kotlin.math.abs(diffPct)
+                        ),
+                        style = CurrencyTypography.captionRegular,
+                        color = diffColor
+                    )
+                    Text(
+                        text = "%,.2f so'm".format(last),
+                        style = CurrencyTypography.textSemiBold,
+                        color = CurrencyColors.button
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
                 LineChart(
                     points = state.points,
-                    modifier = Modifier.fillMaxWidth().height(160.dp)
+                    isUp = isUp,
+                    modifier = Modifier.fillMaxWidth().height(150.dp)
                 )
-                Spacer(modifier = Modifier.height(8.dp))
+
+                Spacer(modifier = Modifier.height(6.dp))
+
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
@@ -106,15 +144,15 @@ private fun PeriodChip(label: String, selected: Boolean, onClick: () -> Unit) {
     val accent = CurrencyColors.button
     Box(
         modifier = Modifier
-            .clip(RoundedCornerShape(8.dp))
-            .background(if (selected) accent.copy(alpha = 0.12f) else CurrencyColors.itemBackground)
+            .clip(RoundedCornerShape(6.dp))
+            .background(if (selected) accent.copy(alpha = 0.12f) else CurrencyColors.background)
             .border(
                 width = if (selected) 1.dp else 0.dp,
                 color = if (selected) accent else accent.copy(alpha = 0f),
-                shape = RoundedCornerShape(8.dp)
+                shape = RoundedCornerShape(6.dp)
             )
             .clickable(onClick = onClick)
-            .padding(horizontal = 12.dp, vertical = 4.dp),
+            .padding(horizontal = 8.dp, vertical = 3.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -126,13 +164,17 @@ private fun PeriodChip(label: String, selected: Boolean, onClick: () -> Unit) {
 }
 
 @Composable
-private fun LineChart(points: List<CurrencyChartPoint>, modifier: Modifier = Modifier) {
-    val accent = CurrencyColors.button
+private fun LineChart(
+    points: List<CurrencyChartPoint>,
+    isUp: Boolean,
+    modifier: Modifier = Modifier
+) {
+    val lineColor = if (isUp) CurrencyColors.success else CurrencyColors.error
     val progress = remember(points) { Animatable(0f) }
 
     LaunchedEffect(points) {
         progress.snapTo(0f)
-        progress.animateTo(1f, animationSpec = tween(800))
+        progress.animateTo(1f, animationSpec = tween(900))
     }
 
     val minRate = points.minOf { it.rate }
@@ -173,15 +215,19 @@ private fun LineChart(points: List<CurrencyChartPoint>, modifier: Modifier = Mod
         drawPath(
             path = fillPath,
             brush = Brush.verticalGradient(
-                colors = listOf(accent.copy(alpha = 0.3f), accent.copy(alpha = 0f)),
+                colors = listOf(lineColor.copy(alpha = 0.25f), lineColor.copy(alpha = 0f)),
                 startY = 0f, endY = h
             )
         )
-        drawPath(path = linePath, color = accent, style = Stroke(2.5.dp.toPx(), cap = StrokeCap.Round))
+        drawPath(
+            path = linePath,
+            color = lineColor,
+            style = Stroke(2.5.dp.toPx(), cap = StrokeCap.Round)
+        )
 
         val lx = xOf(visible.size - 1)
         val ly = yOf(visible.last().rate)
-        drawCircle(color = accent.copy(alpha = 0.25f), radius = 8.dp.toPx(), center = Offset(lx, ly))
-        drawCircle(color = accent, radius = 4.dp.toPx(), center = Offset(lx, ly))
+        drawCircle(color = lineColor.copy(alpha = 0.2f), radius = 8.dp.toPx(), center = Offset(lx, ly))
+        drawCircle(color = lineColor, radius = 4.dp.toPx(), center = Offset(lx, ly))
     }
 }
