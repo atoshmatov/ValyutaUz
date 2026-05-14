@@ -1,9 +1,9 @@
 package uz.toshmatov.currency.core.extensions
 
 import android.app.Activity
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.remember
@@ -34,13 +34,10 @@ fun StatusBarStyle(
 
 fun Modifier.iconIndication(radius: Dp) = composed {
     val interactionSource = remember { MutableInteractionSource() }
+    val currentIndication = LocalIndication.current
 
     indication(
         interactionSource = interactionSource,
-        indication = rememberRipple(
-            color = CurrencyColors.bottomBar,
-            radius = radius
-        )
+        indication = currentIndication
     )
 }
-

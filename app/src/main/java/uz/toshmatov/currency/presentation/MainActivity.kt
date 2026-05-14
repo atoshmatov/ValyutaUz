@@ -43,9 +43,11 @@ class MainActivity : ComponentActivity() {
         )
         setContent {
             val themeMode by viewModel.isDarkMode.collectAsStateWithLifecycle()
+            val accentColor by viewModel.accentColor.collectAsStateWithLifecycle()
             val launchConverter = parseConverterLaunch(intent)
             CurrencyTheme(
                 darkTheme = getCurrentThemeMode(themeMode),
+                accentColor = accentColor,
             ) {
                 Navigator(
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {

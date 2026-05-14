@@ -1,38 +1,38 @@
 [versions]
 # android
-agp = "8.3.2"
+agp = "9.2.0"
 gmsPlugin = "4.4.2"
 
 # Linters
-hiltCompiler = "1.2.0"
+androidxHilt = "1.2.0"
 ktlint = "12.1.0"
 
 # ksp
-ksp = "1.9.10-1.0.13"
+ksp = "2.3.6"
 
 # kotlin
-kotlin = "1.9.10"
+kotlin = "2.3.21"
 
 # androidx core
-coreKtx = "1.15.0"
+coreKtx = "1.16.0"
 
 # androidx fragment & lifecycle
-androidxLifecycle = "2.8.7"
+androidxLifecycle = "2.10.0"
 
 # test
-espressoCore = "3.5.1"
-junitVersion = "1.1.5"
+espressoCore = "3.7.0"
+junitVersion = "1.3.0"
 junit = "4.13.2"
 
 # compose
-activityCompose = "1.9.3"
-composeBom = "2024.04.01"
+activityCompose = "1.13.0"
+composeBom = "2026.05.00"
 
 # constraint layout
-constraintLayout = "1.1.0"
+constraintLayout = "1.1.1"
 
 # voyager
-voyagerVersion = "1.0.0-rc09"
+voyagerVersion = "1.1.0-beta03"
 
 # coil
 coil = "2.7.0"
@@ -51,10 +51,10 @@ retrofit = "2.9.0"
 gson = "2.10.1"
 
 # roomdabase
-room_version = "2.6.1"
+room_version = "2.8.4"
 
 # dagger hilt
-hilt = "2.48.1"
+hilt = "2.59.2"
 
 # kotlin coroutine
 kotlinxCoroutinesCore = "1.8.1"
@@ -83,13 +83,16 @@ chucker = "4.0.0"
 lingver = "1.3.0"
 
 # datastore
-androidxDataStore = "1.1.1"
+androidxDataStore = "1.1.4"
 
 # app widget glance
 glance = "1.1.1"
 
 # work manager
-androidxWork = "2.10.0"
+androidxWork = "2.10.5"
+
+# admob
+admob = "23.6.0"
 
 [libraries]
 # androidx core
@@ -130,7 +133,7 @@ androidx-constrain-layout = { group = "androidx.constraintlayout", name = "const
 # voyager
 voyager = { group = "cafe.adriel.voyager", name = "voyager-navigator", version.ref = "voyagerVersion" }
 voyager-bottomsheet = { group = "cafe.adriel.voyager", name = "voyager-bottom-sheet-navigator", version.ref = "voyagerVersion" }
-voyager-viewmodel = { group = "cafe.adriel.voyager", name = "voyager-androidx", version.ref = "voyagerVersion" }
+voyager-viewmodel = { group = "cafe.adriel.voyager", name = "voyager-screenmodel", version.ref = "voyagerVersion" }
 voyager-hilt = { group = "cafe.adriel.voyager", name = "voyager-hilt", version.ref = "voyagerVersion" }
 voyager-tab = { group = "cafe.adriel.voyager", name = "voyager-tab-navigator", version.ref = "voyagerVersion" }
 voyager-transitions = { group = "cafe.adriel.voyager", name = "voyager-transitions", version.ref = "voyagerVersion" }
@@ -159,8 +162,8 @@ room-paging = { group = "androidx.room", name = "room-paging", version.ref = "ro
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room_version" }
 
 # dagger hilt
-androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompiler" }
-androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltCompiler" }
+androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "androidxHilt" }
+androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "androidxHilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 
@@ -203,9 +206,12 @@ androidx-appwidget-glance-material = { group = "androidx.glance", name = "glance
 # work manager
 androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "androidxWork" }
 
+# admob
+play-services-ads = { group = "com.google.android.gms", name = "play-services-ads", version.ref = "admob" }
+
 [plugins]
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 gms = { id = "com.google.gms.google-services", version.ref = "gmsPlugin" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }

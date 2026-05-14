@@ -3,6 +3,7 @@ package uz.toshmatov.currency.app
 import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
+import com.google.android.gms.ads.MobileAds
 import com.yariksoffice.lingver.Lingver
 import dagger.hilt.android.HiltAndroidApp
 import uz.toshmatov.currency.BuildConfig
@@ -18,6 +19,7 @@ class CurrencyApp : Application(), Configuration.Provider {
     override fun onCreate() {
         super.onCreate()
         Logger.setup(BuildConfig.DEBUG)
+        MobileAds.initialize(this)
 
         Lingver.init(this)
         CurrencyNotification.ensureChannel(this)

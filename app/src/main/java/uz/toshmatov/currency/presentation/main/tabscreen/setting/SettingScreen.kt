@@ -1,5 +1,7 @@
 package uz.toshmatov.currency.presentation.main.tabscreen.setting
 
+import androidx.activity.compose.BackHandler
+import uz.toshmatov.currency.core.uicompoenent.TopBar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,7 +9,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
@@ -26,8 +27,10 @@ import androidx.compose.ui.res.painterResource
 import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import uz.toshmatov.currency.presentation.main.tabscreen.home.HomeScreen
 import uz.toshmatov.currency.core.theme.CurrencyColors
 import uz.toshmatov.currency.core.theme.CurrencyDimensions
 import uz.toshmatov.currency.core.theme.CurrencyTypography
@@ -64,9 +67,13 @@ object SettingScreen : Tab {
         val viewModel = getViewModel<SettingsViewModel>()
         val state by viewModel.state.collectAsState()
         val currentNavigator = LocalNavigator.currentOrThrow.parent!!
+        val tabNavigator = LocalTabNavigator.current
+
+        BackHandler { tabNavigator.current = HomeScreen }
 
         SettingScreenContent(
             state = state,
+            onBack = { tabNavigator.current = HomeScreen },
             onClickItem = {
                 when (it) {
                     ActionType.LANGUAGE -> currentNavigator.push(LanguageScreen())
@@ -85,32 +92,37 @@ object SettingScreen : Tab {
 @Composable
 private fun SettingScreenContent(
     state: SettingsState,
+    onBack: () -> Unit = {},
     onClickItem: (ActionType) -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(CurrencyColors.background)
-            .statusBarsPadding()
-            .verticalScroll(rememberScrollState())
-            .navigationBarsPadding()
-            .padding(
-                horizontal = CurrencyDimensions.medium,
-                vertical = CurrencyDimensions.small
-            ),
+            .statusBarsPadding(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        SettingsHeaderCard()
-        Spacer(modifier = Modifier.height(CurrencyDimensions.medium))
-        for (setting in state.settings) {
-            SettingItem(
-                modifier = Modifier.padding(bottom = CurrencyDimensions.small),
-                settingModel = setting,
-                onClick = onClickItem
-            )
+        TopBar(
+            titleId = string.tab_setting,
+            onBackClick = onBack,
+            contentDescription = "back"
+        )
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = CurrencyDimensions.medium, vertical = CurrencyDimensions.small)
+        ) {
+            Spacer(modifier = Modifier.height(CurrencyDimensions.small))
+            for (setting in state.settings) {
+                SettingItem(
+                    modifier = Modifier.padding(bottom = CurrencyDimensions.small),
+                    settingModel = setting,
+                    onClick = onClickItem
+                )
+            }
+            Spacer(modifier = Modifier.height(CurrencyDimensions.small))
         }
-        Spacer(modifier = Modifier.height(CurrencyDimensions.small))
     }
 }
 

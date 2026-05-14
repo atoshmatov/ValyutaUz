@@ -11,11 +11,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import uz.toshmatov.currency.data.local.model.AccentColor
 import uz.toshmatov.currency.data.local.model.ThemeMode
 import javax.inject.Inject
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "current_theme")
 private val THEME_MODE_KEY = stringPreferencesKey("theme")
+private val ACCENT_COLOR_KEY = stringPreferencesKey("accent_color")
 private val CBU_DATA_KEY = stringPreferencesKey("cbu_data")
 private val SELECTED_WIDGET_CODES_KEY = stringPreferencesKey("selected_widget_codes")
 private val DAILY_NOTIFICATION_ENABLED_KEY = booleanPreferencesKey("daily_notification_enabled")
@@ -51,6 +53,20 @@ class AppDataStore @Inject constructor(context: Context) {
 
         store.edit { preferences ->
             preferences[THEME_MODE_KEY] = themeName
+        }
+    }
+
+    fun getAccentColor(): Flow<AccentColor> {
+        return store.data
+            .map { preferences ->
+                val name = preferences[ACCENT_COLOR_KEY] ?: AccentColor.Blue.name
+                AccentColor.entries.firstOrNull { it.name == name } ?: AccentColor.Blue
+            }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun setAccentColor(accent: AccentColor) {
+        store.edit { preferences ->
+            preferences[ACCENT_COLOR_KEY] = accent.name
         }
     }
 

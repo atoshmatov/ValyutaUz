@@ -7,7 +7,9 @@ import dagger.hilt.components.SingletonComponent
 import uz.toshmatov.currency.core.connect.ConnectivityObserver
 import uz.toshmatov.currency.core.connect.NetworkConnectivityObserver
 import uz.toshmatov.currency.data.local.repository.DataStoreRepositoryImpl
+import uz.toshmatov.currency.data.remote.repository.BankRatesRepositoryImpl
 import uz.toshmatov.currency.data.remote.repository.CBURepositoryImpl
+import uz.toshmatov.currency.domain.repository.BankRatesRepository
 import uz.toshmatov.currency.domain.repository.CBURepository
 import uz.toshmatov.currency.domain.repository.DataStoreRepository
 import javax.inject.Singleton
@@ -26,4 +28,8 @@ interface RepositoryModule {
     @Binds
     @Singleton
     fun bindAppDataStoreRepository(appDataStore: DataStoreRepositoryImpl): DataStoreRepository
+
+    @Binds
+    @Singleton
+    fun bindBankRatesRepository(impl: BankRatesRepositoryImpl): BankRatesRepository
 }

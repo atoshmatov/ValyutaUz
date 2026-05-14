@@ -1,5 +1,6 @@
 package uz.toshmatov.currency.presentation.main.tabscreen.setting.feature.dailyupdates
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -17,10 +18,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.AccessTime
-import androidx.compose.material.icons.rounded.NotificationsActive
-import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -40,14 +37,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import cafe.adriel.voyager.androidx.AndroidScreen
+import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -64,7 +60,7 @@ import uz.toshmatov.currency.domain.model.CBUModel
 import uz.toshmatov.currency.presentation.main.tabscreen.setting.feature.dailyupdates.intents.DailyUpdatesState
 
 @OptIn(ExperimentalMaterial3Api::class)
-class DailyUpdatesScreen : AndroidScreen() {
+class DailyUpdatesScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
@@ -129,7 +125,7 @@ private fun DailyUpdatesContent(
             item(key = "notification_toggle") {
                 Spacer(modifier = Modifier.height(CurrencyDimensions.small))
                 DailySettingCard(
-                    icon = Icons.Rounded.NotificationsActive,
+                    iconRes = drawable.ic_active,
                     title = string.settings_daily_notification.resource,
                     subtitle = string.settings_daily_notification_desc.resource,
                     onClick = {
@@ -158,7 +154,7 @@ private fun DailyUpdatesContent(
             item(key = "notification_time") {
                 Spacer(modifier = Modifier.height(CurrencyDimensions.extraSmall))
                 DailySettingCard(
-                    icon = Icons.Rounded.AccessTime,
+                    iconRes = drawable.ic_time,
                     title = string.settings_notify_time.resource,
                     subtitle = state.notificationTime,
                     onClick = {
@@ -290,7 +286,7 @@ private fun DailySummaryCard(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = Icons.Rounded.Update,
+                    painter = painterResource(id = drawable.ic_update),
                     contentDescription = "Daily updates",
                     tint = CurrencyColors.button
                 )
@@ -320,7 +316,7 @@ private fun DailySummaryCard(
 
 @Composable
 private fun DailySettingCard(
-    icon: ImageVector,
+    @DrawableRes iconRes: Int,
     title: String,
     subtitle: String,
     modifier: Modifier = Modifier,
@@ -362,7 +358,7 @@ private fun DailySettingCard(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = icon,
+                    painter = painterResource(id = iconRes),
                     contentDescription = title,
                     tint = CurrencyColors.button
                 )

@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.hilt)
@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId = "uz.toshmatov.currency"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 36
         versionCode = 13
         versionName = "1.0.3"
@@ -79,15 +79,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
     buildFeatures {
         compose = true
         buildConfig = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3"
     }
     packaging {
         // AGP 8.3.x + Play 16 KB page size requirement:
@@ -134,7 +128,6 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.material3)
-    implementation("androidx.compose.material:material-icons-extended")
     implementation(libs.androidx.ui)
 
     // test
@@ -211,4 +204,7 @@ dependencies {
 
     // work manager
     implementation(libs.androidx.work.runtime.ktx)
+
+    // admob
+    implementation(libs.play.services.ads)
 }

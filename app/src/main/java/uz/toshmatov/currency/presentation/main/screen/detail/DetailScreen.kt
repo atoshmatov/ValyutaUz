@@ -22,7 +22,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.androidx.AndroidScreen
+import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -33,13 +33,13 @@ import uz.toshmatov.currency.core.uicompoenent.CurrencyTextField
 import uz.toshmatov.currency.core.uicompoenent.ShimmedList
 import uz.toshmatov.currency.core.uicompoenent.TopBar
 import uz.toshmatov.currency.core.utils.string
-import uz.toshmatov.currency.presentation.main.screen.converter.ConverterScreen
+import uz.toshmatov.currency.presentation.main.screen.detail.CurrencyDetailScreen
 import uz.toshmatov.currency.presentation.main.screen.detail.intents.DetailEvents
 import uz.toshmatov.currency.presentation.main.screen.detail.intents.DetailState
 import uz.toshmatov.currency.presentation.main.screen.detail.viewModel.CBUDetailViewModel
 import uz.toshmatov.currency.presentation.main.tabscreen.home.component.CBUCurrencyItems
 
-class DetailScreen : AndroidScreen() {
+class DetailScreen : Screen {
 
     @Composable
     override fun Content() {
@@ -70,7 +70,7 @@ class DetailScreen : AndroidScreen() {
                 searchQuery = { query -> cbuViewModel.reduce(DetailEvents.SearchQuery(query)) },
                 backClick = { navigator.pop() },
                 itemClick = { codeName, code, rate ->
-                    navigator.push(ConverterScreen(codeName, code, rate))
+                    navigator.push(CurrencyDetailScreen(codeName, code, rate))
                 }
             )
         }

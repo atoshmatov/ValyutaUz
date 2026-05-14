@@ -19,6 +19,36 @@ import uz.toshmatov.currency.core.utils.resource
 
 @Composable
 fun TopBar(
+    title: String,
+    modifier: Modifier = Modifier,
+    onBackClick: () -> Unit,
+    color: Color = Color.Transparent,
+    contentDescription: String,
+) {
+    TopAppBar(
+        modifier = modifier.padding(start = CurrencyDimensions.medium),
+        title = {
+            Text(
+                text = title,
+                style = CurrencyTypography.textSemiBold,
+                color = CurrencyColors.button,
+                modifier = Modifier.padding(start = CurrencyDimensions.small),
+            )
+        },
+        navigationIcon = {
+            CurrencyIcon(
+                image = drawable.ic_arrow_left,
+                tint = CurrencyColors.button,
+                onClick = onBackClick,
+                contentDescription = contentDescription,
+            )
+        },
+        colors = TopAppBarDefaults.topAppBarColors(color),
+    )
+}
+
+@Composable
+fun TopBar(
     @StringRes titleId: Int,
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,

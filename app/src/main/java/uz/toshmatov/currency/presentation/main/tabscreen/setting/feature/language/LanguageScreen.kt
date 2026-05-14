@@ -12,7 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import cafe.adriel.voyager.androidx.AndroidScreen
+import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -24,7 +24,7 @@ import uz.toshmatov.currency.presentation.main.tabscreen.setting.feature.languag
 import uz.toshmatov.currency.presentation.main.tabscreen.setting.feature.language.intents.LanguageState
 import uz.toshmatov.currency.presentation.main.tabscreen.setting.feature.language.lingver.LingverLocalization
 
-class LanguageScreen : AndroidScreen() {
+class LanguageScreen : Screen {
     @Composable
     override fun Content() {
         val viewModel = getViewModel<LanguageViewModel>()

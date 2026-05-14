@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.androidx.AndroidScreen
+import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import coil.compose.AsyncImage
 import kotlinx.coroutines.delay
@@ -26,7 +26,7 @@ import uz.toshmatov.currency.core.utils.string
 import uz.toshmatov.currency.presentation.MainActivity
 import uz.toshmatov.currency.presentation.main.MainScreen
 
-class SplashScreen : AndroidScreen() {
+class SplashScreen : Screen {
     @SuppressLint("SuspiciousIndentation")
     @Composable
     override fun Content() {

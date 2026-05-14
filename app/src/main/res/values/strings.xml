@@ -61,4 +61,5 @@
   <string name="common_save">Save</string>
   <string name="common_cancel">Cancel</string>
   <string name="notification_title_daily">Daily currency update</string>
+  <string name="bank_rates">Bank kurslari</string>
 </resources>

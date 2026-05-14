@@ -7,10 +7,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material3.Icon
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -29,7 +30,8 @@ import uz.toshmatov.currency.core.utils.string
 fun HomeHeader(
     modifier: Modifier = Modifier,
     title: String = "",
-    onClick: () -> Unit = {},
+    onSettingsClick: () -> Unit = {},
+    onBankRatesClick: () -> Unit = {},
     isDataStale: Boolean = false
 ) {
     val isDarkTheme = CurrencyColors.background.luminance() < 0.5f
@@ -43,14 +45,12 @@ fun HomeHeader(
                 indication = null,
                 onClick = {}
             )
-            .padding(vertical = 12.dp)
-            .padding(horizontal = 16.dp),
+            .padding(vertical = 4.dp)
+            .padding(start = 16.dp, end = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = title,
                 color = CurrencyColors.button,
@@ -71,21 +71,23 @@ fun HomeHeader(
                 )
             }
         }
-        TextButton(
-            onClick = onClick,
-            interactionSource = remember { MutableInteractionSource() }
-        ) {
-            Text(
-                text = string.home_all_item.resource,
-                color = CurrencyColors.button,
-                style = CurrencyTypography.textSemiBold
-            )
-            Spacer(modifier = Modifier.width(2.dp))
-            Icon(
-                painter = painterResource(id = drawable.ic_arrow_right),
-                contentDescription = "see all items",
-                tint = CurrencyColors.button
-            )
+        Row {
+            IconButton(onClick = onBankRatesClick) {
+                Icon(
+                    painter = painterResource(id = drawable.ic_time),
+                    contentDescription = "bank rates",
+                    tint = CurrencyColors.button,
+                    modifier = Modifier.size(22.dp)
+                )
+            }
+            IconButton(onClick = onSettingsClick) {
+                Icon(
+                    painter = painterResource(id = drawable.ic_tab_setting),
+                    contentDescription = "settings",
+                    tint = CurrencyColors.button,
+                    modifier = Modifier.size(22.dp)
+                )
+            }
         }
     }
 }

@@ -44,7 +44,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import cafe.adriel.voyager.androidx.AndroidScreen
+import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -68,7 +68,7 @@ class ConverterScreen(
     val codeName: String,
     val code: String,
     val rate: String
-) : AndroidScreen() {
+) : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
@@ -474,7 +474,7 @@ private data class ConverterCurrency(
 private const val SOM_LABEL = "so'm"
 private const val SOM_CURRENCY_CODE = "UZS"
 private const val DEFAULT_INPUT = "0"
-private const val MAX_INTEGER_DIGITS = 9
+private const val MAX_INTEGER_DIGITS = 15
 private const val MAX_DECIMAL_DIGITS = 4
 private const val CURSOR_MARKER = "|"
 

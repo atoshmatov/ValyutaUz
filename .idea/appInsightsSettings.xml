@@ -41,10 +41,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="uz.toshmatov.currency" />
+                  <option name="mobileSdkAppId" value="1:975757738293:android:080c5d7ed4d80ba8318c7c" />
+                  <option name="projectId" value="valyuta-uz-anios" />
+                  <option name="projectNumber" value="975757738293" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

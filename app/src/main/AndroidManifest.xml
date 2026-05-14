@@ -3,6 +3,7 @@
   xmlns:tools="http://schemas.android.com/tools">
 
   <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
   <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -46,6 +47,11 @@
       android:name=".widget.CurrencyWidgetService"
       android:exported="false"
       android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+    <!-- AdMob App ID. TEST ID hozircha. Haqiqiy ID: https://admob.google.com -->
+    <meta-data
+      android:name="com.google.android.gms.ads.APPLICATION_ID"
+      android:value="ca-app-pub-8019829901651660~7803313873" />
 
     <provider
       android:name="androidx.startup.InitializationProvider"

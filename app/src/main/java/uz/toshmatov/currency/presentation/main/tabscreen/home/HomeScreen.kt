@@ -20,7 +20,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -35,6 +37,10 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
+import uz.toshmatov.currency.presentation.bankrates.BankRatesScreen
+import uz.toshmatov.currency.presentation.main.screen.detail.CurrencyDetailScreen
+import uz.toshmatov.currency.presentation.main.tabscreen.setting.SettingScreen
 import com.amurfm.android.core.networkConnect.NetworkConnectionState
 import com.amurfm.android.core.networkConnect.rememberConnectivityState
 import com.google.accompanist.swiperefresh.SwipeRefresh
@@ -74,6 +80,7 @@ object HomeScreen : Tab {
         val viewModel = getViewModel<HomeViewModel>()
         val state by viewModel.state.collectAsStateWithLifecycle()
         val currentNavigator = LocalNavigator.currentOrThrow.parent!!
+        val tabNavigator = LocalTabNavigator.current
 
         val internetConnection = rememberConnectivityState()
         val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = state.isLoading)
@@ -108,11 +115,11 @@ object HomeScreen : Tab {
                 else -> {
                     HomeScreenContent(
                         state = state,
-                        onClickSeeAll = {
-                            currentNavigator.push(DetailScreen())
-                        },
+                        onSettingsClick = { tabNavigator.current = SettingScreen },
+                        onBankRatesClick = { currentNavigator.push(BankRatesScreen()) },
+                        onClickSeeAll = { currentNavigator.push(DetailScreen()) },
                         itemClick = { codeName, code, rate ->
-                            currentNavigator.push(ConverterScreen(codeName, code, rate))
+                            currentNavigator.push(CurrencyDetailScreen(codeName, code, rate))
                         },
                         showOfflineStaleWarning = isOffline && state.isDataStale && state.cbuList.isNotEmpty(),
                         onRefreshData = viewModel::refresh
@@ -127,6 +134,8 @@ object HomeScreen : Tab {
 private fun HomeScreenContent(
     modifier: Modifier = Modifier,
     state: HomeState,
+    onSettingsClick: () -> Unit = {},
+    onBankRatesClick: () -> Unit = {},
     onClickSeeAll: () -> Unit = {},
     itemClick: (codeName: String, code: String, rate: String) -> Unit,
     showOfflineStaleWarning: Boolean = false,
@@ -136,15 +145,15 @@ private fun HomeScreenContent(
         modifier = modifier
             .fillMaxSize()
             .background(CurrencyColors.background)
-            .statusBarsPadding()
-            .navigationBarsPadding(),
+            .statusBarsPadding(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start,
     ) {
         stickyHeader(key = "CBU") {
             HomeHeader(
                 title = string.home_cbu.resource,
-                onClick = { onClickSeeAll() },
+                onSettingsClick = onSettingsClick,
+                onBankRatesClick = onBankRatesClick,
                 isDataStale = state.isDataStale
             )
         }
@@ -155,9 +164,7 @@ private fun HomeScreenContent(
         }
         items(
             items = state.cbuList,
-            key = {
-                it.code
-            }
+            key = { it.code }
         ) { cbuModel ->
             CBUCurrencyItems(
                 cbuModel = cbuModel,
@@ -167,8 +174,28 @@ private fun HomeScreenContent(
                 }
             )
         }
-        item {
-            Spacer(Modifier.height(80.dp))
+        item(key = "see_all") {
+            TextButton(
+                onClick = onClickSeeAll,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 4.dp)
+            ) {
+                Text(
+                    text = string.home_all_item.resource,
+                    color = CurrencyColors.button,
+                    style = CurrencyTypography.textSemiBold
+                )
+                Spacer(modifier = Modifier.weight(1f))
+                Icon(
+                    painter = painterResource(id = drawable.ic_arrow_right),
+                    contentDescription = null,
+                    tint = CurrencyColors.button
+                )
+            }
+        }
+        item(key = "bottom_space") {
+            Spacer(Modifier.height(8.dp))
         }
     }
 }
