@@ -10,7 +10,11 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -19,6 +23,7 @@ import androidx.core.content.ContextCompat
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 import dagger.hilt.android.AndroidEntryPoint
+import uz.toshmatov.currency.core.ads.AdBanner
 import uz.toshmatov.currency.core.extensions.getCurrentThemeMode
 import uz.toshmatov.currency.core.theme.CurrencyTheme
 import uz.toshmatov.currency.presentation.main.MainScreen
@@ -49,18 +54,23 @@ class MainActivity : ComponentActivity() {
                 darkTheme = getCurrentThemeMode(themeMode),
                 accentColor = accentColor,
             ) {
-                Navigator(
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                        MainScreen(
-                            initialConverterCodeName = launchConverter?.codeName,
-                            initialConverterCode = launchConverter?.code,
-                            initialConverterRate = launchConverter?.rate
-                        )
-                    } else {
-                        SplashScreen()
-                    },
-                ) {
-                    SlideTransition(it)
+                Column {
+                    Box(modifier = Modifier.weight(1f)) {
+                        Navigator(
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                                MainScreen(
+                                    initialConverterCodeName = launchConverter?.codeName,
+                                    initialConverterCode = launchConverter?.code,
+                                    initialConverterRate = launchConverter?.rate
+                                )
+                            } else {
+                                SplashScreen()
+                            },
+                        ) {
+                            SlideTransition(it)
+                        }
+                    }
+                    AdBanner(modifier = Modifier.fillMaxWidth())
                 }
             }
         }
